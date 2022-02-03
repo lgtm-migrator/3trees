@@ -1,11 +1,11 @@
 {
-  "name": "3threes",
-  "displayName": "3 Threes",
+  "name": "3trees",
+  "displayName": "3 Trees",
   "description": "Three trees, knowledge archive with debates",
   "version": "1.0.0",
   "license": "MIT",
-  "repository": "https://github.com/3trees/3trees.git",
-  "path": "3trees/3trees",
+  "repository": "https://github.com/3bases/3trees.git",
+  "path": "3bases/3trees",
   "domain": "threetrees.cloud",
   "scripts": {
     "dev": "next dev --port 1234",

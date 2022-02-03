@@ -1,4 +1,4 @@
-# Seongland Next
+# Three Trees
 
 ![image](https://user-images.githubusercontent.com/27716524/126918573-c8c824bc-70eb-4c8c-ab72-93867451394a.png)
 
@@ -22,15 +22,15 @@
 ```bash
 VERSION=2.1.1
 set -a; source .env; set +a
-docker build  -t ghcr.io/seongland/seongland:$VERSION \
+docker build  -t ghcr.io/3bases/3trees:$VERSION \
 --build-arg GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
 --build-arg GCLOUD_PROJECT=$GCLOUD_PROJECT \
 --build-arg FIREBASE_COLLECTION_IMAGES=$FIREBASE_COLLECTION_IMAGES \
 --build-arg NOTION_API_AUTH_TOKEN=$NOTION_API_AUTH_TOKEN \
 .
-docker push  ghcr.io/seongland/seongland:$VERSION
-docker tag ghcr.io/seongland/seongland:$VERSION ghcr.io/seongland/seongland:latest
-docker push  ghcr.io/seongland/seongland:latest
+docker push  ghcr.io/3bases/3trees:$VERSION
+docker tag ghcr.io/3bases/3trees:$VERSION ghcr.io/3bases/3trees:latest
+docker push  ghcr.io/3bases/3trees:latest
 
 # deploy
 okteto namespace
@@ -51,5 +51,4 @@ docker-compose build
 ## Reference
 
 - [Next Windi](https://github.com/seonglae/next-windicss)
-- [Nextplate](https://github.com/nextplate-dev/nextplate-chakra-ui)
 - [Next Notion](https://github.com/transitive-bullshit/nextjs-notion-starter-kit)
