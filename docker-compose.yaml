@@ -2,8 +2,8 @@ version: '2.2'
 
 services:
   next:
-    scale: 16
-    image: ghcr.io/seongland/seongland:2.1.1
+    scale: 10
+    image: ghcr.io/3threes/3threes:1.0.0
     ports:
       - 8888:8888
     restart: always
