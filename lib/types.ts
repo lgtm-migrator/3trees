@@ -72,7 +72,7 @@ export interface PreviewImage {
   originalHeight: number
   width: number
   height: number
-  type: string
+  type?: string
   dataURIBase64: string
   error?: string
 }

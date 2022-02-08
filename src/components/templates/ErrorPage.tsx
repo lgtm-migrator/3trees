@@ -3,7 +3,7 @@ import * as React from 'react'
 import Footer from '@/components/molecules/Footer'
 import useDarkMode from 'use-dark-mode'
 
-export const ErrorPage: React.FC<{ statusCode: number; title?: string; subtitle?: string }> = ({
+export const ErrorPage: React.FC<{ statusCode?: number; title?: string; subtitle?: string }> = ({
   statusCode,
   title,
   subtitle,

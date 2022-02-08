@@ -1,8 +1,8 @@
 import * as firestore from '@google-cloud/firestore'
 import * as config from './config'
 
-export let db: firestore.Firestore = null
-export let images: firestore.CollectionReference = null
+export let db: firestore.Firestore
+export let images: firestore.CollectionReference
 
 if (config.isPreviewImageSupportEnabled) {
   db = new firestore.Firestore({

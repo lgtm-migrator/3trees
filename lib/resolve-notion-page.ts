@@ -2,16 +2,17 @@ import { parsePageId } from 'notion-utils'
 import { ExtendedRecordMap } from 'notion-types'
 
 import * as acl from './acl'
-import * as types from './types'
 import { pageUrlOverrides, pageUrlAdditions } from './config'
 import { getPage } from './notion'
 import { getSiteMaps } from './get-site-maps'
 import { getSiteForDomain } from './get-site-for-domain'
 
+import type { Site } from './types'
+
 const root = 'wiki'
 
 export async function resolveNotionPage(domain: string, rawPageId?: string) {
-  let site: types.Site
+  let site: Site
   let pageId: string
   let recordMap: ExtendedRecordMap
 
@@ -23,7 +24,7 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
     }
     if (pageId) {
       const resources = await Promise.all([getSiteForDomain(domain), getPage(pageId)])
-      site = resources[0]
+      site = resources[0] as Site
       recordMap = resources[1]
     } else {
       const siteMaps = await getSiteMaps()
@@ -31,12 +32,12 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
       pageId = siteMap?.canonicalPageMap[rawPageId]
       if (pageId) {
         const resources = await Promise.all([getSiteForDomain(domain), getPage(pageId)])
-        site = resources[0]
+        site = resources[0] as Site
         recordMap = resources[1]
       } else return { error: { message: `Not found "${rawPageId}"`, statusCode: 404 } }
     }
   } else {
-    site = await getSiteForDomain(domain)
+    site = (await getSiteForDomain(domain)) as Site
     pageId = site.rootNotionPageId
     console.log(site)
     recordMap = await getPage(pageId)

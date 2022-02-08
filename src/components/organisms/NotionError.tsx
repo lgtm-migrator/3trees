@@ -3,9 +3,9 @@ import * as React from 'react'
 
 import { PageHead } from './PageHead'
 import { ErrorPage } from '@/components'
-import * as types from 'lib/types'
+import type { PageProps } from 'lib/types'
 
-export const NotionError: React.FC<types.PageProps> = ({ site, pageId, error }) => {
+export const NotionError: React.FC<PageProps> = ({ site, pageId, error }) => {
   const title = site ? site?.name : pageId
 
   return (
@@ -18,7 +18,7 @@ export const NotionError: React.FC<types.PageProps> = ({ site, pageId, error }) 
         <title>{title}</title>
       </Head>
 
-      <ErrorPage statusCode={error.statusCode} title={title} subtitle={error.message} />
+      <ErrorPage statusCode={error?.statusCode} title={title} subtitle={error?.message} />
     </>
   )
 }

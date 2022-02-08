@@ -26,7 +26,7 @@ interface ReactUtterancesState {
 
 export class ReactUtterances extends React.Component<ReactUtterancesProps, ReactUtterancesState> {
   reference: React.RefObject<HTMLDivElement>
-  scriptElement: HTMLElement
+  scriptElement?: HTMLElement
 
   constructor(props: ReactUtterancesProps) {
     super(props)
@@ -38,10 +38,10 @@ export class ReactUtterances extends React.Component<ReactUtterancesProps, React
     this.state = { pending: true }
   }
 
-  UNSAFE_componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props: ReactUtterancesProps) {
     // this.scriptElement.setAttribute('theme', props.theme)
     const iframe = document.querySelector('iframe.utterances-frame') as HTMLIFrameElement
-    if (iframe) iframe.contentWindow.postMessage({ type: 'set-theme', theme: props.theme }, 'https://utteranc.es/')
+    if (iframe) iframe?.contentWindow?.postMessage({ type: 'set-theme', theme: props.theme }, 'https://utteranc.es/')
   }
 
   componentDidMount(): void {
@@ -57,13 +57,13 @@ export class ReactUtterances extends React.Component<ReactUtterancesProps, React
 
     if (label) scriptElement.setAttribute('label', label)
 
-    if (issueMap === 'issue-number') scriptElement.setAttribute('issue-number', issueNumber.toString())
-    else if (issueMap === 'issue-term') scriptElement.setAttribute('issue-term', issueTerm)
+    if (issueMap === 'issue-number') scriptElement.setAttribute('issue-number', Number(issueNumber).toString())
+    else if (issueMap === 'issue-term') scriptElement.setAttribute('issue-term', String(issueTerm))
     else scriptElement.setAttribute('issue-term', issueMap)
 
     // TODO: Check current availability
     this.scriptElement = scriptElement
-    this.reference.current.appendChild(scriptElement)
+    this.reference?.current?.appendChild(scriptElement)
   }
 
   render(): React.ReactElement {

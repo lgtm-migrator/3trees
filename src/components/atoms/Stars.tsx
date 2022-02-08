@@ -1,12 +1,12 @@
-import React, { useRef, useMemo } from 'react'
-import { MathUtils, SphereBufferGeometry, MeshBasicMaterial } from 'three'
+import React, { useRef, useMemo, MutableRefObject } from 'react'
+import { MathUtils, SphereBufferGeometry, MeshBasicMaterial, Group } from 'three'
 import { useFrame } from '@react-three/fiber'
 import { a } from '@react-spring/three'
 import type { Interpolation } from '@react-spring/three'
 
 /** This component rotates a bunch of stars */
 export default function Stars({ position, isDarkMode }: { position: Interpolation; isDarkMode: boolean }) {
-  const group = useRef(null)
+  const group = useRef() as MutableRefObject<Group>
   let theta = 90
   const tDiff = 0.1
   const rFactor = 5

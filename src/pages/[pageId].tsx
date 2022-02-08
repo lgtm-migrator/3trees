@@ -2,9 +2,11 @@ import React from 'react'
 import { isDev, domain } from 'lib/config'
 import { getSiteMaps } from 'lib/get-site-maps'
 import { resolveNotionPage } from 'lib/resolve-notion-page'
-import { NotionPage } from '@/components'
 
-export const getStaticProps = async context => {
+import { NotionPage } from '@/components'
+import type { PageProps } from 'lib/types'
+
+export const getStaticProps = async (context: { params: { pageId: string } }) => {
   const rawPageId = context.params.pageId as string
   try {
     if (rawPageId === 'robots.txt') return { redirect: { destination: `/api/${rawPageId}` } }
@@ -26,6 +28,6 @@ export async function getStaticPaths() {
   return ret
 }
 
-const NotionDomainDynamicPage = props => <NotionPage {...props} />
+const NotionDomainDynamicPage = (props: PageProps) => <NotionPage {...props} />
 
 export default NotionDomainDynamicPage

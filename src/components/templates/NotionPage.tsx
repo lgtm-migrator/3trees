@@ -17,7 +17,6 @@ import { mapPageUrl, getCanonicalPageUrl } from 'lib/map-page-url'
 import { mapNotionImageUrl } from 'lib/map-image-url'
 import { getPageDescription } from 'lib/get-page-description'
 import { searchNotion } from 'lib/search-notion'
-import * as types from 'lib/types'
 import * as config from 'lib/config'
 
 // components
@@ -29,10 +28,12 @@ import Footer from '@/components/molecules/Footer'
 import { PageSocial } from '../organisms/PageSocial'
 import { ReactUtterances } from '../molecules/ReactUtterances'
 
+import type { PageProps } from 'lib/types'
+
 const Modal = dynamic(() => import('react-notion-x').then(notion => notion.Modal), { ssr: false })
 
 // Main
-export const NotionPage: React.FC<types.PageProps> = ({ site, recordMap, error, pageId }) => {
+export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId }) => {
   const router = useRouter()
   const lite = useSearchParam('lite')
 
@@ -65,7 +66,8 @@ export const NotionPage: React.FC<types.PageProps> = ({ site, recordMap, error, 
   const keys = Object.keys(recordMap?.block || {})
   const block = recordMap?.block?.[keys[0]]?.value
   if (error || !site || !keys.length || !block) return <NotionError site={site} pageId={pageId} error={error} />
-  const title = getBlockTitle(block, recordMap) || site.name
+
+  const title = getBlockTitle(block, recordMap!) || site.name
 
   if (!config.isServer) {
     const g = window as any
@@ -74,9 +76,9 @@ export const NotionPage: React.FC<types.PageProps> = ({ site, recordMap, error, 
     g.block = block
   }
 
-  const siteMapPageUrl = mapPageUrl(site, recordMap, searchParams)
+  const siteMapPageUrl = mapPageUrl(site, recordMap!, searchParams)
 
-  const canonicalPageUrl = !config.isDev && getCanonicalPageUrl(site, recordMap)(pageId)
+  const canonicalPageUrl = !config.isDev && getCanonicalPageUrl(site, recordMap!)(pageId)
   const isBlogPost = block.type === 'page' && block.parent_table === 'collection'
   const showTableOfContents = !!isBlogPost
   const minTableOfContentsItems = 3
@@ -84,7 +86,7 @@ export const NotionPage: React.FC<types.PageProps> = ({ site, recordMap, error, 
   const imageURL = (block as PageBlock).format?.page_cover || config.defaultPageCover
   const socialImage = imageURL ? mapNotionImageUrl(imageURL, block) : null
 
-  const socialDescription = getPageDescription(block, recordMap) ?? config.description
+  const socialDescription = getPageDescription(block, recordMap!) ?? config.description
 
   let comments: React.ReactNode = null
   let pageAside: React.ReactChild | null = null
@@ -179,7 +181,7 @@ export const NotionPage: React.FC<types.PageProps> = ({ site, recordMap, error, 
           modal: Modal,
           equation: Equation,
         }}
-        recordMap={recordMap}
+        recordMap={recordMap!}
         rootPageId={site.rootNotionPageId}
         fullPage={!isLiteMode}
         darkMode={darkMode.value}
