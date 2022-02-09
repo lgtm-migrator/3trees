@@ -1,14 +1,9 @@
 # Three Trees
-
-![image](https://user-images.githubusercontent.com/27716524/126918573-c8c824bc-70eb-4c8c-ab72-93867451394a.png)
-
+![image](https://user-images.githubusercontent.com/27716524/153127169-fdc23b05-8ad8-442b-a293-623c43fdb7e5.png)
 
 
-## Philosophy
 
-- Atomic Design Pattern
-- Minimalism
-
+# How to Contribute
 
 ## Made by
 - Next js
@@ -17,8 +12,19 @@
 - React Three Fiber
 - React Spring
 
+## Philosophy
 
-## Build
+- Atomic Design Pattern
+- Minimalism
+
+### [Code Structure](https://app.codesee.io/maps/c7512230-8968-11ec-b3c9-e762effaaa2a)
+![image](https://user-images.githubusercontent.com/27716524/153128046-8fce8e3f-a412-4d04-9f6c-27f4aee3662e.png)
+
+
+
+
+
+## Docker Build
 ```bash
 VERSION=2.1.1
 set -a; source .env; set +a
@@ -40,7 +46,7 @@ okteto stack deploy --wait
 kubectl config use-context docker-desktop
 ```
 
-### Local
+### Docker Local
 ```bash
 VERSION=2.1.1
 docker-compose build
