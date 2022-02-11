@@ -26,7 +26,6 @@ import { NotionError } from '@/components/organisms/NotionError'
 import { PageHead } from '../organisms/PageHead'
 import Footer from '@/components/molecules/Footer'
 import { PageSocial } from '../organisms/PageSocial'
-import { ReactUtterances } from '../molecules/ReactUtterances'
 
 import type { PageProps } from 'lib/types'
 
@@ -91,15 +90,7 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   let comments: React.ReactNode = null
   let pageAside: React.ReactChild | null = null
 
-  if (config.utterancesGitHubRepo)
-    comments = (
-      <ReactUtterances
-        repo={config.utterancesGitHubRepo}
-        issueMap="issue-term"
-        issueTerm="pathname"
-        theme={darkMode.value ? 'photon-dark' : 'github-light'}
-      />
-    )
+  if (config.giscusRepo) comments = <></>
   pageAside = <PageSocial />
 
   const pageLink = ({
