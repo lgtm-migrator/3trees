@@ -20,7 +20,7 @@
 
 ## Build
 ```bash
-VERSION=2.1.1
+VERSION=0.1.0
 set -a; source .env; set +a
 docker build  -t ghcr.io/3bases/3trees:$VERSION \
 --build-arg GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \

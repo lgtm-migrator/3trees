@@ -2,7 +2,7 @@
   "name": "3trees",
   "displayName": "3 Trees",
   "description": "Three trees, knowledge archive with debates",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "repository": "https://github.com/3bases/3trees.git",
   "path": "3bases/3trees",
@@ -23,7 +23,7 @@
   "author": {
     "name": "Seonglae Cho",
     "email": "sungle3737@gmail.com",
-    "url": "https://www.seongland.com",
+    "url": "https://threetrees.cloud",
     "twitter": {
       "name": "@SeonglaeC"
     },
