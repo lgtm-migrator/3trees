@@ -1,14 +1,8 @@
 # Three Trees
-
-![image](https://user-images.githubusercontent.com/27716524/126918573-c8c824bc-70eb-4c8c-ab72-93867451394a.png)
-
-
-
-## Philosophy
-
-- Atomic Design Pattern
-- Minimalism
-
+![image](https://user-images.githubusercontent.com/27716524/153128771-d735ff69-5c0f-4077-8fdf-08e5adb35f81.png)
+  
+  
+# How to Contribute
 
 ## Made by
 - Next js
@@ -17,8 +11,23 @@
 - React Three Fiber
 - React Spring
 
+## Philosophy
 
-## Build
+- Atomic Design Pattern
+- Minimalism
+
+## [Code Structure](https://app.codesee.io/maps/c7512230-8968-11ec-b3c9-e762effaaa2a)
+![image](https://user-images.githubusercontent.com/27716524/153128046-8fce8e3f-a412-4d04-9f6c-27f4aee3662e.png)
+
+<p align="center">
+  <a href="https://lgtm.com/projects/g/3bases/3trees/context:javascript"><img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/3bases/3trees.svg?logo=lgtm&logoWidth=18"/></a>
+<p>
+
+
+
+
+
+## Docker Build
 ```bash
 VERSION=0.1.0
 set -a; source .env; set +a
@@ -40,7 +49,7 @@ okteto stack deploy --wait
 kubectl config use-context docker-desktop
 ```
 
-### Local
+### Docker Local
 ```bash
 VERSION=2.1.1
 docker-compose build
