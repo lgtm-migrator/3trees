@@ -15,13 +15,13 @@
   --bm-color-1: #39b4df66;
 }
 
-html.dark {
+body.dark {
   --bd-color: #4d5153;
   --sd-color-0: #282b2e;
   --sd-color-1: #333638;
 }
 
-html.light {
+body.light {
   --bd-color: #dfdfde;
   --sd-color-0: #ccc;
   --sd-color-1: #fff;
