@@ -14,7 +14,7 @@ export const notion = new NotionAPI({
 
 export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
   const recordMap = await notion.getPage(pageId, {
-    gotOptions: { timeout: { request: 2000 } },
+    gotOptions: { timeout: { request: 10000 } },
   })
   const blockIds = Object.keys(recordMap.block)
   const images = blockIds

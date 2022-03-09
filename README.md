@@ -25,11 +25,9 @@
 
 
 
-
-
 ## Docker Build
 ```bash
-VERSION=0.1.0
+VERSION=0.1.3
 set -a; source .env; set +a
 docker build  -t ghcr.io/3bases/3trees:$VERSION \
 --build-arg GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
@@ -42,17 +40,9 @@ docker tag ghcr.io/3bases/3trees:$VERSION ghcr.io/3bases/3trees:latest
 docker push  ghcr.io/3bases/3trees:latest
 
 # deploy
-okteto namespace
+okteto namespace 3trees-seonglae
 # deploy to current cluster
 okteto stack deploy --wait
-# if windows, change to default
-kubectl config use-context docker-desktop
-```
-
-### Docker Local
-```bash
-VERSION=2.1.1
-docker-compose build
 ```
 
 

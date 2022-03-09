@@ -21,8 +21,11 @@ const nextConfig = {
     config.externals.push('sharp')
     return config
   },
-  pageDataCollectionTimeout: Infinity,
-  staticPageGenerationTimeout: Infinity,
+  pageDataCollectionTimeout: 20000,
+  staticPageGenerationTimeout: 20000,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   reactStrictMode: true,
   rewrites: async () => [{ source: '/social.png', destination: '/api/social-image' }],
 }

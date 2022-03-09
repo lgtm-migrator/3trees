@@ -6,24 +6,26 @@ import { resolveNotionPage } from 'lib/resolve-notion-page'
 import { NotionPage } from '@/components'
 import type { PageProps } from 'lib/types'
 
+const DAY = 3600 * 24
+
 export const getStaticProps = async (context: { params: { pageId: string } }) => {
   const rawPageId = context.params.pageId as string
   try {
     if (rawPageId === 'robots.txt') return { redirect: { destination: `/api/${rawPageId}` } }
     const props = await resolveNotionPage(domain, rawPageId)
-    return { props, revalidate: 10 }
+    return { props, revalidate: DAY * 3 }
   } catch (err) {
     console.error(domain, rawPageId, err)
-    return { notFound: true, revalidate: 10 }
+    return { notFound: false, revalidate: 10 }
   }
 }
 
 export async function getStaticPaths() {
-  if (isDev) return { paths: [], fallback: true }
+  if (isDev) return { paths: [], fallback: 'blocking' }
   const siteMaps = await getSiteMaps()
   const ret = {
     paths: siteMaps.flatMap(siteMap => Object.keys(siteMap.canonicalPageMap).map(pageId => ({ params: { pageId } }))),
-    fallback: true,
+    fallback: 'blocking',
   }
   return ret
 }
