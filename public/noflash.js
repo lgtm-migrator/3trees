@@ -10,8 +10,8 @@
   var classNameLight = 'light'
 
   function setClassOnDocumentBody(darkMode) {
-    document.documentElement.classList.add(darkMode ? classNameDark : classNameLight)
-    document.documentElement.classList.remove(darkMode ? classNameLight : classNameDark)
+    document.body.classList.add(darkMode ? classNameDark : classNameLight)
+    document.body.classList.remove(darkMode ? classNameLight : classNameDark)
   }
 
   var preferDarkQuery = '(prefers-color-scheme: dark)'
@@ -36,7 +36,7 @@
     localStorage.setItem(storageKey, String(mql.matches))
   } else {
     // source of truth from document.documentElement
-    var isDarkMode = document.documentElement.classList.contains(classNameDark)
+    var isDarkMode = document.body.classList.contains(classNameDark)
     localStorage.setItem(storageKey, JSON.stringify(isDarkMode))
   }
 })()
