@@ -15,8 +15,9 @@ RUN rm -r .git
 
 # install
 RUN npm i -g pnpm
-RUN pnpm i --prod
+RUN pnpm i
 RUN pnpm build
+RUN pnpm i --prod
 
 # main image
 FROM node:16-alpine
