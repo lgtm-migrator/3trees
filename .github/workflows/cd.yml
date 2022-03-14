@@ -33,12 +33,12 @@ jobs:
       - name: Install npm dependencies
         run: |
           cd app
-          docker build  -t ghcr.io/3bases/3trees:$RELEASE_VERSION \
-          --build-arg GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
-          --build-arg GCLOUD_PROJECT=$GCLOUD_PROJECT \
-          --build-arg FIREBASE_COLLECTION_IMAGES=$FIREBASE_COLLECTION_IMAGES \
-          --build-arg NOTION_API_AUTH_TOKEN=$NOTION_API_AUTH_TOKEN \
+          docker build  -t ghcr.io/3bases/3trees:${{ env.RELEASE_VERSION }} \
+          --build-arg GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} \
+          --build-arg GCLOUD_PROJECT=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} \
+          --build-arg FIREBASE_COLLECTION_IMAGES=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} \
+          --build-arg NOTION_API_AUTH_TOKEN=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} \
           .
-          docker push  ghcr.io/3bases/3trees:$VERSION
-          docker tag ghcr.io/3bases/3trees:$VERSION ghcr.io/3bases/3trees:latest
+          docker push  ghcr.io/3bases/3trees:${{ env.RELEASE_VERSION }}
+          docker tag ghcr.io/3bases/3trees:${{ env.RELEASE_VERSION }} ghcr.io/3bases/3trees:latest
           docker push  ghcr.io/3bases/3trees:latest
