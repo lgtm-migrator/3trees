@@ -38,6 +38,7 @@ jobs:
             GCLOUD_PROJECT=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
             FIREBASE_COLLECTION_IMAGES=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
             NOTION_API_AUTH_TOKEN=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+            GIT_TAG=${{ env.RELEASE_VERSION }}
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ env.RELEASE_VERSION }}
