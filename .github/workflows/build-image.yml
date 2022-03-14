@@ -16,29 +16,28 @@ jobs:
         run: |
           echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
         with:
-          path: node_modules
-          key: ${{ runner.OS }}-${{ hashFiles('**/*.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.PAT }}
 
-      - name: Install npm dependencies
-        run: |
-          cd app
-          docker build  -t ghcr.io/3bases/3trees:${{ env.RELEASE_VERSION }} \
-          --build-arg GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} \
-          --build-arg GCLOUD_PROJECT=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} \
-          --build-arg FIREBASE_COLLECTION_IMAGES=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} \
-          --build-arg NOTION_API_AUTH_TOKEN=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} \
-          .
-          docker push  ghcr.io/3bases/3trees:${{ env.RELEASE_VERSION }}
-          docker tag ghcr.io/3bases/3trees:${{ env.RELEASE_VERSION }} ghcr.io/3bases/3trees:latest
-          docker push  ghcr.io/3bases/3trees:latest
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        id: docker_build
+        with:
+          context: .
+          file: ./app/Dockerfile
+          push: true
+          build-args: |
+            GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+            GCLOUD_PROJECT=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+            FIREBASE_COLLECTION_IMAGES=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+            NOTION_API_AUTH_TOKEN=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          tags: |
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ env.RELEASE_VERSION }}
