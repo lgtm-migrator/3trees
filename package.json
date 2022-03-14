@@ -58,7 +58,7 @@
     "since 2017"
   ],
   "engines": {
-    "node": ">=v14.19.0"
+    "node": ">=v16.*.*"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.2",
