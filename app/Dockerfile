@@ -1,8 +1,3 @@
-# meta
-LABEL email="sungle3737@gmail.com"
-LABEL name="seonglae"
-
-# build image
 FROM node:16-buster-slim as build
 WORKDIR /app
 
