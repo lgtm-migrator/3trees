@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: threetrees-pod
+spec:
+  containers:
+    - name: threetrees-container
+      image: ghcr.io/3bases/3trees:0.1.2
+      resources:
+        limits:
+          memory: 2Gi
+          cpu: '1'
+        requests:
+          memory: 1Gi
+          cpu: '1'
+  imagePullSecrets:
+    - name: regcred

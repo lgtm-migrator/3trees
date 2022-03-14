@@ -1,0 +1,10 @@
+version: '2.2'
+
+services:
+  threetrees:
+    image: ghcr.io/3bases/3trees:0.1.2
+    ports:
+      - 1234:1234
+    restart: always
+    env_file:
+      - .env

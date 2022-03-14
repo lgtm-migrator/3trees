@@ -40,7 +40,8 @@ docker tag ghcr.io/3bases/3trees:$VERSION ghcr.io/3bases/3trees:latest
 docker push  ghcr.io/3bases/3trees:latest
 
 # deploy
-okteto namespace 3trees-seonglae
+kubectl config use-context cloud_okteto_com
+kubectl config set-context --current --namespace 3trees-seonglae
 # deploy to current cluster
 okteto stack deploy --wait
 ```

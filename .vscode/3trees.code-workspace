@@ -5,6 +5,10 @@
 			"path": ".."
 		},
 		{
+			"name": "app",
+			"path": "..\\app"
+		},
+		{
 			"name": "components",
 			"path": "..\\src\\components"
 		},
