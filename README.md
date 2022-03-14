@@ -27,8 +27,6 @@
 
 ## Docker Build
 ```bash
-VERSION=0.1.3
-set -a; source .env; set +a
 docker build  -t ghcr.io/3bases/3trees:$VERSION \
 --build-arg GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
 --build-arg GCLOUD_PROJECT=$GCLOUD_PROJECT \
@@ -38,12 +36,6 @@ docker build  -t ghcr.io/3bases/3trees:$VERSION \
 docker push  ghcr.io/3bases/3trees:$VERSION
 docker tag ghcr.io/3bases/3trees:$VERSION ghcr.io/3bases/3trees:latest
 docker push  ghcr.io/3bases/3trees:latest
-
-# deploy
-kubectl config use-context cloud_okteto_com
-kubectl config set-context --current --namespace 3trees-seonglae
-# deploy to current cluster
-okteto stack deploy --wait
 ```
 
 
