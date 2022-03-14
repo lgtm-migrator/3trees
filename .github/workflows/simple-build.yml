@@ -27,10 +27,11 @@ jobs:
 
       - name: Install npm dependencies
         run: |
-          env GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-          env GCLOUD_PROJECT=${{ secrets.GCLOUD_PROJECT }}
-          env FIREBASE_COLLECTION_IMAGES=${{ secrets.FIREBASE_COLLECTION_IMAGES }}
-          env NOTION_API_AUTH_TOKEN=${{ secrets.NOTION_API_AUTH_TOKEN }}
+          touch .env
+          echo GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }} >> .env
+          echo GCLOUD_PROJECT=${{ secrets.GCLOUD_PROJECT }} >> .env
+          echo FIREBASE_COLLECTION_IMAGES=${{ secrets.FIREBASE_COLLECTION_IMAGES }} >> .env
+          echo NOTION_API_AUTH_TOKEN=${{ secrets.NOTION_API_AUTH_TOKEN }} >> .env
           npm i -g pnpm
           pnpm i
           pnpm build:scripts
