@@ -1,8 +1,9 @@
-name: Test Server
+name: Test before render
 
 on:
   push:
-    branches: [main]
+    branches-ignore:
+      - main
 
 jobs:
   build:
@@ -28,4 +29,4 @@ jobs:
         run: |
           npm i -g pnpm \
           pnpm i \
-          pnpm build
+          pnpm build:scripts
