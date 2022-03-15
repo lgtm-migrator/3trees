@@ -10,19 +10,28 @@
 
 
 # How to Contribute
+1. Become a **3Trees contributor**
+2. Become **Repository Developer**
 
-## Made by
+
+
+# 1. Three Trees contributor
+- Check about [3Trees](threetrees.cloud)
+- Join [Slack](github.com/3bases)
+
+
+# 2. Repository Developer
+repository structure notion to check
+
+
+
+### Made by
 
 - Next js
 - Windi CSS
 - React Notion X
 - React Three Fiber
 - React Spring
-
-## Philosophy
-
-- Atomic Design Pattern
-- Minimalism
 
 ## [Code Structure](https://app.codesee.io/maps/c7512230-8968-11ec-b3c9-e762effaaa2a)
 
