@@ -35,9 +35,9 @@ jobs:
           push: true
           build-args: |
             GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-            GCLOUD_PROJECT=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-            FIREBASE_COLLECTION_IMAGES=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-            NOTION_API_AUTH_TOKEN=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+            GCLOUD_PROJECT=${{ secrets.GCLOUD_PROJECT }}
+            FIREBASE_COLLECTION_IMAGES=${{ secrets.FIREBASE_COLLECTION_IMAGES }}
+            NOTION_API_AUTH_TOKEN=${{ secrets.NOTION_API_AUTH_TOKEN }}
             GIT_TAG=${{ env.RELEASE_VERSION }}
           tags: |
             ghcr.io/${{ github.repository }}:latest
