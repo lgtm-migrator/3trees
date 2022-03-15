@@ -1,6 +1,6 @@
 import { PageProps } from './types'
 
-export async function pageAcl({ site, recordMap, pageId }: PageProps): Promise<PageProps | undefined> {
+export function pageAcl({ site, recordMap, pageId }: Partial<PageProps>): PageProps | void {
   if (!site)
     return {
       error: {
@@ -13,7 +13,7 @@ export async function pageAcl({ site, recordMap, pageId }: PageProps): Promise<P
     return {
       error: {
         statusCode: 404,
-        message: `Unable to resolve page for domain "${site.domain}". Notion page "${pageId}" not found.`,
+        message: `Unable to resolve page for "${pageId}" not found.`,
       },
     }
 
@@ -24,7 +24,7 @@ export async function pageAcl({ site, recordMap, pageId }: PageProps): Promise<P
     return {
       error: {
         statusCode: 404,
-        message: `Unable to resolve page for domain "${site.domain}". Notion page "${pageId}" invalid data.`,
+        message: `Unable to resolve page for "${pageId}" invalid data.`,
       },
     }
 
