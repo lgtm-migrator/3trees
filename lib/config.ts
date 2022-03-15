@@ -41,8 +41,8 @@ export const defaultPageIcon: string = getSiteConfig('defaultPageIcon', null) ||
 export const defaultPageCover: string = getSiteConfig('defaultPageCover', null) || ''
 export const defaultPageCoverPosition: number = getSiteConfig('defaultPageCoverPosition', 0.5)
 
-// Optional utteranc.es comments via GitHub issue comments
-export const utterancesGitHubRepo: string | null = getSiteConfig('utterancesGitHubRepo', null)
+// Optional giscusRepo comments via GitHub Discussion Repo
+export const giscusRepo: string | null = getSiteConfig('giscusRepo', null)
 
 // Optional image CDN host to proxy all image requests through
 export const imageCDNHost: string | null = getSiteConfig('imageCDNHost', null)
@@ -59,7 +59,7 @@ export const includeNotionIdInUrls: boolean = getSiteConfig('includeNotionIdInUr
 // ----------------------------------------------------------------------------
 
 export const isServer = typeof window === 'undefined'
-export const port = getEnv('PORT', '1234')
+export const port = getEnv('PORT', '8888')
 export const host = isDev ? `http://localhost:${port}` : `https://${domain}`
 export const apiBaseUrl = `${host}/api`
 

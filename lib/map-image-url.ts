@@ -1,13 +1,15 @@
 import { Block } from 'notion-types'
 import { imageCDNHost } from './config'
 
+// more recent versions of notion don't proxy unsplash images
+const EXPCEPTION = 'https://images.unsplash.com'
+
 export const mapNotionImageUrl = (url: string, block: Block) => {
   if (url.startsWith('data:')) return url
   if (imageCDNHost && url.startsWith(imageCDNHost)) return url
   if (url.startsWith('/images')) url = `https://www.notion.so${url}`
 
-  // more recent versions of notion don't proxy unsplash images
-  if (!url.startsWith('https://images.unsplash.com')) {
+  if (!url.startsWith(EXPCEPTION)) {
     url = `https://www.notion.so${url.startsWith('/image') ? url : `/image/${encodeURIComponent(url)}`}`
     const notionImageUrlV2 = new URL(url)
     let table = block.parent_table === 'space' ? 'block' : block.parent_table
@@ -22,7 +24,6 @@ export const mapNotionImageUrl = (url: string, block: Block) => {
 
 export const mapImageUrl = (imageUrl: string) => {
   if (imageUrl.startsWith('data:')) return imageUrl
-  // Our proxy uses Cloudflare's global CDN to cache these image assets
   if (imageCDNHost) return `${imageCDNHost}/${encodeURIComponent(imageUrl)}`
   else return imageUrl
 }

@@ -17,6 +17,7 @@ export const getAllPages = pMemoize(getAllPagesImpl, { maxAge: 60000 * 5 })
 export async function getAllPagesImpl(rootNotionPageId: string, rootNotionSpaceId: string): Promise<Partial<SiteMap>> {
   const pageMap = await getAllPagesInSpace(rootNotionPageId, rootNotionSpaceId, getPage.bind(notion), {
     concurrency: OPTIMIZED_CONCURRENCY,
+    traverseCollections: false,
   })
   for (const uuid in pageMap) if (pageMap[uuid] === null) delete pageMap[uuid]
 
@@ -39,9 +40,9 @@ export async function getAllPagesImpl(rootNotionPageId: string, rootNotionSpaceI
 export async function getAllPagesInSpace(
   rootPageId: string,
   rootSpaceId: string | undefined,
-  getPage: (pageId: string) => Promise<ExtendedRecordMap>,
+  getPage: (pageId: string, timeout: number) => Promise<ExtendedRecordMap | void>,
   {
-    concurrency = 4,
+    concurrency = OPTIMIZED_CONCURRENCY,
     traverseCollections = true,
     targetPageId,
   }: {
@@ -53,7 +54,8 @@ export async function getAllPagesInSpace(
   let count = 0
   const pages: PageMap = {}
   const pendingPageIds = new Set<string>()
-  const queue = new PQueue({ concurrency })
+  const timeout = 10000
+  const queue = new PQueue({ concurrency, timeout })
 
   async function processPage(pageId: string) {
     if (targetPageId && pendingPageIds.has(targetPageId)) return
@@ -63,7 +65,7 @@ export async function getAllPagesInSpace(
       queue.add(async () => {
         try {
           if (targetPageId && pendingPageIds.has(targetPageId) && pageId !== targetPageId) return
-          const page = await getPage(pageId)
+          const page = await getPage(pageId, timeout)
           if (!page) return
           const spaceId = page.block[pageId]?.value?.space_id
           if (!rootSpaceId) rootSpaceId = spaceId
@@ -94,8 +96,8 @@ export async function getAllPagesInSpace(
     }
   }
   await processPage(rootPageId)
-  const info = setInterval(() => console.log('Pending', pendingPageIds.size), 2000)
-  const counter = setInterval(() => console.log('Complete', count), 2000)
+  const info = setInterval(() => console.debug('Pending', pendingPageIds.size), 2000)
+  const counter = setInterval(() => console.debug('Complete', count), 2000)
   await queue.onIdle()
   clearInterval(info)
   clearInterval(counter)

@@ -5,6 +5,9 @@ import { getPreviewImages } from './get-preview-images'
 import { mapNotionImageUrl } from './map-image-url'
 import { getSiteConfig, getEnv } from './get-config-value'
 
+// remove notion-client's vervose warning
+console.warn = (...args) => console.debug(...args.map(arg => (arg instanceof Error ? arg.message : arg)))
+
 export const activeUser: string = getSiteConfig('notionUserId', null)!
 export const notion = new NotionAPI({
   apiBaseUrl: process.env.NOTION_API_BASE_URL,
@@ -12,10 +15,11 @@ export const notion = new NotionAPI({
   activeUser,
 })
 
-export async function getPage(pageId: string): Promise<ExtendedRecordMap> {
-  const recordMap = await notion.getPage(pageId, {
-    gotOptions: { timeout: { request: 2000 } },
-  })
+export async function getPage(pageId: string, timeout: number = 10000): Promise<ExtendedRecordMap | void> {
+  const recordMap = await notion
+    .getPage(pageId, { gotOptions: { timeout: { request: timeout } } })
+    .catch(err => console.debug(err.message, pageId))
+  if (!recordMap) return recordMap
   const blockIds = Object.keys(recordMap.block)
   const images = blockIds
     .map(blockId => {

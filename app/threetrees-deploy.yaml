@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: threetrees-deploy
+  labels:
+    run: threetrees
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: threetrees
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: threetrees
+    spec:
+      containers:
+        - name: threetrees-container
+          image: ghcr.io/3bases/3trees:0.1.2
+          securityContext:
+            readOnlyRootFilesystem: true
+          ports:
+            - containerPort: 1234
+          resources:
+            limits:
+              memory: 2Gi
+              cpu: '1'
+            requests:
+              memory: 1Gi
+              cpu: '1'
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              valueFrom:
+                secretKeyRef:
+                  name: threetrees-secret
+                  key: GOOGLE_APPLICATION_CREDENTIALS
+            - name: GCLOUD_PROJECT
+              valueFrom:
+                secretKeyRef:
+                  name: threetrees-secret
+                  key: GCLOUD_PROJECT
+            - name: FIREBASE_COLLECTION_IMAGES
+              valueFrom:
+                secretKeyRef:
+                  name: threetrees-secret
+                  key: FIREBASE_COLLECTION_IMAGES
+            - name: NOTION_API_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: threetrees-secret
+                  key: NOTION_API_AUTH_TOKEN

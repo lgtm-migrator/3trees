@@ -7,7 +7,9 @@ async function build() {
   promises.push(await generateFavicons())
   promises.push(await copyPublicAssets())
   promises.push(await generateSitemap())
-  await Promise.all(promises)
+  await Promise.all(promises).catch(err => {
+    throw err
+  })
 }
 
 build()

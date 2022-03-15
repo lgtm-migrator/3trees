@@ -22,7 +22,7 @@ module.exports = {
   socialImageSubtitle: pkg.description,
   defaultPageCoverPosition: 0.5,
   includeNotionIdInUrls: true,
-  utterancesGitHubRepo: pkg.path,
+  giscusRepo: pkg.path,
 
   // Personal Info
   url: `https://${pkg.domain}`,

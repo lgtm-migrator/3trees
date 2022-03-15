@@ -15,6 +15,7 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
   let site: Site
   let pageId: string
   let recordMap: ExtendedRecordMap
+  const error = { error: { message: `Not found "${rawPageId}"`, statusCode: 404 } }
 
   if (rawPageId && rawPageId !== root) {
     pageId = parsePageId(rawPageId)
@@ -25,6 +26,7 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
     if (pageId) {
       const resources = await Promise.all([getSiteForDomain(domain), getPage(pageId)])
       site = resources[0] as Site
+      if (!resources[1]) return error
       recordMap = resources[1]
     } else {
       const siteMaps = await getSiteMaps()
@@ -33,14 +35,17 @@ export async function resolveNotionPage(domain: string, rawPageId?: string) {
       if (pageId) {
         const resources = await Promise.all([getSiteForDomain(domain), getPage(pageId)])
         site = resources[0] as Site
+        if (!resources[1]) return error
         recordMap = resources[1]
-      } else return { error: { message: `Not found "${rawPageId}"`, statusCode: 404 } }
+      } else return error
     }
   } else {
     site = (await getSiteForDomain(domain)) as Site
     pageId = site.rootNotionPageId
-    console.log(site)
-    recordMap = await getPage(pageId)
+    console.table(site)
+    const pageMap = await getPage(pageId)
+    if (!pageMap) return error
+    recordMap = pageMap
   }
 
   const props = { site, recordMap, pageId }
