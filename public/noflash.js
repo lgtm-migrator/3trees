@@ -8,10 +8,12 @@
   var storageKey = 'darkMode'
   var classNameDark = 'dark'
   var classNameLight = 'light'
+  const notion = document.querySelector('.notion')
+  const target = notion ? notion : document.body
 
-  function setClassOnDocumentBody(darkMode) {
-    document.body.classList.add(darkMode ? classNameDark : classNameLight)
-    document.body.classList.remove(darkMode ? classNameLight : classNameDark)
+  function setClass(darkMode) {
+    target.classList.remove(darkMode ? classNameLight : classNameDark)
+    target.classList.add(darkMode ? classNameDark : classNameLight)
   }
 
   var preferDarkQuery = '(prefers-color-scheme: dark)'
@@ -29,14 +31,14 @@
   // Determine the source of truth
   if (localStorageExists) {
     // source of truth from localStorage
-    setClassOnDocumentBody(localStorageTheme)
+    setClass(localStorageTheme)
   } else if (supportsColorSchemeQuery) {
     // source of truth from system
-    setClassOnDocumentBody(mql.matches)
+    setClass(mql.matches)
     localStorage.setItem(storageKey, String(mql.matches))
   } else {
     // source of truth from document.documentElement
-    var isDarkMode = document.body.classList.contains(classNameDark)
+    var isDarkMode = target.classList.contains(classNameDark)
     localStorage.setItem(storageKey, JSON.stringify(isDarkMode))
   }
 })()

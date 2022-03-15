@@ -1,7 +1,5 @@
 import Head from 'next/head'
 import * as React from 'react'
-import Footer from '@/components/molecules/Footer'
-import useDarkMode from 'use-dark-mode'
 
 export const ErrorPage: React.FC<{ statusCode?: number; title?: string; subtitle?: string }> = ({
   statusCode,
@@ -9,20 +7,6 @@ export const ErrorPage: React.FC<{ statusCode?: number; title?: string; subtitle
   subtitle,
 }) => {
   if (!title) title = String(statusCode)
-  const darkMode = useDarkMode(false, {
-    classNameDark: 'dark',
-    classNameLight: 'light',
-    onChange: isDark => {
-      if (isDark) {
-        document.body.classList.remove('light')
-        document.body.classList.add('dark')
-      } else {
-        document.body.classList.remove('dark')
-        document.body.classList.add('light')
-      }
-    },
-  })
-
   return (
     <>
       <Head>
@@ -43,10 +27,6 @@ export const ErrorPage: React.FC<{ statusCode?: number; title?: string; subtitle
             </h2>
           )}
         </main>
-      </div>
-
-      <div className="absolute bottom-0" w="full">
-        <Footer isDarkMode={darkMode.value} toggleDarkMode={darkMode.toggle} />
       </div>
     </>
   )

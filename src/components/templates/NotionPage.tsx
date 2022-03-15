@@ -36,25 +36,37 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   const router = useRouter()
   const lite = useSearchParam('lite')
 
+  // lite mode is for oembed
   const params: { lite?: string } = {}
   if (lite) params.lite = lite
-
-  // lite mode is for oembed
   const isLiteMode = lite === 'true'
+
+  // Theme
   const searchParams = new URLSearchParams(params)
+  const themeChange = (isDark?: boolean) => {
+    const notion = document.querySelector('.notion') as HTMLElement
+    const target = notion ? notion : document.body
+    if (isDark) {
+      document.body.classList.remove('light')
+      document.body.classList.remove('dark')
+      target.classList.remove('light-mode')
+      target.classList.remove('light')
+      target.classList.add('dark-mode')
+      target.classList.add('dark')
+    } else {
+      document.body.classList.remove('dark')
+      document.body.classList.remove('light')
+      target.classList.remove('dark-mode')
+      target.classList.remove('dark')
+      target.classList.add('light-mode')
+      target.classList.add('light')
+    }
+  }
   const darkMode = useDarkMode(false, {
     classNameDark: 'dark',
     classNameLight: 'light',
-    onChange: isDark => {
-      if (isDark) {
-        document.body.classList.remove('light')
-        document.body.classList.add('dark')
-      } else {
-        document.body.classList.remove('dark')
-        document.body.classList.add('light')
-      }
-    },
   })
+  useEffect(() => themeChange(darkMode.value), [darkMode])
 
   const themeColor = useMemo(() => (darkMode.value ? '#2F3437' : '#fff'), [darkMode])
   useEffect(() => {

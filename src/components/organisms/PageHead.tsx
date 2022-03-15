@@ -17,7 +17,7 @@ export const PageHead: React.FC<types.PageProps & { darkMode: boolean }> = ({ si
           <meta property="og:description" content={site.description} />
         </>
       )}
-      {darkMode ? <meta name="theme-color" content="#2F3437" /> : <meta name="theme-color" content="#2F3437" />}
+      {darkMode ? <meta name="theme-color" content="#2f3437" /> : <meta name="theme-color" content="#fff" />}
       <meta property="og:type" content="website" />
     </Head>
   )
