@@ -1,6 +1,13 @@
-# Three Trees
+# 3 Trees
 
-![image](https://user-images.githubusercontent.com/27716524/153128771-d735ff69-5c0f-4077-8fdf-08e5adb35f81.png)
+![image](https://user-images.githubusercontent.com/27716524/158438213-ab5b913b-a280-4a50-93b0-7b69df89049f.png)
+
+<br/>
+
+![image](https://user-images.githubusercontent.com/27716524/158437995-142e5ec9-f2df-4e20-b03a-620a6ade32c3.png)
+
+
+
 
 # How to Contribute
 
