@@ -26,14 +26,14 @@ const previewImage = async (req: NextApiRequest, res: NextApiResponse): Promise<
 }
 
 export async function createPreviewImage(url: string, id: string): Promise<PreviewImage | PreviewError | undefined> {
-  console.log('createPreviewImage lambda', { url, id })
+  console.debug('createPreviewImage lambda', { url, id })
   const doc = db.images.doc(id)
   try {
     const model = await doc.get()
     if (model.exists) return model.data() as PreviewImage
     const { body } = await got(url, { responseType: 'buffer' })
     const result = await lqip(body)
-    console.log('lqip', result.metadata)
+    console.debug('lqip', result.metadata)
     const image = {
       url,
       originalWidth: result.metadata.originalWidth,
