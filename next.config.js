@@ -1,6 +1,5 @@
-//@ts-check
 const withTM = require('next-transpile-modules')(['three'])
-const WindiCSS = require('windicss-webpack-plugin').default
+const WindiCSSWebpackPlugin = require('windicss-webpack-plugin')
 
 /**
  * @type {import('next').NextConfig}
@@ -17,7 +16,8 @@ const nextConfig = {
     },
   ],
   webpack: config => {
-    config.plugins.push(new WindiCSS())
+    // @ts-ignore
+    config.plugins.push(new WindiCSSWebpackPlugin())
     config.externals.push('sharp')
     return config
   },

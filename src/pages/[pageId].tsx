@@ -25,7 +25,7 @@ export async function getStaticPaths() {
   const siteMaps = await getSiteMaps()
   const ret = {
     paths: siteMaps.flatMap(siteMap => Object.keys(siteMap.canonicalPageMap).map(pageId => ({ params: { pageId } }))),
-    fallback: 'blocking',
+    fallback: true,
   }
   return ret
 }
