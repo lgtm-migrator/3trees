@@ -64,7 +64,8 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   if (router.isFallback) return <Loading />
   const keys = Object.keys(recordMap?.block || {})
   const block = recordMap?.block?.[keys[0]]?.value
-  if (error || !site || !keys.length || !block) return <NotionError site={site} pageId={pageId} error={error} />
+  if (error || !site || !keys.length || !block)
+    return <NotionError darkMode={darkMode.value} site={site} pageId={pageId} error={error} />
 
   const title = getBlockTitle(block, recordMap!) || site.name
 
@@ -128,7 +129,7 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
 
   return (
     <>
-      <PageHead site={site} />
+      <PageHead site={site} darkMode={darkMode.value} />
       <Head>
         <meta property="og:title" content={title} />
         <meta property="og:site_name" content={site.name} />

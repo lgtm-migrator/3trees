@@ -33,7 +33,7 @@ export const ErrorPage: React.FC<{ statusCode?: number; title?: string; subtitle
       </Head>
 
       <div text="dark:white" className="flex absolute inset-0" justify="center">
-        <main className="flex items-center" justify="center" flex="col">
+        <main className="flex items-center container mx-10" text="center" justify="center" flex="col">
           <h1 text="5xl" font="semibold">
             {title}
           </h1>

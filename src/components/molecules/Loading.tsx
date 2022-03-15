@@ -19,11 +19,16 @@ export const Loading: React.FC = () => {
   })
 
   return (
-    <div text="dark:white" className="flex absolute inset-0" justify="center">
-      <main className="flex items-center" justify="center" flex="col">
-        <LoadingIcon />
-      </main>
-      <Footer isDarkMode={darkMode.value} toggleDarkMode={darkMode.toggle} />
-    </div>
+    <>
+      <div text="dark:white" className="flex absolute inset-0" justify="center">
+        <main className="flex items-center container" justify="center" flex="col">
+          <LoadingIcon />
+        </main>
+      </div>
+
+      <div className="absolute bottom-0" w="full">
+        <Footer isDarkMode={darkMode.value} toggleDarkMode={darkMode.toggle} />
+      </div>
+    </>
   )
 }
