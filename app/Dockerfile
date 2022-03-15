@@ -31,5 +31,5 @@ USER threetrees
 
 # meta
 RUN npm i -g pnpm
-EXPOSE 8888
+EXPOSE 1234
 CMD [ "pnpm", "start" ]
