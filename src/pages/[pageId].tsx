@@ -13,7 +13,6 @@ export const getStaticProps = async (context: { params: { pageId: string } }) =>
   const rawPageId = context.params.pageId as string
   if (rawPageId === 'robots.txt') return { redirect: { destination: `/api/${rawPageId}` } }
   const props = await resolveNotionPage(domain, rawPageId)
-
   if (!props.error) return { props, revalidate: DAY * 3 } as GetStaticPropsResult<PageProps>
   else
     return { notFound: false, revalidate: true, props: { error: props.error } } as unknown as GetStaticPropsResult<PageProps>
