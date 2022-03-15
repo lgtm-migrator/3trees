@@ -163,6 +163,7 @@ hr.notion-hr {
 }
 
 .notion-collection-card.notion-collection-card-size-small {
+  transition: background-color 0.3s;
   transition: box-shadow 0.3s;
   border-radius: 10px;
   background: var(--bg-color);
@@ -174,7 +175,9 @@ hr.notion-hr {
 }
 
 .notion-collection-card.notion-collection-card-size-small:hover {
+  transition: background-color 1000ms linear;
   box-shadow: none;
+  background: linear-gradient(90.68deg, var(--bm-color-0) 0.26%, var(--bm-color-1) 102.37%);
 }
 
 .notion-collection-card:hover .notion-collection-card-cover {
@@ -240,8 +243,22 @@ hr.notion-hr {
 
 /* Quote */
 .notion-quote {
+  margin: 0.2em 0.75em !important;
   padding: 0.2em 0.75em;
   font-size: 1.1em;
+}
+
+blockquote {
+  border-left: none !important;
+}
+
+
+blockquote:before {
+  content: "\201C";
+  font-size: 3em;
+  font-family: Georgia;
+  color: var(--sd-color-0);
+  border-left: none;
 }
 
 /* Header */
@@ -355,31 +372,29 @@ hr.notion-hr {
   border-bottom-left-radius: 0.125rem;
   box-decoration-break: clone;
   background-color: none;
-  background-image: linear-gradient(119deg, var(--bg-color), #fff697 10.5%, #fdf59d 85.29%, var(--bg-color));
 }
 
 .notion-purple_background,
 .notion-pink_background {
-  background-image: linear-gradient(119deg, var(--bg-color), #f5b8d1 10.5%, #f9bcd3 85.29%, var(--bg-color));
+  background: #ddbdf199;
 }
 
 .notion-blue_background,
 .notion-gray_background {
-  /* light blue */
-  background-image: linear-gradient(119deg, var(--bg-color), #adedfc 10.5%, #adebfd 85.29%, var(--bg-color));
+  background: var(--bd-color);
 }
 
 .notion-red_background,
 .notion-orange_background {
-  background-image: linear-gradient(119deg, var(--bg-color), #f5c4ff 10.5%, #e7a8fc 85.29%, var(--bg-color));
+  background: #f0bfb199;
 }
 
 .notion-teal_background {
-  background-image: linear-gradient(119deg, var(--bg-color), #d4eabc 10.5%, #d2eabc 85.29%, var(--bg-color));
+  background: #bee2e499;
 }
 
 .notion-brown_background {
-  background-image: linear-gradient(119deg, var(--bg-color), #96b8ec 10.5%, #a6c3f0 85.29%, var(--bg-color));
+  background: #68615899;
 }
 
 .dark-mode .notion-red_background,

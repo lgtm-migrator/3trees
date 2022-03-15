@@ -10,7 +10,7 @@ import type { CanonicalPageMap, SiteMap } from './types'
 import type { ExtendedRecordMap, PageMap } from 'notion-types'
 
 const OPTIMIZED_CONCURRENCY = 100
-const MAX_PAGE = 1000
+const MAX_PAGE = 10000
 const uuid = !!includeNotionIdInUrls
 
 export const getAllPages = pMemoize(getAllPagesImpl, { maxAge: 60000 * 5 })
