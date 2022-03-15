@@ -17,11 +17,11 @@ export async function resolveNotionPage(domain: string, rawPageId: string) {
 
   // Non Root
   pageId = parsePageId(rawPageId)
-  console.debug('pageid', pageId)
   if (!pageId) {
     const override = pageUrlOverrides[rawPageId] || pageUrlAdditions[rawPageId]
     if (override) pageId = parsePageId(override)
   }
+  console.debug('pageid', pageId)
   if (pageId)
     recordMap = (await getPage(pageId).catch(err => {
       error = new Error(err.name)
