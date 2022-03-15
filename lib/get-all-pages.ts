@@ -40,7 +40,7 @@ export async function getAllPagesImpl(rootNotionPageId: string, rootNotionSpaceI
 export async function getAllPagesInSpace(
   rootPageId: string,
   rootSpaceId: string | undefined,
-  getPage: (pageId: string, timeout: number) => Promise<ExtendedRecordMap>,
+  getPage: (pageId: string, timeout: number) => Promise<ExtendedRecordMap | void>,
   {
     concurrency = OPTIMIZED_CONCURRENCY,
     traverseCollections = true,
