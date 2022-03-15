@@ -22,7 +22,7 @@ spec:
           securityContext:
             readOnlyRootFilesystem: true
           ports:
-            - containerPort: 1234
+            - containerPort: 8888
           resources:
             limits:
               memory: 2Gi
