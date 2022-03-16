@@ -43,7 +43,7 @@ const Document = () => {
         <script
           defer
           src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon='{"token": "c8b3924687ca4bdaaf9bd8f31abbd40b"}'></script>
+          data-cf-beacon='{"token": "2a669fe98f2743749ff5c52292cd54c1"}'></script>
       </body>
     </Html>
   )

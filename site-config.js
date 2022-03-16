@@ -45,6 +45,7 @@ module.exports = {
     '/logic': 'e562053ace984677a72cb9eaf5c6f91e',
     '/portfolio': 'b418523753984d4e8c940ede2e3de680',
     '/resume': '30022b4afb6f4d6e8446e0d49ec0a92f',
+    '/human': '92be46566b9d4460b56e870be0fb3d56',
     '/computing': '3c7dae6f75754b0eaacefe11b809ee35',
     '/mathematics': '2731da9546944e7bb9455cedddd0f87f',
     '/meta-science': 'bd533ed4e91c47809d96a342b5ddcccf',

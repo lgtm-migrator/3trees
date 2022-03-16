@@ -8,8 +8,8 @@
   "path": "3bases/3trees",
   "domain": "threetrees.cloud",
   "scripts": {
-    "dev": "next dev --port 8888",
-    "start": "next start --port 8888",
+    "dev": "next dev --port 1234",
+    "start": "next start --port 1234",
     "lint": "eslint ./src/**/*.{ts,tsx} --ignore-path .gitignore --fix",
     "css": "windicss-analysis",
     "build": "run-s \"build:**\"",
@@ -21,7 +21,7 @@
   },
   "color": "#2f3437",
   "author": {
-    "name": "Seonglae Cho",
+    "name": "Alan Jo",
     "email": "sungle3737@gmail.com",
     "url": "https://threetrees.cloud",
     "twitter": {
@@ -102,6 +102,7 @@
     "windicss-webpack-plugin": "^1.6.7",
     "prettier": "^2.5.1",
     "worker-loader": "^3.0.8",
+    "lqip-modern": "^1.2.0",
     "zustand": "^3.7.1"
   },
   "devDependencies": {
@@ -125,7 +126,6 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "^7.0.4",
-    "lqip-modern": "^1.2.0",
     "windicss-analysis": "^0.3.5"
   }
 }

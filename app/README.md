@@ -17,6 +17,7 @@ kubectl create secret generic threetrees-secret --from-env-file=.env
 change the image
 
 ```
+kubectl apply -f threetrees-svc.yaml
 kubectl apply -f threetrees-deploy.yaml
 ```
 

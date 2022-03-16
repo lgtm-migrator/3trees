@@ -4,7 +4,7 @@ import * as types from 'lib/types'
 
 // TODO: remove duplication between PageHead and NotionPage Head
 
-export const PageHead: React.FC<types.PageProps> = ({ site }) => {
+export const PageHead: React.FC<types.PageProps & { darkMode: boolean }> = ({ site, darkMode }) => {
   return (
     <Head>
       <meta charSet="utf-8" />
@@ -17,8 +17,7 @@ export const PageHead: React.FC<types.PageProps> = ({ site }) => {
           <meta property="og:description" content={site.description} />
         </>
       )}
-
-      <meta name="theme-color" content="#2F3437" />
+      {darkMode ? <meta name="theme-color" content="#2f3437" /> : <meta name="theme-color" content="#fff" />}
       <meta property="og:type" content="website" />
     </Head>
   )
