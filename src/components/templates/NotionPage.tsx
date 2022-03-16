@@ -25,7 +25,6 @@ import { Loading } from '../molecules/Loading'
 import { NotionError } from '@/components/organisms/NotionError'
 import { PageHead } from '../organisms/PageHead'
 import Footer from '@/components/molecules/Footer'
-import { PageSocial } from '../organisms/PageSocial'
 
 import type { PageProps } from 'lib/types'
 
@@ -43,25 +42,22 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
 
   // Theme
   const searchParams = new URLSearchParams(params)
-  const themeChange = (isDark?: boolean) => {
+  function resetTheme(mode: 'light' | 'dark') {
     const notion = document.querySelector('.notion') as HTMLElement
     const target = notion ? notion : document.body
-    if (isDark) {
-      document.body.classList.remove('light')
-      document.body.classList.remove('dark')
-      target.classList.remove('light-mode')
-      target.classList.remove('light')
-      target.classList.add('dark-mode')
-      target.classList.add('dark')
-    } else {
-      document.body.classList.remove('dark')
-      document.body.classList.remove('light')
-      target.classList.remove('dark-mode')
-      target.classList.remove('dark')
-      target.classList.add('light-mode')
-      target.classList.add('light')
+    for (const root of [document.body, target]) {
+      root.classList.remove('light')
+      root.classList.remove('dark')
+      root.classList.remove('light-mode')
+      root.classList.remove('dark-mode')
+    }
+    for (const root of [document.body, target]) {
+      root.classList.add(mode)
+      root.classList.add(`${mode}-mode`)
     }
   }
+  const themeChange = (isDark?: boolean) => (isDark ? resetTheme('dark') : resetTheme('light'))
+
   const darkMode = useDarkMode(false, {
     classNameDark: 'dark',
     classNameLight: 'light',
@@ -92,7 +88,6 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
 
   const canonicalPageUrl = !config.isDev && getCanonicalPageUrl(site, recordMap!)(pageId)
   const isBlogPost = block.type === 'page' && block.parent_table === 'collection'
-  const showTableOfContents = !!isBlogPost
   const minTableOfContentsItems = 3
 
   const imageURL = (block as PageBlock).format?.page_cover || config.defaultPageCover
@@ -104,7 +99,6 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   let pageAside: React.ReactChild | null = null
 
   if (config.giscusRepo) comments = <></>
-  pageAside = <PageSocial />
 
   const pageLink = ({
     href,
@@ -191,7 +185,7 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
         darkMode={darkMode.value}
         previewImages={site.previewImages !== false}
         showCollectionViewDropdown={false}
-        showTableOfContents={showTableOfContents}
+        showTableOfContents={isBlogPost}
         minTableOfContentsItems={minTableOfContentsItems}
         defaultPageIcon={config.defaultPageIcon}
         defaultPageCover={config.defaultPageCover}

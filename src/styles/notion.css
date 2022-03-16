@@ -35,7 +35,7 @@
 
 /* Search */
 .notion-search {
-  background: #0000;
+  background: var(--bg-color);
   border-radius: 1em;
 }
 
@@ -114,7 +114,17 @@ input.searchInput {
 
 .notion-header {
   background: transparent;
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(4px);
+}
+
+/* Table of Contents */
+.notion-aside {
+  margin: 1rem;
+}
+
+.notion-table-of-contents-item {
+  border-radius: 4px;
+  padding-left: 0.4rem;
 }
 
 /* border color */
