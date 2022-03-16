@@ -9,7 +9,7 @@ import { parsePageId } from 'notion-utils'
 import type { CanonicalPageMap, SiteMap } from './types'
 import type { ExtendedRecordMap, PageMap } from 'notion-types'
 
-const OPTIMIZED_CONCURRENCY = 100
+const OPTIMIZED_CONCURRENCY = 10
 const MAX_PAGE = 10000
 const MAX_PENDING = 100
 const uuid = includeNotionIdInUrls
