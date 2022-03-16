@@ -64,10 +64,8 @@ input.searchInput {
   margin-top: 20vh !important;
 }
 
-
 /* only target safari */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-
   _::-webkit-full-page-media,
   _:future,
   :root,
@@ -266,9 +264,8 @@ blockquote {
   border-left: none !important;
 }
 
-
 blockquote:before {
-  content: "\201C";
+  content: '\201C';
   font-size: 3em;
   font-family: Georgia;
   color: var(--sd-color-0);
@@ -280,6 +277,39 @@ blockquote:before {
 .notion-h2,
 .notion-h3 {
   margin-bottom: 0.25em;
+}
+
+/* breadcrumbs */
+.notion-header .nav-header .breadcrumbs .breadcrumb {
+  display: none;
+}
+
+.notion-header .nav-header .breadcrumbs .breadcrumb:nth-child(-n + 4) {
+  display: flex;
+}
+
+.notion-header .nav-header .breadcrumbs .breadcrumb:nth-last-child(-n + 4) {
+  display: flex;
+}
+
+.notion-header .nav-header .breadcrumbs .spacer {
+  display: none;
+}
+
+.notion-header .nav-header .breadcrumbs .spacer:nth-child(-n + 4) {
+  display: flex;
+}
+
+.notion-header .nav-header .breadcrumbs .spacer:nth-last-child(-n + 4) {
+  display: flex;
+}
+
+.notion-header .nav-header .breadcrumbs .spacer:nth-child(n + 4):nth-last-child(n + 5)::after {
+  content: '\a0...';
+}
+
+.notion-header .nav-header .breadcrumbs .spacer:nth-child(n + 5):nth-last-child(n + 4)::before {
+  content: '\a0';
 }
 
 /* Callout */
@@ -358,7 +388,6 @@ blockquote:before {
   margin-left: 2px;
 }
 
-
 /* Colors */
 .notion-blue .notion-inline-code {
   color: var(--blue-color);
@@ -369,7 +398,6 @@ blockquote:before {
   border-radius: 0.5rem;
   background: var(--bd-color) !important;
 }
-
 
 .notion-red_background,
 .notion-pink_background,

@@ -56,7 +56,8 @@ export async function getAllPagesInSpace(
   const pages: PageMap = {}
   const pendingPageIds = new Set<string>()
   const timeout = 10000
-  const queue = new PQueue({ concurrency, timeout })
+  const retry = 10
+  const queue = new PQueue({ concurrency, timeout: timeout * retry })
 
   async function processPage(pageId: string) {
     if (targetPageId && pendingPageIds.has(targetPageId)) return
