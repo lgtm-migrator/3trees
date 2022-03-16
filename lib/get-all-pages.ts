@@ -11,6 +11,7 @@ import type { ExtendedRecordMap, PageMap } from 'notion-types'
 
 const OPTIMIZED_CONCURRENCY = 100
 const MAX_PAGE = 10000
+const MAX_PENDING = 1000
 const uuid = !!includeNotionIdInUrls
 
 export const getAllPages = pMemoize(getAllPagesImpl, { maxAge: 60000 * 5 })
@@ -61,7 +62,8 @@ export async function getAllPagesInSpace(
     if (targetPageId && pendingPageIds.has(targetPageId)) return
     pageId = parsePageId(pageId) as string
     if (pageId && !pages[pageId] && !pendingPageIds.has(pageId)) {
-      if (count + pendingPageIds.size > MAX_PAGE) return
+      if (pendingPageIds.size > MAX_PENDING) await sleep(timeout)
+      if (count + pendingPageIds.size > MAX_PAGE || pendingPageIds.size > MAX_PENDING) return
       pendingPageIds.add(pageId)
       queue.add(async () => {
         try {
@@ -103,4 +105,8 @@ export async function getAllPagesInSpace(
   clearInterval(info)
   clearInterval(counter)
   return pages
+}
+
+async function sleep(interval: number) {
+  return new Promise(resolve => setTimeout(resolve, interval))
 }
