@@ -2,11 +2,11 @@ import fetch from 'isomorphic-unfetch'
 import pMemoize from 'p-memoize'
 
 import { api } from './config'
-import * as types from './types'
+import type { SearchParams, SearchResults } from 'notion-types'
 
 export const searchNotion = pMemoize(searchNotionImpl, { maxAge: 10000 })
 
-async function searchNotionImpl(params: types.SearchParams): Promise<types.SearchResults> {
+async function searchNotionImpl(params: SearchParams): Promise<SearchResults> {
   return fetch(api.searchNotion, {
     method: 'POST',
     body: JSON.stringify(params),

@@ -38,11 +38,17 @@
   background: var(--bg-color);
   border-radius: 1em;
 }
+
+.notion-search .searchBar {
+  min-height: 52px;
+}
 .notion-search .noResults,
 .notion-search .noResultsDetail {
   color: var(--fg-color);
 }
-.noResultsPane {
+.noResultsPane,
+.resultsPane,
+.resultsFooter {
   border-top: 1px solid var(--bd-color);
 }
 input.searchInput {
