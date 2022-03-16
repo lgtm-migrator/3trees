@@ -11,7 +11,7 @@ import type { ExtendedRecordMap, PageMap } from 'notion-types'
 
 const OPTIMIZED_CONCURRENCY = 100
 const MAX_PAGE = 10000
-const MAX_PENDING = 1000
+const MAX_PENDING = 100
 const uuid = includeNotionIdInUrls
 
 export const getAllPages = pMemoize(getAllPagesImpl, { maxAge: 60000 * 5 })
