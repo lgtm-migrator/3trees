@@ -43,6 +43,7 @@ input.searchInput {
   background: var(--bg-color);
   color: var(--fg-color);
   caret-color: var(--fg-color);
+  max-width: 90%;
 }
 
 .quickFindMenu {
@@ -127,6 +128,10 @@ input.searchInput {
   padding-left: 0.4rem;
 }
 
+.notion-table-of-contents-item-body {
+  border-bottom: none;
+}
+
 /* border color */
 .notion-page-title-text {
   color: var(--fg-color);
@@ -162,8 +167,7 @@ hr.notion-hr {
 
 .notion-gallery-grid .notion-page-title-text {
   white-space: unset;
-  text-align: center;
-  line-height: 2;
+  line-height: 1;
   margin-bottom: 5px;
 }
 
