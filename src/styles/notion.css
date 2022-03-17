@@ -19,6 +19,7 @@
   --bd-color: #4d5153 !important;
   --sd-color-0: #282b2e !important;
   --sd-color-1: #333638 !important;
+  --notion-blue: #5e87c9;
 }
 
 .light-mode {
@@ -495,4 +496,15 @@ blockquote:before {
 .notion .notion-page-icon-cover {
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Per */
+.notion-h1 {
+  text-align: center;
+  width: 100%;
+}
+
+.notion-collection-header-title {
+  flex-direction: column;
+  width: 100%;
 }

@@ -1,10 +1,10 @@
-import Head from 'next/head'
 import * as React from 'react'
-import * as types from 'lib/types'
+import Head from 'next/head'
+import { PageProps } from 'lib/types'
 
 // TODO: remove duplication between PageHead and NotionPage Head
 
-export const PageHead: React.FC<types.PageProps & { darkMode: boolean }> = ({ site, darkMode }) => {
+export const PageHead: React.FC<PageProps & { darkMode: boolean }> = ({ site, darkMode }) => {
   return (
     <Head>
       <meta charSet="utf-8" />

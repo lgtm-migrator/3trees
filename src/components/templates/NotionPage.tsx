@@ -7,7 +7,6 @@ import { useRouter } from 'next/router'
 import { useSearchParam } from 'react-use'
 import BodyClassName from 'react-body-classname'
 import useDarkMode from 'use-dark-mode'
-import { PageBlock } from 'notion-types'
 import { NotionRenderer, Code, Collection, CollectionRow, Equation } from 'react-notion-x'
 
 // utils
@@ -17,7 +16,15 @@ import { mapPageUrl, getCanonicalPageUrl } from 'lib/map-page-url'
 import { mapNotionImageUrl } from 'lib/map-image-url'
 import { getPageDescription } from 'lib/get-page-description'
 import { searchNotion } from 'lib/search-notion'
-import * as config from 'lib/config'
+import {
+  isDev,
+  defaultPageCover,
+  description,
+  giscusRepo,
+  twitter,
+  defaultPageCoverPosition,
+  defaultPageIcon,
+} from 'lib/config'
 
 // components
 import { NotionCustomFont } from '../molecules/NotionCustomFont'
@@ -26,22 +33,13 @@ import { NotionError } from '@/components/organisms/NotionError'
 import { PageHead } from '../organisms/PageHead'
 import Footer from '@/components/molecules/Footer'
 
+import type { PageBlock } from 'notion-types'
 import type { PageProps } from 'lib/types'
 
 const Modal = dynamic(() => import('react-notion-x').then(notion => notion.Modal), { ssr: false })
 
-// Main
 export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId }) => {
-  const router = useRouter()
-  const lite = useSearchParam('lite')
-
-  // lite mode is for oembed
-  const params: { lite?: string } = {}
-  if (lite) params.lite = lite
-  const isLiteMode = lite === 'true'
-
   // Theme
-  const searchParams = new URLSearchParams(params)
   function resetTheme(mode: 'light' | 'dark') {
     const notion = document.querySelector('.notion') as HTMLElement
     const target = notion ? notion : document.body
@@ -57,48 +55,45 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
     }
   }
   const themeChange = (isDark?: boolean) => (isDark ? resetTheme('dark') : resetTheme('light'))
-
   const darkMode = useDarkMode(false, {
     classNameDark: 'dark',
     classNameLight: 'light',
   })
   useEffect(() => themeChange(darkMode.value), [darkMode])
-
   const themeColor = useMemo(() => (darkMode.value ? '#2F3437' : '#fff'), [darkMode])
   useEffect(() => {
     document.body.style.background = themeColor
   }, [themeColor])
 
+  // Loading or Error
+  const router = useRouter()
   if (router.isFallback) return <Loading />
   const keys = Object.keys(recordMap?.block || {})
   const block = recordMap?.block?.[keys[0]]?.value
   if (error || !site || !keys.length || !block)
     return <NotionError darkMode={darkMode.value} site={site} pageId={pageId} error={error} />
 
+  // lite mode is for oembed
+  const lite = useSearchParam('lite')
+  const params: { lite?: string } = {}
+  if (lite) params.lite = lite
+  const isLiteMode = lite === 'true'
+
+  // Metadatas
   const title = getBlockTitle(block, recordMap!) || site.name
-
-  if (!config.isServer) {
-    const g = window as any
-    g.pageId = pageId
-    g.recordMap = recordMap
-    g.block = block
-  }
-
+  const searchParams = new URLSearchParams(params)
   const siteMapPageUrl = mapPageUrl(site, recordMap!, searchParams)
-
-  const canonicalPageUrl = !config.isDev && getCanonicalPageUrl(site, recordMap!)(pageId)
+  const canonicalPageUrl = !isDev && getCanonicalPageUrl(site, recordMap!)(pageId)
   const isBlogPost = block.type === 'page' && block.parent_table === 'collection'
   const minTableOfContentsItems = 3
-
-  const imageURL = (block as PageBlock).format?.page_cover || config.defaultPageCover
+  const imageURL = (block as PageBlock).format?.page_cover || defaultPageCover
   const socialImage = imageURL ? mapNotionImageUrl(imageURL, block) : null
+  const socialDescription = getPageDescription(block, recordMap!) ?? description
 
-  const socialDescription = getPageDescription(block, recordMap!) ?? config.description
-
+  // Components
   let comments: React.ReactNode = null
   let pageAside: React.ReactChild | null = null
-
-  if (config.giscusRepo) comments = <></>
+  if (giscusRepo) comments = <></>
 
   const pageLink = ({
     href,
@@ -141,7 +136,7 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
         <meta property="og:site_name" content={site.name} />
         <meta name="twitter:title" content={title} />
         <meta property="twitter:domain" content={site.domain} />
-        {config.twitter && <meta name="twitter:creator" content={`@${config.twitter}`} />}
+        {twitter && <meta name="twitter:creator" content={`@${twitter}`} />}
         {socialDescription && (
           <>
             <meta name="description" content={socialDescription} />
@@ -187,9 +182,9 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
         showCollectionViewDropdown={false}
         showTableOfContents={isBlogPost}
         minTableOfContentsItems={minTableOfContentsItems}
-        defaultPageIcon={config.defaultPageIcon}
-        defaultPageCover={config.defaultPageCover}
-        defaultPageCoverPosition={config.defaultPageCoverPosition}
+        defaultPageIcon={defaultPageIcon}
+        defaultPageCover={defaultPageCover}
+        defaultPageCoverPosition={defaultPageCoverPosition}
         mapPageUrl={siteMapPageUrl}
         mapImageUrl={mapNotionImageUrl}
         searchNotion={searchNotion}
