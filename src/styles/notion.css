@@ -308,11 +308,15 @@ blockquote:before {
 }
 
 /* breadcrumbs */
+.notion-header .nav-header .breadcrumbs {
+  overflow: hidden;
+}
+
 .notion-header .nav-header .breadcrumbs .breadcrumb {
   display: none;
 }
 
-.notion-header .nav-header .breadcrumbs .breadcrumb:nth-child(-n + 4) {
+.notion-header .nav-header .breadcrumbs .breadcrumb:nth-child(-n + 2) {
   display: flex;
 }
 
@@ -324,7 +328,7 @@ blockquote:before {
   display: none;
 }
 
-.notion-header .nav-header .breadcrumbs .spacer:nth-child(-n + 4) {
+.notion-header .nav-header .breadcrumbs .spacer:nth-child(-n + 2) {
   display: flex;
 }
 
@@ -332,11 +336,11 @@ blockquote:before {
   display: flex;
 }
 
-.notion-header .nav-header .breadcrumbs .spacer:nth-child(n + 4):nth-last-child(n + 5)::after {
+.notion-header .nav-header .breadcrumbs .spacer:nth-child(n + 2):nth-last-child(n + 5)::after {
   content: '\a0...';
 }
 
-.notion-header .nav-header .breadcrumbs .spacer:nth-child(n + 5):nth-last-child(n + 4)::before {
+.notion-header .nav-header .breadcrumbs .spacer:nth-child(n + 3):nth-last-child(n + 4)::before {
   content: '\a0';
 }
 
