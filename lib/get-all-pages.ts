@@ -9,7 +9,7 @@ import { parsePageId } from 'notion-utils'
 import type { CanonicalPageMap, SiteMap } from './types'
 import type { ExtendedRecordMap, PageMap } from 'notion-types'
 
-const OPTIMIZED_CONCURRENCY = 10
+const OPTIMIZED_CONCURRENCY = 20
 const MAX_PAGE = 10000
 const MAX_PENDING = 100
 const uuid = includeNotionIdInUrls
@@ -55,8 +55,8 @@ export async function getAllPagesInSpace(
   let count = 0
   const pages: PageMap = {}
   const pendingPageIds = new Set<string>()
-  const timeout = 10000
-  const retry = 10
+  const timeout = 20000
+  const retry = 5
   const queue = new PQueue({ concurrency, timeout: timeout * retry })
 
   async function processPage(pageId: string) {
