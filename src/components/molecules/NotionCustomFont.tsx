@@ -1,8 +1,8 @@
-import Head from 'next/head'
 import * as React from 'react'
-import * as types from '~/lib/types'
+import Head from 'next/head'
+import { Site } from '~/lib/types'
 
-export const NotionCustomFont: React.FC<{ site: types.Site }> = ({ site }) => {
+export const NotionCustomFont: React.FC<{ site: Site }> = ({ site }) => {
   if (!site.fontFamily) return null
 
   const fontFamilies = [site.fontFamily]

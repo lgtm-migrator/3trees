@@ -1,14 +1,19 @@
-import * as firestore from '@google-cloud/firestore'
-import * as config from './config'
+import { Firestore } from '@google-cloud/firestore'
+import {
+  isPreviewImageSupportEnabled,
+  googleProjectId,
+  googleApplicationCredentials,
+  firebaseCollectionImages,
+} from './config'
+import type { CollectionReference } from '@google-cloud/firestore'
 
-export let db: firestore.Firestore
-export let images: firestore.CollectionReference
+export let db: Firestore
+export let images: CollectionReference
 
-if (config.isPreviewImageSupportEnabled) {
-  db = new firestore.Firestore({
-    projectId: config.googleProjectId,
-    credentials: config.googleApplicationCredentials,
+if (isPreviewImageSupportEnabled) {
+  db = new Firestore({
+    projectId: googleProjectId,
+    credentials: googleApplicationCredentials,
   })
-
-  images = db.collection(config.firebaseCollectionImages)
+  images = db.collection(firebaseCollectionImages)
 }

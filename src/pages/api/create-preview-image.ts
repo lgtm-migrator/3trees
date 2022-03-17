@@ -4,7 +4,7 @@ import got from 'got'
 import lqip from 'lqip-modern'
 
 import { isPreviewImageSupportEnabled } from '~/lib/config'
-import * as db from '~/lib/db'
+import { images } from '~/lib/db'
 
 import { PreviewImage, PreviewError } from '~/lib/types'
 
@@ -27,7 +27,7 @@ const previewImage = async (req: NextApiRequest, res: NextApiResponse): Promise<
 
 export async function createPreviewImage(url: string, id: string): Promise<PreviewImage | PreviewError | undefined> {
   console.debug('createPreviewImage lambda', { url, id })
-  const doc = db.images.doc(id)
+  const doc = images.doc(id)
   try {
     const model = await doc.get()
     if (model.exists) return model.data() as PreviewImage

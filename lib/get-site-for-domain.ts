@@ -1,12 +1,13 @@
-import * as config from './config'
-import * as types from './types'
+import { name, rootNotionSpaceId, rootNotionPageId, description } from './config'
 
-export const getSiteForDomain = (domain: string): types.Site => {
+import type { Site } from './types'
+
+export const getSiteForDomain = (domain: string): Site => {
   return {
     domain,
-    name: config.name,
-    rootNotionPageId: config.rootNotionPageId,
-    rootNotionSpaceId: config.rootNotionSpaceId,
-    description: config.description,
-  } as types.Site
+    name: name,
+    rootNotionPageId: rootNotionPageId,
+    rootNotionSpaceId: rootNotionSpaceId,
+    description: description,
+  } as Site
 }

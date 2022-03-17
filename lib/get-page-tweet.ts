@@ -1,6 +1,6 @@
-import * as types from './types'
 import { getPageProperty } from 'notion-utils'
+import type { Block, ExtendedRecordMap } from 'notion-types'
 
-export function getPageTweet(block: types.Block, recordMap: types.ExtendedRecordMap): string | null {
+export function getPageTweet(block: Block, recordMap: ExtendedRecordMap): string | null {
   return getPageProperty('Tweet', block, recordMap)
 }

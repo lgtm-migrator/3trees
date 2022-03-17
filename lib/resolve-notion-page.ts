@@ -21,7 +21,6 @@ export async function resolveNotionPage(domain: string, rawPageId: string) {
     const override = pageUrlOverrides[rawPageId] || pageUrlAdditions[rawPageId]
     if (override) pageId = parsePageId(override)
   }
-  console.debug('pageid', pageId)
   if (pageId)
     recordMap = (await getPage(pageId).catch(err => {
       error = new Error(err.name)
