@@ -1,6 +1,46 @@
 import React from 'react'
 import { Head, Html, Main, NextScript } from 'next/document'
-import siteConfig from '~/site-config'
+import Script from 'next/script'
+
+const noflash = `
+(function () {
+  // Theme settings
+  const storageKey = 'darkMode'
+  const classNameDark = 'dark'
+  const classNameLight = 'light'
+  const suffix = '-mode'
+  function setClass(darkMode) {
+    document.body.classList.remove(darkMode ? classNameLight : classNameDark)
+    document.body.classList.remove(darkMode ? classNameLight : classNameDark)
+    document.body.classList.add(darkMode ? classNameDark + suffix : classNameLight + suffix)
+    document.body.classList.add(darkMode ? classNameDark + suffix : classNameLight + suffix)
+  }
+
+  // Check Theme
+  const preferDarkQuery = '(prefers-color-scheme: dark)'
+  const mql = window.matchMedia(preferDarkQuery)
+  const supportsColorSchemeQuery = mql.media === preferDarkQuery
+  let localStorageTheme = null
+  try {
+    localStorageTheme = localStorage.getItem(storageKey)
+  } catch (err) {}
+  var localStorageExists = localStorageTheme !== null
+  if (localStorageExists) {
+    localStorageTheme = JSON.parse(localStorageTheme)
+  }
+
+  // Determine the source of truth
+  if (localStorageExists) {
+    setClass(localStorageTheme)
+  } else if (supportsColorSchemeQuery) {
+    setClass(mql.matches)
+    localStorage.setItem(storageKey, String(mql.matches))
+  } else {
+    var isDarkMode = document.body.classList.contains(classNameDark)
+    localStorage.setItem(storageKey, JSON.stringify(isDarkMode))
+  }
+})()
+`
 
 const Document = () => {
   return (
@@ -12,8 +52,6 @@ const Document = () => {
 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="theme-color" content={siteConfig.themeColor} />
-        <meta name="msapplication-TileColor" content={siteConfig.themeColor} />
 
         <link rel="manifest" href="/manifest.json" />
 
@@ -37,7 +75,7 @@ const Document = () => {
       </Head>
 
       <body>
-        <script src="/noflash.js" type="text/javascript"></script>
+        <Script>{noflash}</Script>
         <Main />
         <NextScript />
         <script

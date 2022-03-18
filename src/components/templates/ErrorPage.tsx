@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import * as React from 'react'
 
-export const ErrorPage: React.FC<{ statusCode?: number; title?: string; subtitle?: string }> = ({
+import type { NextPage } from 'next'
+
+export const ErrorPage: NextPage<{ statusCode?: number; title?: string; subtitle?: string }> = ({
   statusCode,
   title,
   subtitle,

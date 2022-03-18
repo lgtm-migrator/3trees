@@ -38,26 +38,33 @@ import type { PageProps } from 'lib/types'
 
 const Modal = dynamic(() => import('react-notion-x').then(notion => notion.Modal), { ssr: false })
 
+const DARK_CLASS = 'dark'
+const LIGHT_CLASS = 'light'
+const SUFFIX = '-mode'
+
 export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId }) => {
   // Theme
-  function resetTheme(mode: 'light' | 'dark') {
+  function resetTheme(mode: typeof DARK_CLASS | typeof LIGHT_CLASS) {
     const notion = document.querySelector('.notion') as HTMLElement
     const target = notion ? notion : document.body
     for (const root of [document.body, target]) {
-      root.classList.remove('light')
-      root.classList.remove('dark')
-      root.classList.remove('light-mode')
-      root.classList.remove('dark-mode')
+      if (mode === DARK_CLASS) {
+        root.classList.remove(LIGHT_CLASS)
+        root.classList.remove(LIGHT_CLASS + SUFFIX)
+      } else if (mode === LIGHT_CLASS) {
+        root.classList.remove(DARK_CLASS)
+        root.classList.remove(DARK_CLASS + SUFFIX)
+      }
     }
     for (const root of [document.body, target]) {
       root.classList.add(mode)
-      root.classList.add(`${mode}-mode`)
+      root.classList.add(mode + SUFFIX)
     }
   }
-  const themeChange = (isDark?: boolean) => (isDark ? resetTheme('dark') : resetTheme('light'))
+  const themeChange = (isDark?: boolean) => (isDark ? resetTheme(DARK_CLASS) : resetTheme(LIGHT_CLASS))
   const darkMode = useDarkMode(false, {
-    classNameDark: 'dark',
-    classNameLight: 'light',
+    classNameDark: DARK_CLASS,
+    classNameLight: LIGHT_CLASS,
   })
   useEffect(() => themeChange(darkMode.value), [darkMode])
   const themeColor = useMemo(() => (darkMode.value ? '#2F3437' : '#fff'), [darkMode])

@@ -1,8 +1,7 @@
 # Register
 
 ```bash
-kubectl config use-context cloud_okteto_com
-kubectl config set-context --current --namespace 3trees-seonglae
+kubectl config use-context cloud_okteto_com --namespace 3trees-seonglae
 kubectl create secret docker-registry ghcred \
 --docker-server="ghcr.io" \
 --docker-username="$USER" \
@@ -17,6 +16,7 @@ kubectl create secret generic threetrees-secret --from-env-file=.env
 change the image
 
 ```
+kubectl config use-context cloud_okteto_com --namespace 3trees-seonglae
 kubectl apply -f threetrees-svc.yaml
 kubectl apply -f threetrees-deploy.yaml
 ```
