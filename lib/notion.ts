@@ -5,6 +5,8 @@ import { getPreviewImages } from './get-preview-images'
 import { mapNotionImageUrl } from './map-image-url'
 import { getSiteConfig, getEnv } from './get-config-value'
 
+export const TIMEOUT = 20000
+
 // remove notion-client's vervose warning
 console.warn = (...args) => console.debug(...args.map(arg => (arg instanceof Error ? arg.message : arg)))
 
@@ -15,7 +17,7 @@ export const notion = new NotionAPI({
   activeUser,
 })
 
-export async function getPage(pageId: string, timeout: number = 10000): Promise<ExtendedRecordMap | void> {
+export async function getPage(pageId: string, timeout: number = TIMEOUT): Promise<ExtendedRecordMap | void> {
   const recordMap = await notion
     .getPage(pageId, { gotOptions: { timeout: { request: timeout } } })
     .catch(err => console.debug(err.message, pageId))

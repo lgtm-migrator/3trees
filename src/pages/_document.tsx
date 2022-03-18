@@ -1,26 +1,25 @@
 import React from 'react'
 import { Head, Html, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 
 const noflash = `
-(function () {
-  // Theme settings
-  const storageKey = 'darkMode'
-  const classNameDark = 'dark'
-  const classNameLight = 'light'
-  const suffix = '-mode'
-  function setClass(darkMode) {
-    document.body.classList.remove(darkMode ? classNameLight : classNameDark)
-    document.body.classList.remove(darkMode ? classNameLight : classNameDark)
+;(function () {
+  // Change these if you use something different in your hook.
+  var storageKey = 'darkMode'
+  var classNameDark = 'dark'
+  var classNameLight = 'light'
+  var suffix = '-mode'
+
+  function setClassOnDocumentBody(darkMode) {
+    document.body.classList.add(darkMode ? classNameDark : classNameLight)
     document.body.classList.add(darkMode ? classNameDark + suffix : classNameLight + suffix)
-    document.body.classList.add(darkMode ? classNameDark + suffix : classNameLight + suffix)
+    document.body.classList.remove(darkMode ? classNameLight : classNameDark)
+    document.body.classList.remove(darkMode ? classNameLight + suffix : classNameDark + suffix)
   }
 
-  // Check Theme
-  const preferDarkQuery = '(prefers-color-scheme: dark)'
-  const mql = window.matchMedia(preferDarkQuery)
-  const supportsColorSchemeQuery = mql.media === preferDarkQuery
-  let localStorageTheme = null
+  var preferDarkQuery = '(prefers-color-scheme: dark)'
+  var mql = window.matchMedia(preferDarkQuery)
+  var supportsColorSchemeQuery = mql.media === preferDarkQuery
+  var localStorageTheme = null
   try {
     localStorageTheme = localStorage.getItem(storageKey)
   } catch (err) {}
@@ -31,11 +30,14 @@ const noflash = `
 
   // Determine the source of truth
   if (localStorageExists) {
-    setClass(localStorageTheme)
+    // source of truth from localStorage
+    setClassOnDocumentBody(localStorageTheme)
   } else if (supportsColorSchemeQuery) {
-    setClass(mql.matches)
+    // source of truth from system
+    setClassOnDocumentBody(mql.matches)
     localStorage.setItem(storageKey, String(mql.matches))
   } else {
+    // source of truth from document.body
     var isDarkMode = document.body.classList.contains(classNameDark)
     localStorage.setItem(storageKey, JSON.stringify(isDarkMode))
   }
@@ -75,7 +77,7 @@ const Document = () => {
       </Head>
 
       <body>
-        <Script>{noflash}</Script>
+        <script dangerouslySetInnerHTML={{ __html: noflash }}></script>
         <Main />
         <NextScript />
         <script

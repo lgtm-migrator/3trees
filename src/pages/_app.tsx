@@ -6,8 +6,6 @@ import Router from 'next/router'
 
 import siteConfig from '~/site-config'
 
-import type { AppProps } from '@/types/next'
-
 import 'windi.css'
 import 'katex/dist/katex.min.css'
 import 'react-notion-x/src/styles.css'
@@ -24,6 +22,8 @@ import '@/styles/global.css'
 import '@/styles/nprogress.css'
 import '@/styles/notion.css'
 import '@/styles/prism-theme.css'
+
+import type { AppProps } from 'next/app'
 
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())
@@ -70,13 +70,7 @@ function App(props: AppProps) {
         sameAs={Object.values(siteConfig.socials)}
       />
 
-      {Component.disableLayout ? (
-        <Component {...pageProps} />
-      ) : (
-        <>
-          <Component {...pageProps} />
-        </>
-      )}
+      <Component {...pageProps} />
     </>
   )
 }

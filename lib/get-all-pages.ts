@@ -2,19 +2,20 @@ import pMemoize from 'p-memoize'
 import PQueue from 'p-queue'
 
 import { includeNotionIdInUrls } from './config'
-import { getPage, notion } from './notion'
+import { getPage, notion, TIMEOUT } from './notion'
 import { getCanonicalPageId } from './get-canonical-page-id'
 import { parsePageId } from 'notion-utils'
 
 import type { CanonicalPageMap, SiteMap } from './types'
 import type { ExtendedRecordMap, PageMap } from 'notion-types'
 
-const OPTIMIZED_CONCURRENCY = 10
-const MAX_PAGE = 10000
-const MAX_PENDING = 100
 const uuid = includeNotionIdInUrls
-
 export const getAllPages = pMemoize(getAllPagesImpl, { maxAge: 60000 * 5 })
+
+export const OPTIMIZED_CONCURRENCY = 10
+export const MAX_PAGE = 10000
+export const MAX_PENDING = 100
+export const RETRY = 10
 
 export async function getAllPagesImpl(rootNotionPageId: string, rootNotionSpaceId: string): Promise<Partial<SiteMap>> {
   const pageMap = await getAllPagesInSpace(rootNotionPageId, rootNotionSpaceId, getPage.bind(notion), {
@@ -55,8 +56,8 @@ export async function getAllPagesInSpace(
   let count = 0
   const pages: PageMap = {}
   const pendingPageIds = new Set<string>()
-  const timeout = 20000
-  const retry = 10
+  const timeout = TIMEOUT
+  const retry = RETRY
   const queue = new PQueue({ concurrency, timeout: timeout * retry })
 
   async function processPage(pageId: string) {

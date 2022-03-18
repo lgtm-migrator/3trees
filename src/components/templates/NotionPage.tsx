@@ -44,9 +44,13 @@ const SUFFIX = '-mode'
 
 export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId }) => {
   // Theme
-  function resetTheme(mode: typeof DARK_CLASS | typeof LIGHT_CLASS) {
+  function changeTheme(mode: typeof DARK_CLASS | typeof LIGHT_CLASS) {
     const notion = document.querySelector('.notion') as HTMLElement
     const target = notion ? notion : document.body
+    for (const root of [document.body, target]) {
+      root.classList.add(mode)
+      root.classList.add(mode + SUFFIX)
+    }
     for (const root of [document.body, target]) {
       if (mode === DARK_CLASS) {
         root.classList.remove(LIGHT_CLASS)
@@ -56,15 +60,11 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
         root.classList.remove(DARK_CLASS + SUFFIX)
       }
     }
-    for (const root of [document.body, target]) {
-      root.classList.add(mode)
-      root.classList.add(mode + SUFFIX)
-    }
   }
-  const themeChange = (isDark?: boolean) => (isDark ? resetTheme(DARK_CLASS) : resetTheme(LIGHT_CLASS))
+  const themeChange = (isDark?: boolean) => (isDark ? changeTheme(DARK_CLASS) : changeTheme(LIGHT_CLASS))
   const darkMode = useDarkMode(false, {
-    classNameDark: DARK_CLASS,
-    classNameLight: LIGHT_CLASS,
+    classNameDark: DARK_CLASS + SUFFIX,
+    classNameLight: LIGHT_CLASS + SUFFIX,
   })
   useEffect(() => themeChange(darkMode.value), [darkMode])
   const themeColor = useMemo(() => (darkMode.value ? '#2F3437' : '#fff'), [darkMode])
