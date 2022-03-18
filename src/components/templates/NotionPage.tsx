@@ -41,46 +41,42 @@ const Modal = dynamic(() => import('react-notion-x').then(notion => notion.Modal
 const DARK_CLASS = 'dark'
 const LIGHT_CLASS = 'light'
 const SUFFIX = '-mode'
+const mockElement = { classList: { add: () => {}, remove: () => {} } }
 
 export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId }) => {
+  // Loading
+  const router = useRouter()
+  if (router.isFallback) return <Loading />
+
   // Theme
   function changeTheme(mode: typeof DARK_CLASS | typeof LIGHT_CLASS) {
+    const targets = [document.body]
     const notion = document.querySelector('.notion') as HTMLElement
-    const target = notion ? notion : document.body
-    for (const root of [document.body, target]) {
-      root.classList.add(mode)
-      root.classList.add(mode + SUFFIX)
-    }
-    for (const root of [document.body, target]) {
-      if (mode === DARK_CLASS) {
-        root.classList.remove(LIGHT_CLASS)
-        root.classList.remove(LIGHT_CLASS + SUFFIX)
-      } else if (mode === LIGHT_CLASS) {
-        root.classList.remove(DARK_CLASS)
-        root.classList.remove(DARK_CLASS + SUFFIX)
-      }
-    }
+    if (notion) targets.push(notion)
+    for (const root of targets) root.classList.add(mode, mode + SUFFIX)
+    for (const root of targets)
+      if (mode === DARK_CLASS) root.classList.remove(LIGHT_CLASS, LIGHT_CLASS + SUFFIX)
+      else if (mode === LIGHT_CLASS) root.classList.remove(DARK_CLASS, DARK_CLASS + SUFFIX)
   }
   const themeChange = (isDark?: boolean) => (isDark ? changeTheme(DARK_CLASS) : changeTheme(LIGHT_CLASS))
-  const darkMode = useDarkMode(false, {
-    classNameDark: DARK_CLASS + SUFFIX,
-    classNameLight: LIGHT_CLASS + SUFFIX,
+  const darkMode = useDarkMode(true, {
+    element: mockElement as HTMLElement,
+    classNameDark: DARK_CLASS,
+    classNameLight: LIGHT_CLASS,
+    onChange: themeChange,
   })
-  useEffect(() => themeChange(darkMode.value), [darkMode])
   const themeColor = useMemo(() => (darkMode.value ? '#2F3437' : '#fff'), [darkMode])
   useEffect(() => {
     document.body.style.background = themeColor
   }, [themeColor])
 
-  // Loading or Error
-  const router = useRouter()
-  if (router.isFallback) return <Loading />
+  // Error
   const keys = Object.keys(recordMap?.block || {})
   const block = recordMap?.block?.[keys[0]]?.value
   if (error || !site || !keys.length || !block)
     return <NotionError darkMode={darkMode.value} site={site} pageId={pageId} error={error} />
 
-  // lite mode is for oembed
+  // Lite
   const lite = useSearchParam('lite')
   const params: { lite?: string } = {}
   if (lite) params.lite = lite
