@@ -4,6 +4,8 @@ import { Block, ExtendedRecordMap, SearchParams, SearchResults } from 'notion-ty
 import { getPreviewImages } from './get-preview-images'
 import { mapNotionImageUrl } from './map-image-url'
 import { getSiteConfig, getEnv } from './get-config-value'
+import { isBuild } from './config'
+console.log(isBuild)
 
 export const TIMEOUT = 20000
 

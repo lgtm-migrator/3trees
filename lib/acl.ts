@@ -32,12 +32,11 @@ export function pageAcl({ site, recordMap, pageId }: Partial<PageProps>): PagePr
   const rootSpaceId = rootValue?.space_id
 
   if (rootSpaceId && site.rootNotionSpaceId && rootSpaceId !== site.rootNotionSpaceId)
-    if (process.env.NODE_ENV) {
+    if (process.env.NODE_ENV)
       return {
         error: {
           statusCode: 404,
           message: `Notion page "${pageId}" doesn't belong to the Notion workspace owned by "${site.domain}".`,
         },
       }
-    }
 }
