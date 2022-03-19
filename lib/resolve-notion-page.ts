@@ -28,6 +28,7 @@ export async function resolveNotionPage(domain: string, rawPageId: string) {
       error = { statusCode: SERVER_ERR, message: err.name }
     })) as ExtendedRecordMap
 
-  const props = { site, recordMap, pageId, error } as PageProps
+  const props = { site, recordMap, pageId } as PageProps
+  if (error) props.error = error
   return { ...props, ...pageAcl(props) }
 }
