@@ -9,16 +9,12 @@ export function getCanonicalPageId(
   { uuid = true }: { uuid?: boolean } = {}
 ): string | null {
   const cleanPageId = parsePageId(pageId, { uuid: false })
-  if (!cleanPageId) {
-    return null
-  }
+  if (!cleanPageId) return null
 
   const override = inversePageUrlOverrides[cleanPageId]
-  if (override) {
-    return override
-  } else {
+  if (override) return override
+  else
     return getCanonicalPageIdImpl(pageId, recordMap, {
       uuid,
     })
-  }
 }

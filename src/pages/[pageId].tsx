@@ -1,5 +1,5 @@
 import React from 'react'
-import { isDev, domain } from 'lib/config'
+import { isDev, domain, pageUrlOverrides } from 'lib/config'
 import { getSiteMaps } from 'lib/get-site-maps'
 import { resolveNotionPage } from 'lib/resolve-notion-page'
 
@@ -22,6 +22,10 @@ export async function getStaticPaths() {
   if (isDev) return { paths: [], fallback: 'blocking' } as GetStaticPathsResult
   const siteMaps = await getSiteMaps()
   const paths = siteMaps.flatMap(siteMap => Object.keys(siteMap.canonicalPageMap).map(pageId => ({ params: { pageId } })))
+  const overrides = Object.keys(pageUrlOverrides)
+  for (const override of overrides)
+    if (!paths.find(path => path.params.pageId === override)) paths.push({ params: { pageId: override } })
+  paths.push(...Object.keys(pageUrlOverrides).map(override => ({ params: { pageId: override } })))
   return { paths, fallback: true } as GetStaticPathsResult
 }
 
