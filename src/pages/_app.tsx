@@ -36,7 +36,7 @@ function App(props: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <DefaultSeo title="Welcome!" titleTemplate={`%s · ${siteConfig.title}`} canonical={siteConfig.url + router.asPath} />
+      <DefaultSeo canonical={siteConfig.url + router.asPath} />
       <SocialProfileJsonLd
         type="Organization"
         name={siteConfig.title}
