@@ -11,7 +11,7 @@
     "dev": "next dev --port 1234",
     "start": "next start --port 1234",
     "lint": "eslint ./**/*.{ts,tsx} --ignore-path .gitignore --fix",
-  "css": "windicss-analysis",
+    "css": "windicss-analysis",
     "build": "run-s \"build:**\"",
     "build:scripts": "esmo scripts/build.ts",
     "build:web": "next build",
