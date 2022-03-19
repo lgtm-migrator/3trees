@@ -13,7 +13,7 @@ const uuid = includeNotionIdInUrls
 export const getAllPages = pMemoize(getAllPagesImpl, { maxAge: 60000 * 5 })
 
 export const OPTIMIZED_CONCURRENCY = 10
-export const MAX_PAGE = 10
+export const MAX_PAGE = 10000
 export const MAX_PENDING = 100
 export const RETRY = 10
 

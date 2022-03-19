@@ -18,6 +18,7 @@ change the image
 ```
 kubectl config use-context cloud_okteto_com --namespace 3trees-seonglae
 kubectl apply -f threetrees-svc.yaml
+kubectl apply -f www.yaml
 kubectl apply -f threetrees-deploy.yaml
 ```
 
