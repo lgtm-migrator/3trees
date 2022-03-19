@@ -15,9 +15,11 @@
     "build": "run-s \"build:**\"",
     "build:scripts": "esmo scripts/build.ts",
     "build:web": "next build",
+    "prepare": "husky install",
     "format": "run-p \"format:**\"",
     "format:index": "prettier --write \"*.{js,json,md}\"",
-    "format:src": "prettier --write \"src/**/*.{css,js,ts,tsx}\""
+    "format:src": "prettier --write \"src/**/*.{css,js,ts,tsx}\"",
+    "format:lib": "prettier --write \"lib/**/*.ts\""
   },
   "color": {
     "light": "#fff",
@@ -42,20 +44,6 @@
     "linkedin": {
       "name": "seonglae"
     }
-  },
-  "husky": {
-    "hooks": {
-      "post-merge": "pnpm i",
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "./**/*.{ts,tsx}": [
-      "eslint --fix --ignore-path .gitignore"
-    ],
-    "{src}/**/*.{md,ts,tsx}": [
-      "prettier --write --ignore-path .gitignore"
-    ]
   },
   "browserslist": [
     "since 2017"

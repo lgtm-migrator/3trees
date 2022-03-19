@@ -6,24 +6,19 @@
 
 ![image](https://user-images.githubusercontent.com/27716524/158437995-142e5ec9-f2df-4e20-b03a-620a6ade32c3.png)
 
-
-
-
 # How to Contribute
+
 1. Become a **3Trees contributor**
 2. Become **Repository Developer**
 
-
-
 # 1. Three Trees contributor
+
 - Check about [3Trees](threetrees.cloud)
 - Join [Slack](github.com/3bases)
 
-
 # 2. Repository Developer
+
 repository structure notion to check
-
-
 
 ### Made by
 
