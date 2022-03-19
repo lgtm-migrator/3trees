@@ -42,7 +42,6 @@ const Modal = dynamic(() => import('react-notion-x').then(notion => notion.Modal
 const DARK_CLASS = 'dark'
 const LIGHT_CLASS = 'light'
 const SUFFIX = '-mode'
-const mockElement = { classList: { add: () => {}, remove: () => {} } }
 
 export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId }) => {
   // Theme
@@ -53,7 +52,6 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   }
   const themeChange = (isDark?: boolean) => (isDark ? changeTheme(DARK_CLASS) : changeTheme(LIGHT_CLASS))
   const darkMode = useDarkMode(false, {
-    element: mockElement as HTMLElement,
     classNameDark: DARK_CLASS + SUFFIX,
     classNameLight: LIGHT_CLASS + SUFFIX,
     onChange: themeChange,
@@ -62,6 +60,12 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   useEffect(() => {
     document.body.style.background = themeColor
   }, [themeColor])
+
+  // Lite
+  const lite = useSearchParam('lite')
+  const params: { lite?: string } = {}
+  if (lite) params.lite = lite
+  const isLiteMode = lite === 'true'
 
   // Loading
   const router = useRouter()
@@ -73,26 +77,20 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   if (error || !site || !keys.length || !block)
     return <NotionError darkMode={darkMode.value} site={site} pageId={pageId} error={error} />
 
-  // Lite
-  const lite = useSearchParam('lite')
-  const params: { lite?: string } = {}
-  if (lite) params.lite = lite
-  const isLiteMode = lite === 'true'
-
   // Metadatas
-  const title = getBlockTitle(block, recordMap!) || site.name
+  const title = getBlockTitle(block, recordMap) || site.name
   const searchParams = new URLSearchParams(params)
-  const siteMapPageUrl = mapPageUrl(site, recordMap!, searchParams)
-  const canonicalPageUrl = !isDev && getCanonicalPageUrl(site, recordMap!)(pageId)
+  const siteMapPageUrl = mapPageUrl(site, recordMap, searchParams)
+  const canonicalPageUrl = !isDev && getCanonicalPageUrl(site, recordMap)(pageId)
   const isBlogPost = block.type === 'page' && block.parent_table === 'collection'
   const minTableOfContentsItems = 3
   const cover = (block as PageBlock).format?.page_cover
   const socialImage = cover ? mapNotionImageUrl(cover, block) : undefined
-  const socialDescription = getPageDescription(block, recordMap!) ?? description
+  const socialDescription = getPageDescription(block, recordMap) ?? description
 
   // Components
   let comments: React.ReactNode = null
-  let pageAside: React.ReactChild | null = null
+  const pageAside: React.ReactChild | null = null
   if (giscusRepo) comments = <></>
 
   const pageLink = ({
@@ -174,7 +172,7 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
           modal: Modal,
           equation: Equation,
         }}
-        recordMap={recordMap!}
+        recordMap={recordMap}
         rootPageId={site.rootNotionPageId}
         fullPage={!isLiteMode}
         darkMode={darkMode.value}
