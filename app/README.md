@@ -32,7 +32,6 @@ docker build  -t ghcr.io/3bases/3trees:$GIT_TAG \
 --build-arg FIREBASE_COLLECTION_IMAGES=$FIREBASE_COLLECTION_IMAGES \
 --build-arg NOTION_API_AUTH_TOKEN=$NOTION_API_AUTH_TOKEN \
 --build-arg GIT_TAG=$GIT_TAG \
---build-arg RUNTIME_ENV=build \
 .
 docker push  ghcr.io/3bases/3trees:$GIT_TAG
 docker tag ghcr.io/3bases/3trees:$GIT_TAG ghcr.io/3bases/3trees:latest

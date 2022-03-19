@@ -44,10 +44,6 @@ const SUFFIX = '-mode'
 const mockElement = { classList: { add: () => {}, remove: () => {} } }
 
 export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId }) => {
-  // Loading
-  const router = useRouter()
-  if (router.isFallback) return <Loading />
-
   // Theme
   function changeTheme(mode: typeof DARK_CLASS | typeof LIGHT_CLASS) {
     const targets = [document.body]
@@ -61,14 +57,18 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   const themeChange = (isDark?: boolean) => (isDark ? changeTheme(DARK_CLASS) : changeTheme(LIGHT_CLASS))
   const darkMode = useDarkMode(true, {
     element: mockElement as HTMLElement,
-    classNameDark: DARK_CLASS,
-    classNameLight: LIGHT_CLASS,
+    classNameDark: DARK_CLASS + SUFFIX,
+    classNameLight: LIGHT_CLASS + SUFFIX,
     onChange: themeChange,
   })
   const themeColor = useMemo(() => (darkMode.value ? '#2F3437' : '#fff'), [darkMode])
   useEffect(() => {
     document.body.style.background = themeColor
   }, [themeColor])
+
+  // Loading
+  const router = useRouter()
+  if (router.isFallback) return <Loading />
 
   // Error
   const keys = Object.keys(recordMap?.block || {})
@@ -89,8 +89,8 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   const canonicalPageUrl = !isDev && getCanonicalPageUrl(site, recordMap!)(pageId)
   const isBlogPost = block.type === 'page' && block.parent_table === 'collection'
   const minTableOfContentsItems = 3
-  const imageURL = (block as PageBlock).format?.page_cover || defaultPageCover
-  const socialImage = imageURL ? mapNotionImageUrl(imageURL, block) : null
+  const cover = (block as PageBlock).format?.page_cover
+  const socialImage = cover ? mapNotionImageUrl(cover, block) : undefined
   const socialDescription = getPageDescription(block, recordMap!) ?? description
 
   // Components

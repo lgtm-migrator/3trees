@@ -6,7 +6,7 @@ import { ErrorPage } from '@/components'
 import type { PageProps } from 'lib/types'
 
 export const NotionError: React.FC<PageProps & { darkMode: boolean }> = ({ site, error, darkMode }) => {
-  const title = String(error?.statusCode)
+  const title = error?.message
   return (
     <>
       <PageHead site={site} darkMode={darkMode} />
@@ -15,7 +15,7 @@ export const NotionError: React.FC<PageProps & { darkMode: boolean }> = ({ site,
         <meta property="og:title" content={title} />
         <title>{title}</title>
       </Head>
-      <ErrorPage statusCode={error?.statusCode} title={title} subtitle={error?.message} />
+      <ErrorPage statusCode={error?.statusCode} title={title} subtitle={'Notion Error'} />
     </>
   )
 }

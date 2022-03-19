@@ -39,7 +39,6 @@ jobs:
             FIREBASE_COLLECTION_IMAGES=${{ secrets.FIREBASE_COLLECTION_IMAGES }}
             NOTION_API_AUTH_TOKEN=${{ secrets.NOTION_API_AUTH_TOKEN }}
             GIT_TAG=${{ env.RELEASE_VERSION }}
-            RUNTIME_ENV=build
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ env.RELEASE_VERSION }}

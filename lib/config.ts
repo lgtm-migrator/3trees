@@ -52,7 +52,6 @@ export const imageCDNHost: string | null = getSiteConfig('imageCDNHost', null)
 export const isPreviewImageSupportEnabled: boolean = getSiteConfig('isPreviewImageSupportEnabled', false)
 
 export const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
-export const isBuild = process.env.RUNTIME_ENV === 'build'
 
 // where it all starts -- the site's root Notion page
 export const includeNotionIdInUrls: boolean = getSiteConfig('includeNotionIdInUrls', isDev)

@@ -36,7 +36,7 @@ export function pageAcl({ site, recordMap, pageId }: Partial<PageProps>): PagePr
       return {
         error: {
           statusCode: 404,
-          message: `Notion page "${pageId}" doesn't belong to the Notion workspace owned by "${site.domain}".`,
+          message: `Notion page "${pageId}" doesn't belong to the Notion workspace`,
         },
       }
 }
