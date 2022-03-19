@@ -391,7 +391,7 @@ blockquote:before {
 }
 
 .timeline-comment .comment {
-  background-color: #2f3437;
+  background-color: var(--bg-color);
 }
 
 /* Link */

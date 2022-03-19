@@ -27,6 +27,7 @@ import {
 } from 'lib/config'
 
 // components
+import { bgColor } from '~/site-config'
 import { NotionCustomFont } from '../molecules/NotionCustomFont'
 import { Loading } from '../molecules/Loading'
 import { NotionError } from '@/components/organisms/NotionError'
@@ -57,7 +58,7 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
     classNameLight: LIGHT_CLASS + SUFFIX,
     onChange: themeChange,
   })
-  const themeColor = useMemo(() => (darkMode.value ? '#2F3437' : '#fff'), [darkMode])
+  const themeColor = useMemo(() => (darkMode.value ? bgColor.dark : bgColor.light), [darkMode])
   useEffect(() => {
     document.body.style.background = themeColor
   }, [themeColor])

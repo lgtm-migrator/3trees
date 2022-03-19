@@ -19,7 +19,10 @@
     "format:index": "prettier --write \"*.{js,json,md}\"",
     "format:src": "prettier --write \"src/**/*.{css,js,ts,tsx}\""
   },
-  "color": "#2f3437",
+  "color": {
+    "light": "#fff",
+    "dark": "#2f3437"
+  },
   "author": {
     "name": "Alan Jo",
     "email": "sungle3737@gmail.com",

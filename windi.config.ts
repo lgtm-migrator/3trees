@@ -1,4 +1,5 @@
 import { defineConfig } from 'windicss/helpers'
+import { bgColor } from './site-config'
 
 export default defineConfig({
   darkMode: 'class',
@@ -10,9 +11,7 @@ export default defineConfig({
   theme: {
     extend: {
       colors: {
-        background: {
-          dark: '#2F3437',
-        },
+        background: bgColor,
       },
     },
   },
