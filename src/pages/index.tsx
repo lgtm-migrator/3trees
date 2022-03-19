@@ -21,8 +21,8 @@ export default function NotionDomainPage(props: PageProps) {
     <>
       <Head>
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="ogimage.png" />
-        <meta property="og:image" content="ogimage.png" />
+        <meta name="twitter:image" content="/ogimage.png" />
+        <meta property="og:image" content="/ogimage.png" />
       </Head>
       <NotionPage {...props} />
     </>
