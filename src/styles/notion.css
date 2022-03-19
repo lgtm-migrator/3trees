@@ -22,7 +22,7 @@
   --notion-blue: #5e87c9;
 }
 
-.light-mode {
+:root {
   --bg-color: #fff !important;
   --bd-color: #dfdfde !important;
   --sd-color-0: #ccc !important;

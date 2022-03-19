@@ -2,36 +2,33 @@ import React from 'react'
 import { Head, Html, Main, NextScript } from 'next/document'
 
 const noflash = `
-;(function () {
-  var storageKey = 'darkMode'
-  var classNameDark = 'dark'
-  var classNameLight = 'light'
-  var suffix = '-mode'
-  function setClassOnDocumentBody(darkMode) {
-    document.body.classList.add(darkMode ? classNameDark : classNameLight, darkMode ? classNameDark + suffix : classNameLight + suffix)
-    document.body.classList.remove(darkMode ? classNameLight : classNameDark, darkMode ? classNameLight + suffix : classNameDark + suffix)
-  }
-  var preferDarkQuery = '(prefers-color-scheme: dark)'
-  var mql = window.matchMedia(preferDarkQuery)
-  var supportsColorSchemeQuery = mql.media === preferDarkQuery
-  var localStorageTheme = null
-  try {
-    localStorageTheme = localStorage.getItem(storageKey)
-  } catch (err) {}
-  var localStorageExists = localStorageTheme !== null
-
-  // Branch
-  if (localStorageExists) {
-    localStorageTheme = JSON.parse(localStorageTheme)
-    setClassOnDocumentBody(localStorageTheme)
-  } else if (supportsColorSchemeQuery) {
-    setClassOnDocumentBody(mql.matches)
-    localStorage.setItem(storageKey, String(mql.matches))
-  } else {
-    var isDarkMode = document.body.classList.contains(classNameDark)
-    localStorage.setItem(storageKey, JSON.stringify(isDarkMode))
-  }
-})()
+const storageKey = 'darkMode'
+const classNameDark = 'dark'
+const classNameLight = 'light'
+const suffix = '-mode'
+function setClassOnDocumentBody(darkMode) {
+  document.body.classList.add(darkMode ? classNameDark : classNameLight, darkMode ? classNameDark + suffix : classNameLight + suffix)
+  document.body.classList.remove(darkMode ? classNameLight : classNameDark, darkMode ? classNameLight + suffix : classNameDark + suffix)
+}
+const preferDarkQuery = '(prefers-color-scheme: dark)'
+const mql = window.matchMedia(preferDarkQuery)
+const supportsColorSchemeQuery = mql.media === preferDarkQuery
+let localStorageTheme = null
+try {
+  localStorageTheme = localStorage.getItem(storageKey)
+} catch (err) {}
+const localStorageExists = localStorageTheme !== null
+// Branch
+if (localStorageExists) {
+  localStorageTheme = JSON.parse(localStorageTheme)
+  setClassOnDocumentBody(localStorageTheme)
+} else if (supportsColorSchemeQuery) {
+  setClassOnDocumentBody(mql.matches)
+  localStorage.setItem(storageKey, String(mql.matches))
+} else {
+  const isDarkMode = document.body.classList.contains(classNameDark)
+  localStorage.setItem(storageKey, JSON.stringify(isDarkMode))
+}
 `
 
 const Document = () => {

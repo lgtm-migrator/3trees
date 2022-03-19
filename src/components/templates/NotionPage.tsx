@@ -46,16 +46,12 @@ const mockElement = { classList: { add: () => {}, remove: () => {} } }
 export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId }) => {
   // Theme
   function changeTheme(mode: typeof DARK_CLASS | typeof LIGHT_CLASS) {
-    const targets = [document.body]
-    const notion = document.querySelector('.notion') as HTMLElement
-    if (notion) targets.push(notion)
-    for (const root of targets) root.classList.add(mode, mode + SUFFIX)
-    for (const root of targets)
-      if (mode === DARK_CLASS) root.classList.remove(LIGHT_CLASS, LIGHT_CLASS + SUFFIX)
-      else if (mode === LIGHT_CLASS) root.classList.remove(DARK_CLASS, DARK_CLASS + SUFFIX)
+    document.body.classList.add(mode, mode + SUFFIX)
+    if (mode === DARK_CLASS) document.body.classList.remove(LIGHT_CLASS, LIGHT_CLASS + SUFFIX)
+    else if (mode === LIGHT_CLASS) document.body.classList.remove(DARK_CLASS, DARK_CLASS + SUFFIX)
   }
   const themeChange = (isDark?: boolean) => (isDark ? changeTheme(DARK_CLASS) : changeTheme(LIGHT_CLASS))
-  const darkMode = useDarkMode(true, {
+  const darkMode = useDarkMode(false, {
     element: mockElement as HTMLElement,
     classNameDark: DARK_CLASS + SUFFIX,
     classNameLight: LIGHT_CLASS + SUFFIX,
