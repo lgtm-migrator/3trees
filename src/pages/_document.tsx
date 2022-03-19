@@ -2,46 +2,33 @@ import React from 'react'
 import { Head, Html, Main, NextScript } from 'next/document'
 
 const noflash = `
-;(function () {
-  // Change these if you use something different in your hook.
-  var storageKey = 'darkMode'
-  var classNameDark = 'dark'
-  var classNameLight = 'light'
-  var suffix = '-mode'
-
-  function setClassOnDocumentBody(darkMode) {
-    document.body.classList.add(darkMode ? classNameDark : classNameLight)
-    document.body.classList.add(darkMode ? classNameDark + suffix : classNameLight + suffix)
-    document.body.classList.remove(darkMode ? classNameLight : classNameDark)
-    document.body.classList.remove(darkMode ? classNameLight + suffix : classNameDark + suffix)
-  }
-
-  var preferDarkQuery = '(prefers-color-scheme: dark)'
-  var mql = window.matchMedia(preferDarkQuery)
-  var supportsColorSchemeQuery = mql.media === preferDarkQuery
-  var localStorageTheme = null
-  try {
-    localStorageTheme = localStorage.getItem(storageKey)
-  } catch (err) {}
-  var localStorageExists = localStorageTheme !== null
-  if (localStorageExists) {
-    localStorageTheme = JSON.parse(localStorageTheme)
-  }
-
-  // Determine the source of truth
-  if (localStorageExists) {
-    // source of truth from localStorage
-    setClassOnDocumentBody(localStorageTheme)
-  } else if (supportsColorSchemeQuery) {
-    // source of truth from system
-    setClassOnDocumentBody(mql.matches)
-    localStorage.setItem(storageKey, String(mql.matches))
-  } else {
-    // source of truth from document.body
-    var isDarkMode = document.body.classList.contains(classNameDark)
-    localStorage.setItem(storageKey, JSON.stringify(isDarkMode))
-  }
-})()
+const storageKey = 'darkMode'
+const classNameDark = 'dark'
+const classNameLight = 'light'
+const suffix = '-mode'
+function setClassOnDocumentBody(darkMode) {
+  document.body.classList.add(darkMode ? classNameDark : classNameLight, darkMode ? classNameDark + suffix : classNameLight + suffix)
+  document.body.classList.remove(darkMode ? classNameLight : classNameDark, darkMode ? classNameLight + suffix : classNameDark + suffix)
+}
+const preferDarkQuery = '(prefers-color-scheme: dark)'
+const mql = window.matchMedia(preferDarkQuery)
+const supportsColorSchemeQuery = mql.media === preferDarkQuery
+let localStorageTheme = null
+try {
+  localStorageTheme = localStorage.getItem(storageKey)
+} catch (err) {}
+const localStorageExists = localStorageTheme !== null
+// Branch
+if (localStorageExists) {
+  localStorageTheme = JSON.parse(localStorageTheme)
+  setClassOnDocumentBody(localStorageTheme)
+} else if (supportsColorSchemeQuery) {
+  setClassOnDocumentBody(mql.matches)
+  localStorage.setItem(storageKey, String(mql.matches))
+} else {
+  const isDarkMode = document.body.classList.contains(classNameDark)
+  localStorage.setItem(storageKey, JSON.stringify(isDarkMode))
+}
 `
 
 const Document = () => {

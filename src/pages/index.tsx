@@ -3,6 +3,7 @@ import { domain } from 'lib/config'
 import { resolveNotionPage } from 'lib/resolve-notion-page'
 import { NotionPage } from '@/components'
 import { PageProps } from 'lib/types'
+import Head from 'next/head'
 
 import type { GetStaticPropsResult } from 'next'
 
@@ -16,5 +17,14 @@ export const getStaticProps = async () => {
 }
 
 export default function NotionDomainPage(props: PageProps) {
-  return <NotionPage {...props} />
+  return (
+    <>
+      <Head>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="ogimage.png" />
+        <meta property="og:image" content="ogimage.png" />
+      </Head>
+      <NotionPage {...props} />
+    </>
+  )
 }
