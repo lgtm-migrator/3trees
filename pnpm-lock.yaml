@@ -20,7 +20,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.14.0
   classnames: ^2.3.1
   copy: ^0.3.2
-  dotenv: ^10.0.0
+  dotenv: ^16.0.0
   esbuild-node-loader: ^0.8.0
   eslint: ^7.32.0
   eslint-config-next: ^11.1.4
@@ -74,7 +74,7 @@ dependencies:
   '@react-three/fiber': 7.0.26_6a2478a5b9a0dfe3cc9e1f0de361d624
   classnames: 2.3.1
   copy: 0.3.2
-  dotenv: 10.0.0
+  dotenv: 16.0.0
   esbuild-node-loader: 0.8.0
   esno: 0.14.1
   favicons: 6.2.2
@@ -2578,9 +2578,9 @@ packages:
       domelementtype: 2.2.0
       domhandler: 4.2.0
 
-  /dotenv/10.0.0:
-    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
-    engines: {node: '>=10'}
+  /dotenv/16.0.0:
+    resolution: {integrity: sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==}
+    engines: {node: '>=12'}
     dev: false
 
   /draco3d/1.4.3:
