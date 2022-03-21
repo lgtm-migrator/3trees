@@ -1,6 +1,6 @@
 # 3 Trees
 
-![image](https://user-images.githubusercontent.com/27716524/158438213-ab5b913b-a280-4a50-93b0-7b69df89049f.png)
+![image](https://threetrees.cloud/ogimage.png)
 
 <br/>
 
