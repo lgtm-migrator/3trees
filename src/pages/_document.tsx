@@ -62,7 +62,7 @@ const Document = () => {
         <link href="/apple-touch-icon-180x180.png" rel="icon" sizes="180x180" type="image/png" />
         <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
         <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
-        <GA4 id="G-CRRP8E78TC" />
+        <GA4 id="G-9T961HYDTR" />
       </Head>
 
       <body>
