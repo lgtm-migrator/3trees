@@ -59,6 +59,7 @@ specifiers:
   tslib: ^2.3.1
   typescript: ^4.6.3
   use-dark-mode: ^2.3.1
+  use-sound: ^4.0.1
   webpack: ^5.70.0
   windicss: ^3.5.1
   windicss-analysis: ^0.3.5
@@ -105,6 +106,7 @@ dependencies:
   tslib: 2.3.1
   typescript: 4.6.3
   use-dark-mode: 2.3.1_react@17.0.2
+  use-sound: 4.0.1_react@17.0.2
   webpack: 5.70.0
   windicss: 3.5.1
   windicss-webpack-plugin: 1.6.7
@@ -3898,6 +3900,10 @@ packages:
     resolution: {integrity: sha512-rUmoryG4lEAtkjF5tcYaihrVoE86Fdw1BLqO/UiBWOOF56h32a6ax8oV4urBlinVtNNtArLlBq8igGfZf2tQnw==}
     dev: false
 
+  /howler/2.2.3:
+    resolution: {integrity: sha512-QM0FFkw0LRX1PR8pNzJVAY25JhIWvbKMBFM4gqk+QdV+kPXOhleWGCB6AiAF/goGjIHK2e/nIElplvjQwhr0jg==}
+    dev: false
+
   /html-to-react/1.4.5_react@17.0.2:
     resolution: {integrity: sha512-KONZUDFPg5OodWaQu2ymfkDmU0JA7zB1iPfvyHehTmMUZnk0DS7/TyCMTzsLH6b4BvxX15g88qZCXFhJWktsmA==}
     peerDependencies:
@@ -7148,6 +7154,15 @@ packages:
       react: ^16.8.0 || ^17.0.0
     dependencies:
       '@use-it/event-listener': 0.1.6_react@17.0.2
+      react: 17.0.2
+    dev: false
+
+  /use-sound/4.0.1_react@17.0.2:
+    resolution: {integrity: sha512-hykJ86kNcu6y/FzlSHcQxhjSGMslZx2WlfLpZNoPbvueakv4OF3xPxEtGV2YmculrIaH0tPp9LtG4jgy17xMWg==}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      howler: 2.2.3
       react: 17.0.2
     dev: false
 
