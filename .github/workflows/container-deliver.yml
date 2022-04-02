@@ -43,6 +43,20 @@ jobs:
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ env.RELEASE_VERSION }}
 
+      - name: Set Context
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: set-context cloud_okteto_com --namespace 3trees-seonglae
+
+      - name: Use Context
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: use-context cloud_okteto_com
+
       - name: Apply Service
         uses: actions-hub/kubectl@master
         env:
@@ -56,4 +70,3 @@ jobs:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
           args: apply -f app/threetrees-deploy.yaml
-
