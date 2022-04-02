@@ -1,7 +1,8 @@
 # Register
 
 ```bash
-kubectl config use-context cloud_okteto_com --namespace 3trees-seonglae
+kubectl config set-context cloud_okteto_com --namespace 3trees-seonglae
+kubectl config use-context cloud_okteto_com
 kubectl create secret docker-registry ghcred \
 --docker-server="ghcr.io" \
 --docker-username="$USER" \
@@ -9,6 +10,7 @@ kubectl create secret docker-registry ghcred \
 --docker-email="$EMAIL"
 kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "ghcred"}]}'
 kubectl create secret generic threetrees-secret --from-env-file=.env
+cat ~/.kube/config | base64 > KUBE_CONFIG
 ```
 
 # Deployment
@@ -16,7 +18,8 @@ kubectl create secret generic threetrees-secret --from-env-file=.env
 change the image
 
 ```
-kubectl config use-context cloud_okteto_com --namespace 3trees-seonglae
+kubectl config set-context cloud_okteto_com --namespace 3trees-seonglae
+kubectl config use-context cloud_okteto_com
 kubectl apply -f threetrees-svc.yaml
 kubectl apply -f www.yaml
 kubectl apply -f threetrees-deploy.yaml
