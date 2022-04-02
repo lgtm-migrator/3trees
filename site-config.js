@@ -60,6 +60,5 @@ module.exports = {
   },
 
   // Color
-  bgColor: pkg.color,
-  themeColor: pkg.color,
+  bgColor: pkg.colors,
 }

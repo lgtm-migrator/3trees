@@ -34,4 +34,4 @@ jobs:
           echo NOTION_API_AUTH_TOKEN=${{ secrets.NOTION_API_AUTH_TOKEN }} >> .env
           npm i -g pnpm
           pnpm i
-          pnpm build:scripts
+          pnpm lint

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Head from 'next/head'
 import { PageProps } from 'lib/types'
+import { bgColor } from '~/site-config'
 
 // TODO: remove duplication between PageHead and NotionPage Head
 
@@ -17,7 +18,7 @@ export const PageHead: React.FC<PageProps & { darkMode: boolean }> = ({ site, da
           <meta property="og:description" content={site.description} />
         </>
       )}
-      {darkMode ? <meta name="theme-color" content="#2f3437" /> : <meta name="theme-color" content="#fff" />}
+      <meta name="theme-color" content={darkMode ? bgColor.dark : bgColor.light} />
       <meta property="og:type" content="website" />
     </Head>
   )
