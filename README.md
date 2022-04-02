@@ -39,4 +39,4 @@ repository structure notion to check
 ## Reference
 
 - [Next Windi](https://github.com/seonglae/next-windicss)
-- [Next Notion](https://github.com/transitive-bullshit/nextjs-notion-starter-kit)
+- [Next Notion](https://github.com/NotionX/react-notion-x)

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Head, Html, Main, NextScript } from 'next/document'
+import { GA4 } from '@/components/atoms/GA4'
 
 const noflash = `
 const storageKey = 'darkMode'
@@ -61,16 +62,13 @@ const Document = () => {
         <link href="/apple-touch-icon-180x180.png" rel="icon" sizes="180x180" type="image/png" />
         <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
         <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
+        <GA4 id="G-CRRP8E78TC" />
       </Head>
 
       <body>
         <script dangerouslySetInnerHTML={{ __html: noflash }}></script>
         <Main />
         <NextScript />
-        <script
-          defer
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon='{"token": "2a669fe98f2743749ff5c52292cd54c1"}'></script>
       </body>
     </Html>
   )
