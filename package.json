@@ -21,7 +21,7 @@
     "format:src": "prettier --write \"src/**/*.{css,js,ts,tsx}\"",
     "format:lib": "prettier --write \"lib/**/*.ts\""
   },
-  "color": {
+  "colors": {
     "light": "#fff",
     "dark": "#2f3437"
   },
