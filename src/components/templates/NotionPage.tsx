@@ -32,7 +32,7 @@ import { NotionCustomFont } from '../molecules/NotionCustomFont'
 import { Loading } from '../molecules/Loading'
 import { NotionError } from '@/components/organisms/NotionError'
 import { PageHead } from '../organisms/PageHead'
-import Footer from '@/components/molecules/Footer'
+import { Footer } from '@/components/molecules/Footer'
 
 import type { PageBlock } from 'notion-types'
 import type { PageProps } from 'lib/types'
