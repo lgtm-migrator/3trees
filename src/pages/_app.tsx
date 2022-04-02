@@ -5,6 +5,7 @@ import NProgress from 'nprogress'
 import Router from 'next/router'
 
 import siteConfig from '~/site-config'
+import { GA4 } from '@/components/atoms/GA4'
 
 import 'windi.css'
 import 'katex/dist/katex.min.css'
@@ -44,6 +45,7 @@ function App(props: AppProps) {
         sameAs={Object.values(siteConfig.socials)}
       />
       <Component {...pageProps} />
+      <GA4 id="G-9T961HYDTR" />
     </>
   )
 }
