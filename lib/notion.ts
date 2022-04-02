@@ -13,7 +13,7 @@ export const TIMEOUT = 20000
 // remove notion-client's vervose warning
 console.warn = (...args) => console.debug(...args.map(arg => (arg instanceof Error ? arg.message : arg)))
 
-export const activeUser: string = getSiteConfig('notionUserId', null)!
+export const activeUser: string = getSiteConfig('notionUserId')
 export const notion = new NotionAPI({
   apiBaseUrl: process.env.NOTION_API_BASE_URL,
   authToken: getEnv('NOTION_API_AUTH_TOKEN', null),

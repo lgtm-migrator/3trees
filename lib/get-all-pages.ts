@@ -26,7 +26,8 @@ export async function getAllPagesImpl(rootNotionPageId: string, rootNotionSpaceI
   const canonicalPageMap: CanonicalPageMap = Object.keys(pageMap).reduce((map: CanonicalPageMap, pageId: string) => {
     const recordMap = pageMap[pageId]
     if (!recordMap) return map
-    const canonicalPageId = getCanonicalPageId(pageId, recordMap, { uuid })!
+    const canonicalPageId = getCanonicalPageId(pageId, recordMap, { uuid })
+    if (!canonicalPageId) return map
     if (map[canonicalPageId]) {
       console.error('error duplicate canonical page id', canonicalPageId, pageId, map[canonicalPageId])
       return map

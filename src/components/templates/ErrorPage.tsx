@@ -8,7 +8,8 @@ export const ErrorPage: NextPage<{ statusCode?: number; title?: string; subtitle
   title,
   subtitle,
 }) => {
-  title = title || (statusCode ? String(statusCode) : undefined) || 'Please retry...😥'
+  title = title || (statusCode ? String(statusCode) : 'Please retry...😥')
+  subtitle = subtitle || 'Sorry 😅'
   return (
     <>
       <Head>
@@ -24,7 +25,7 @@ export const ErrorPage: NextPage<{ statusCode?: number; title?: string; subtitle
             {title}
           </h1>
           {subtitle && (
-            <h2 text="2xl" font="semibold">
+            <h2 text="2xl" m="4" font="semibold">
               {subtitle}
             </h2>
           )}

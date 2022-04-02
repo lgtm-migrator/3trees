@@ -118,7 +118,7 @@ pre {
   background: none;
 }
 
-pre[class*='language-']>code {
+pre[class*='language-'] > code {
   border-left: 0 none !important;
   box-shadow: none !important;
   background: none !important;
