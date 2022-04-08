@@ -7,7 +7,7 @@ specifiers:
   '@google-cloud/firestore': ^4.15.1
   '@next/eslint-plugin-next': ^11.1.4
   '@react-spring/three': ^9.4.4
-  '@react-three/drei': ^8.20.1
+  '@react-three/drei': ^9.1.6
   '@react-three/fiber': ^7.0.26
   '@types/lqip-modern': ^1.1.2
   '@types/node': ^14.18.12
@@ -71,7 +71,7 @@ dependencies:
   '@babel/runtime': 7.17.8
   '@google-cloud/firestore': 4.15.1
   '@react-spring/three': 9.4.4_ad27693c45be9cdb7cec72b09129ec73
-  '@react-three/drei': 8.20.1_734b800b63683de9231c2d7d9525a5ba
+  '@react-three/drei': 9.1.6_734b800b63683de9231c2d7d9525a5ba
   '@react-three/fiber': 7.0.26_fd377fdf312df1f300847b85f25960c5
   classnames: 2.3.1
   copy: 0.3.2
@@ -1124,12 +1124,12 @@ packages:
     resolution: {integrity: sha512-KpxKt/D//q/t/6FBcde/RE36LKp8PpWu7kFEMLwpzMGl9RpcexunmYOQJWwmJWtkQjgE1YRr7DzBMryz6La1cQ==}
     dev: false
 
-  /@react-three/drei/8.20.1_734b800b63683de9231c2d7d9525a5ba:
-    resolution: {integrity: sha512-dNVz6yOg9SeCVH7sgmot7l7Js6u2VdVtEVhU+CmLQ7QCcaCnJqibVtf44s7nXXoESOocyrlvAfbrgtmOA509RA==}
+  /@react-three/drei/9.1.6_734b800b63683de9231c2d7d9525a5ba:
+    resolution: {integrity: sha512-EmmARzg8899guGJvIeOlUiH1mPQJMkSp5WwLWiFPzLNcM1RgsNkgidg6SwoklO9lvgWMnik6BRDIqm6ApXvRGg==}
     peerDependencies:
-      '@react-three/fiber': '>=6.0'
-      react: '>=17.0'
-      react-dom: '>=17.0'
+      '@react-three/fiber': '>=8.0'
+      react: '>=18.0'
+      react-dom: '>=18.0'
       three: '>=0.137'
     peerDependenciesMeta:
       react-dom:
@@ -1152,7 +1152,7 @@ packages:
       suspend-react: 0.0.8_react@17.0.2
       three: 0.139.0
       three-mesh-bvh: 0.5.7_three@0.139.0
-      three-stdlib: 2.8.10_three@0.139.0
+      three-stdlib: 2.9.1_three@0.139.0
       troika-three-text: 0.46.3_three@0.139.0
       utility-types: 3.10.0
       zustand: 3.7.1_react@17.0.2
@@ -6768,10 +6768,10 @@ packages:
       three: 0.139.0
     dev: false
 
-  /three-stdlib/2.8.10_three@0.139.0:
-    resolution: {integrity: sha512-8AWWdgaJyccg9+GdyxSXnW23XR53KJ4E23Un3Y+d1yl4sSSWIafWbDADJcU8DoNEPZTXCw5UXYt5r7P5pAh5VA==}
+  /three-stdlib/2.9.1_three@0.139.0:
+    resolution: {integrity: sha512-e+Hyd47ssVTy2UzUfmaccB7m30qITVMdvGs/QypeGdJa3uwhw1zR9jO/ce61S65Omiy/oGDMWG8dJIZxyQ7u8w==}
     peerDependencies:
-      three: '>=0.137.0'
+      three: '>=0.122.0'
     dependencies:
       '@babel/runtime': 7.17.8
       '@webgpu/glslang': 0.0.15
