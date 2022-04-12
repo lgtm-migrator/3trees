@@ -130,6 +130,10 @@ input.searchInput {
 }
 
 /* Table of Contents */
+.notion-page-content-has-aside {
+  width: 100%;
+}
+
 .notion-aside {
   margin: 1rem;
 }
