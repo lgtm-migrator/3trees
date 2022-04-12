@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: threetrees-container
-          image: ghcr.io/3bases/3trees:0.3.8
+          image: ghcr.io/3bases/3trees:0.3.9
           ports:
             - containerPort: 1234
           resources:
