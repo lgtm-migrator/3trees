@@ -11,7 +11,7 @@ import { NotionRenderer, Code, Collection, CollectionRow, Equation } from 'react
 
 // utils
 import { getBlockTitle } from 'notion-utils'
-
+import { GiscusFoot } from '@/components/organisms/GiscusFoot'
 import { mapPageUrl, getCanonicalPageUrl } from 'lib/map-page-url'
 import { mapNotionImageUrl } from 'lib/map-image-url'
 import { getPageDescription } from 'lib/get-page-description'
@@ -91,7 +91,7 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   // Components
   let comments: React.ReactNode = null
   const pageAside: React.ReactChild | null = null
-  if (giscusRepo) comments = <></>
+  if (giscusRepo) comments = <GiscusFoot pageId={pageId} darkMode={darkMode.value} />
 
   const pageLink = ({
     href,
