@@ -11,6 +11,7 @@ const nextConfig = {
       headers: [
         { key: 'X-Frame-Options', value: 'DENY' },
         { key: 'X-XSS-Protection', value: '1' },
+        { key: 'Access-Control-Allow-Origin', value: 'https://giscus.app' },
         { key: 'X-Content-Type-Options', value: 'nosniff' },
       ],
     },
