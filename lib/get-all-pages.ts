@@ -80,7 +80,8 @@ export async function getAllPagesInSpace(
             .filter(key => {
               const block = page.block[key]?.value
               if (!block) return false
-              const isPage = block.type === 'page' || block.type === 'collection_view_page'
+              // @ts-ignore
+              const isPage = !block.is_template && (block.type === 'page' || block.type === 'collection_view_page')
               return isPage && block.space_id === rootSpaceId
             })
             .forEach(subPageId => processPage(subPageId))
