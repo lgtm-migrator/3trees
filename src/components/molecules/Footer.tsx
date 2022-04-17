@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useMemo } from 'react'
+import React, { MouseEventHandler, useMemo, useEffect } from 'react'
 import { FaTwitter, FaGithub, FaLinkedin } from 'react-icons/fa'
 import { IoSunnyOutline, IoMoonSharp, IoPauseOutline, IoPlayOutline } from 'react-icons/io5'
 import useSound from 'use-sound'
@@ -34,6 +34,20 @@ export const Footer: React.FC<{
   )
   React.useEffect(() => setHasMounted(true), [])
 
+  // Shortcut
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'L') {
+        e.preventDefault()
+        toggleDarkModeCb(e)
+      }
+    }
+    document.addEventListener('keydown', listener)
+    return () => {
+      document.removeEventListener('keydown', listener)
+    }
+  }, [toggleDarkModeCb])
+
   // Background Sound
   const { playing, setPlaying } = usePlayStore()
   const [start, { stop }] = useSound('/sound/loop.mp3', { loop: true })
@@ -49,13 +63,13 @@ export const Footer: React.FC<{
       text="dark:white"
       m="x-auto t-auto b-0"
       p="4"
-      w="full max-11/12"
+      w="full max-10/12 <sm:max-12/12"
       justify="between"
       flex="row <sm:col"
       select="none">
       <div select="none" text="xs" order="1 <sm:3" className="items-center flex">
         <a
-          text="hover:light-blue-500 3xl"
+          text="hover:light-blue-500 2xl"
           p="2"
           className="inline-flex "
           transition="colors"
@@ -70,7 +84,7 @@ export const Footer: React.FC<{
       {hasMounted ? (
         <div order="2 <sm:1">
           <a
-            text="hover:light-blue-500 3xl"
+            text="hover:light-blue-500 2xl"
             p="2"
             className="inline-flex"
             transition="colors"
@@ -84,7 +98,7 @@ export const Footer: React.FC<{
         {siteConfig.twitter ? (
           <a
             cursor="pointer"
-            text="hover:light-blue-500 3xl"
+            text="hover:light-blue-500 2xl"
             p="2"
             className="inline-flex"
             href={`https://twitter.com/${siteConfig.twitter}`}
@@ -99,7 +113,7 @@ export const Footer: React.FC<{
         {siteConfig.github ? (
           <a
             cursor="pointer"
-            text="hover:indigo-500 3xl"
+            text="hover:indigo-500 2xl"
             p="2"
             className="inline-flex"
             href={`https://github.com/${siteConfig.github}`}
@@ -114,7 +128,7 @@ export const Footer: React.FC<{
         {siteConfig.linkedin ? (
           <a
             cursor="pointer"
-            text="hover:blue-500 3xl"
+            text="hover:blue-500 2xl"
             p="2"
             className="inline-flex"
             href={`https://www.linkedin.com/in/${siteConfig.linkedin}`}
