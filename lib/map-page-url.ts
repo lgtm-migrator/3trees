@@ -1,9 +1,10 @@
 import { ExtendedRecordMap } from 'notion-types'
 import { uuidToId, parsePageId } from 'notion-utils'
 
-import { Site } from './types'
 import { includeNotionIdInUrls } from './config'
 import { getCanonicalPageId } from './get-canonical-page-id'
+
+import type { Site } from './types'
 
 const uuid = includeNotionIdInUrls
 

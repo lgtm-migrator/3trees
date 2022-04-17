@@ -2,19 +2,20 @@ import React, { useEffect, useMemo } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import cs from 'classnames'
 import { useRouter } from 'next/router'
 import { useSearchParam } from 'react-use'
 import BodyClassName from 'react-body-classname'
 import useDarkMode from 'use-dark-mode'
-import { NotionRenderer, Code, Collection, CollectionRow, Equation } from 'react-notion-x'
+import { NotionRenderer, Breadcrumbs } from 'react-notion-x'
+import { getBlockTitle, getPageProperty, parsePageId } from 'notion-utils'
 
 // utils
-import { getBlockTitle } from 'notion-utils'
 import { GiscusFoot } from '@/components/organisms/GiscusFoot'
+import { NotionPageHeader } from '@/components/organisms/NotionPageHeader'
 import { mapPageUrl, getCanonicalPageUrl } from 'lib/map-page-url'
-import { mapNotionImageUrl } from 'lib/map-image-url'
-import { getPageDescription } from 'lib/get-page-description'
+import { mapImageUrl } from 'lib/map-image-url'
 import { searchNotion } from 'lib/search-notion'
 import {
   isDev,
@@ -37,7 +38,112 @@ import { Footer } from '@/components/molecules/Footer'
 import type { PageBlock } from 'notion-types'
 import type { PageProps } from 'lib/types'
 
-const Modal = dynamic(() => import('react-notion-x').then(notion => notion.Modal), { ssr: false })
+// @ts-ignore
+const Code = dynamic(() =>
+  import('react-notion-x/build/third-party/code').then(async m => {
+    await Promise.all([
+      // @ts-ignore
+      import('prismjs/components/prism-markup.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-bash.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-c.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-cpp.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-csharp.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-docker.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-java.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-javascript.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-typescript.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-git.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-go.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-graphql.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-makefile.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-markdown.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-objectivec.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-ocaml.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-python.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-rust.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-sass.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-scss.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-solidity.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-sql.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-stylus.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-swift.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-wasm.js'),
+      // @ts-ignore
+      import('prismjs/components/prism-yaml.js'),
+    ])
+    return m.Code
+  })
+)
+
+// @ts-ignore
+const Collection = dynamic(() => import('react-notion-x/build/third-party/collection').then(m => m.Collection))
+// @ts-ignore
+const Equation = dynamic(() => import('react-notion-x/build/third-party/equation').then(m => m.Equation))
+const Modal = dynamic(
+  () =>
+    import('react-notion-x/build/third-party/modal').then(m => {
+      m.Modal.setAppElement('.notion-viewport')
+      return m.Modal
+    }),
+  {
+    ssr: false,
+  }
+)
+
+const formatDate = (input: string | number, { month = 'short' }: { month?: 'long' | 'short' } = {}) => {
+  const date = new Date(input)
+  const monthLocale = date.toLocaleString('en-US', { month })
+  return `${date.getUTCFullYear()} ${monthLocale} ${date.getUTCDate()} ${date.getUTCHours()}:${date.getUTCMinutes()}`
+}
+
+// @ts-ignore
+const propertyLastEditedTimeValue = ({ block, pageHeader }, defaultFn: () => React.ReactNode) => {
+  if (pageHeader && block?.last_edited_time) {
+    return `Edited ${formatDate(block?.last_edited_time, {
+      month: 'short',
+    })}`
+  }
+  return defaultFn()
+}
+// @ts-ignore
+const propertyCreatedTimeValue = ({ block, pageHeader }, defaultFn: () => React.ReactNode) => {
+  if (pageHeader && block?.created_time) {
+    return `Created ${formatDate(block?.created_time, {
+      month: 'short',
+    })}`
+  }
+  return defaultFn()
+}
+
+// @ts-ignore
+const propertyTextValue = ({ schema, pageHeader, block }, defaultFn: () => React.ReactNode) => {
+  console.debug(schema, pageHeader, block)
+  return defaultFn()
+}
 
 const DARK_CLASS = 'dark'
 const LIGHT_CLASS = 'light'
@@ -67,6 +173,23 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   if (lite) params.lite = lite
   const isLiteMode = lite === 'true'
 
+  // Components
+  const components = useMemo(
+    () => ({
+      nextImage: Image,
+      nextLink: Link,
+      Code,
+      Collection,
+      Equation,
+      Modal,
+      Header: NotionPageHeader,
+      propertyLastEditedTimeValue,
+      propertyTextValue,
+      propertyCreatedTimeValue,
+    }),
+    []
+  )
+
   // Loading
   const router = useRouter()
   if (router.isFallback) return <Loading />
@@ -81,54 +204,44 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
   const title = getBlockTitle(block, recordMap) || site.name
   const searchParams = new URLSearchParams(params)
   const siteMapPageUrl = mapPageUrl(site, recordMap, searchParams)
-  const canonicalPageUrl = !isDev && getCanonicalPageUrl(site, recordMap)(pageId)
+  const canonicalPageUrl = isDev ? undefined : getCanonicalPageUrl(site, recordMap)(pageId)
   const isBlogPost = block.type === 'page' && block.parent_table === 'collection'
   const minTableOfContentsItems = 3
-  const cover = (block as PageBlock).format?.page_cover
-  const socialImage = cover ? mapNotionImageUrl(cover, block) : undefined
-  const socialDescription = getPageDescription(block, recordMap) ?? description
+
+  const socialImage = mapImageUrl(
+    getPageProperty<string>('Social Image', block, recordMap) || (block as PageBlock).format?.page_cover || description,
+    block
+  )
+  const socialDescription = getPageProperty<string>('Description', block, recordMap) || description
 
   // Components
   let comments: React.ReactNode = null
   const pageAside: React.ReactChild | null = null
-  if (giscusRepo) comments = <GiscusFoot pageId={pageId} darkMode={darkMode.value} />
-
-  const pageLink = ({
-    href,
-    as,
-    passHref,
-    prefetch,
-    replace,
-    scroll,
-    shallow,
-    locale,
-    ...props
-  }: {
-    href: string
-    as: URL
-    passHref?: boolean
-    prefetch?: boolean
-    replace?: boolean
-    scroll?: boolean
-    shallow?: boolean
-    locale?: string
-  }) => (
-    <Link
-      href={href}
-      as={as}
-      passHref={passHref}
-      prefetch={prefetch}
-      replace={replace}
-      scroll={scroll}
-      shallow={shallow}
-      locale={locale}>
-      <a {...props} />
-    </Link>
-  )
+  if (giscusRepo)
+    comments = (
+      <>
+        <GiscusFoot pageId={pageId} darkMode={darkMode.value} />
+        {pageId === parsePageId(site.rootNotionPageId) ? (
+          <></>
+        ) : (
+          <header className="notion-header">
+            <Breadcrumbs block={block} rootOnly={false} />
+          </header>
+        )}
+      </>
+    )
 
   return (
     <>
-      <PageHead site={site} darkMode={darkMode.value} />
+      <PageHead
+        pageId={pageId as string}
+        site={site}
+        title={title}
+        darkMode={darkMode.value}
+        description={socialDescription}
+        image={socialImage}
+        url={canonicalPageUrl}
+      />
       <Head>
         <meta property="og:title" content={title} />
         <meta property="og:site_name" content={site.name} />
@@ -163,15 +276,8 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
       <NotionCustomFont site={site} />
       {isLiteMode && <BodyClassName className="notion-lite" />}
       <NotionRenderer
-        bodyClassName={cs(pageId === site.rootNotionPageId && 'index-page')}
-        components={{
-          pageLink,
-          code: Code,
-          collection: Collection,
-          collectionRow: CollectionRow,
-          modal: Modal,
-          equation: Equation,
-        }}
+        bodyClassName={cs(pageId === parsePageId(site.rootNotionPageId) && 'index-page')}
+        components={components}
         recordMap={recordMap}
         rootPageId={site.rootNotionPageId}
         fullPage={!isLiteMode}
@@ -184,7 +290,7 @@ export const NotionPage: React.FC<PageProps> = ({ site, recordMap, error, pageId
         defaultPageCover={defaultPageCover}
         defaultPageCoverPosition={defaultPageCoverPosition}
         mapPageUrl={siteMapPageUrl}
-        mapImageUrl={mapNotionImageUrl}
+        mapImageUrl={mapImageUrl}
         searchNotion={searchNotion}
         pageFooter={comments}
         pageAside={pageAside}
