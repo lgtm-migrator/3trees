@@ -27,8 +27,18 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: ['www.notion.so', 'notion.so', 'images.unsplash.com', 's3.us-west-2.amazonaws.com', 'threetrees.cloud'],
+    formats: ['image/avif', 'image/webp'],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
   reactStrictMode: true,
   rewrites: async () => [{ source: '/social.png', destination: '/api/social-image' }],
 }
 
-module.exports = withTM(nextConfig)
+if (process.env.ANALYZE === 'true')
+  require('@next/bundle-analyzer')({
+    enabled: true,
+  })(withTM(nextConfig))
+else module.exports = withTM(nextConfig)

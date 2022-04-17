@@ -59,6 +59,9 @@ module.exports = {
     '/present': 'b612831ac69d4787b502237bdb87b66a',
   },
 
+  // Redis
+  isRedisEnabled: false,
+
   // Color
   bgColor: pkg.colors,
 }
