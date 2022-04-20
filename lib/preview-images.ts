@@ -60,7 +60,6 @@ async function createPreviewImage(url: string, { cacheKey }: { cacheKey: string 
 
     return previewImage
   } catch (err) {
-    console.warn('failed to create preview image', url, (err as Error).message)
     return null
   }
 }
