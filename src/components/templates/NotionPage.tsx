@@ -11,7 +11,7 @@ import useDarkMode from 'use-dark-mode'
 import { NotionRenderer, Breadcrumbs } from 'react-notion-x'
 import { getBlockTitle, getPageProperty, parsePageId } from 'notion-utils'
 
-// utils
+// Utils
 import { GiscusFoot } from '@/components/organisms/GiscusFoot'
 import { NotionPageHeader } from '@/components/organisms/NotionPageHeader'
 import { mapPageUrl, getCanonicalPageUrl } from 'lib/map-page-url'
@@ -27,7 +27,7 @@ import {
   defaultPageIcon,
 } from 'lib/config'
 
-// components
+// Components
 import { bgColor } from '~/site-config'
 import { NotionCustomFont } from '../molecules/NotionCustomFont'
 import { Loading } from '../molecules/Loading'

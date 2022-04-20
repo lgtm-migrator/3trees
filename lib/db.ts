@@ -1,19 +1,14 @@
-import { Firestore } from '@google-cloud/firestore'
-import {
-  isPreviewImageSupportEnabled,
-  googleProjectId,
-  googleApplicationCredentials,
-  firebaseCollectionImages,
-} from './config'
-import type { CollectionReference } from '@google-cloud/firestore'
+import Keyv from '@keyvhq/core'
+import KeyvRedis from '@keyvhq/redis'
 
-export let db: Firestore
-export let images: CollectionReference
+import { isRedisEnabled, redisUrl, redisNamespace } from './config'
 
-if (isPreviewImageSupportEnabled) {
-  db = new Firestore({
-    projectId: googleProjectId,
-    credentials: googleApplicationCredentials,
-  })
-  images = db.collection(firebaseCollectionImages)
+let db: Keyv
+if (isRedisEnabled) {
+  const keyvRedis = new KeyvRedis(redisUrl)
+  db = new Keyv({ store: keyvRedis, namespace: redisNamespace || undefined })
+} else {
+  db = new Keyv()
 }
+
+export { db }

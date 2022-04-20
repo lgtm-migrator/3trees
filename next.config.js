@@ -1,4 +1,3 @@
-const withTM = require('next-transpile-modules')(['three'])
 const WindiCSSWebpackPlugin = require('windicss-webpack-plugin')
 
 /**
@@ -40,5 +39,5 @@ const nextConfig = {
 if (process.env.ANALYZE === 'true')
   require('@next/bundle-analyzer')({
     enabled: true,
-  })(withTM(nextConfig))
-else module.exports = withTM(nextConfig)
+  })(nextConfig)
+else module.exports = nextConfig
