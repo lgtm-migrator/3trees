@@ -6,13 +6,13 @@ ARG GIT_TAG
 
 # clone
 RUN apk --no-cache --virtual build-dependencies add git
-RUN apk add --no-cache chromium
 RUN git clone -b $GIT_TAG https://github.com/3bases/3trees .
 RUN rm -r .git
 
 # install
 RUN npm i -g pnpm
 RUN pnpm i
+RUN PUPPETEER_PRODUCT=firefox yarn install
 RUN pnpm build
 RUN pnpm i --prod
 RUN rm -r cache
