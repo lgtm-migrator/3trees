@@ -12,7 +12,7 @@ RUN rm -r .git
 # install
 RUN npm i -g pnpm
 RUN pnpm i
-RUN PUPPETEER_PRODUCT=firefox yarn install
+RUN PUPPETEER_PRODUCT=firefox npm install
 RUN pnpm build
 RUN pnpm i --prod
 RUN rm -r cache
