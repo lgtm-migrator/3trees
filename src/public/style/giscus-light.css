@@ -77,6 +77,10 @@ main {
   color-scheme: light;
 }
 
+main {
+  padding: 1px;
+}
+
 main .pagination-loader-container {
   background-image: url(https://github.com/images/modules/pulls/progressive-disclosure-line.svg);
 }
