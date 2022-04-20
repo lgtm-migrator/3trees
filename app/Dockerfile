@@ -7,7 +7,7 @@ ARG GIT_TAG
 # clone
 RUN apk --no-cache --virtual build-dependencies add git
 RUN apk add --no-cache chromium
-RUN git clone -b $e https://github.com/3bases/3trees .
+RUN git clone -b $GIT_TAG https://github.com/3bases/3trees .
 RUN rm -r .git
 
 # install
