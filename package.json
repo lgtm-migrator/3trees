@@ -105,7 +105,7 @@
     "@types/lqip-modern": "^1.1.2",
     "@types/node": "^14.18.12",
     "@types/nprogress": "^0.2.0",
-    "@types/react": "^17.0.44",
+    "@types/react": "^18.0.5",
     "@types/react-body-classname": "^1.1.7",
     "@types/react-dom": "^17.0.15",
     "@types/three": "^0.139.0",
