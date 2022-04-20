@@ -57,10 +57,7 @@ export const redisUrl = getEnv('REDIS_URL', `redis://${redisUser}:${redisPasswor
 export const redisNamespace: string | null = getEnv('REDIS_NAMESPACE', 'preview-images')
 export const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
 
-// where it all starts -- the site's root Notion page
 export const includeNotionIdInUrls: boolean = getSiteConfig('includeNotionIdInUrls', isDev)
-
-// ----------------------------------------------------------------------------
 
 export const isServer = typeof window === 'undefined'
 export const port = getEnv('PORT', '1234')
@@ -70,24 +67,6 @@ export const apiBaseUrl = `${host}/api`
 export const api = {
   searchNotion: `${apiBaseUrl}/search-notion`,
   getSocialImage: `${apiBaseUrl}/social-image`,
-}
-
-// ----------------------------------------------------------------------------
-export const googleProjectId = getEnv('GCLOUD_PROJECT', null)
-export const googleApplicationCredentials = getGoogleApplicationCredentials()
-export const firebaseCollectionImages = getEnv('FIREBASE_COLLECTION_IMAGES', null)
-
-// this hack is necessary because vercel doesn't support secret files so we need to encode our google
-// credentials a base64-encoded string of the JSON-ified content
-function getGoogleApplicationCredentials() {
-  if (!isPreviewImageSupportEnabled || !isServer) return null
-  try {
-    const googleApplicationCredentialsBase64 = getEnv('GOOGLE_APPLICATION_CREDENTIALS', undefined)
-    return JSON.parse(Buffer.from(googleApplicationCredentialsBase64, 'base64').toString())
-  } catch (err) {
-    console.error('Firebase config error: invalid "GOOGLE_APPLICATION_CREDENTIALS" should be base64-encoded JSON\n')
-    throw err
-  }
 }
 
 function cleanPageUrlMap(pageUrlMap: PageUrlOverridesMap, label: string): PageUrlOverridesMap {

@@ -5,7 +5,7 @@ import { writeFile, readFile, mkdir, stat } from 'fs/promises'
 import { join } from 'path'
 
 import { getPreviewImageMap } from './preview-images'
-import { getSiteConfig, getEnv } from './get-config-value'
+import { getSiteConfig } from './get-config-value'
 
 export const TIMEOUT = 20000
 
@@ -15,7 +15,6 @@ console.warn = (...args) => console.debug(...args.map(arg => (arg instanceof Err
 export const activeUser: string = getSiteConfig('notionUserId')
 export const notion = new NotionAPI({
   apiBaseUrl: process.env.NOTION_API_BASE_URL,
-  authToken: getEnv('NOTION_API_AUTH_TOKEN', null),
   activeUser,
 })
 

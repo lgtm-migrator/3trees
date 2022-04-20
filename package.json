@@ -86,6 +86,7 @@
     "react-notion-x": "6.11.0",
     "react-use": "^17.3.2",
     "sharp": "0.28.3",
+    "tslib": "^2.3.1",
     "typescript": "^4.6.3",
     "use-dark-mode": "^2.3.1",
     "use-sound": "^4.0.1",

@@ -15,14 +15,24 @@ cat ~/.kube/config | base64 > KUBE_CONFIG
 
 # Deployment
 
-change the image
+change the image of deploy manifest
 
 ```
 kubectl config set-context cloud_okteto_com --namespace 3trees-seonglae
 kubectl config use-context cloud_okteto_com
 kubectl apply -f threetrees-svc.yaml
-kubectl apply -f www.yaml
 kubectl apply -f threetrees-deploy.yaml
+```
+
+# Test
+
+change the image of deploy manifest
+
+```
+kubectl config set-context cloud_okteto_com --namespace 3trees-seonglae
+kubectl config use-context cloud_okteto_com
+kubectl apply -f test-svc.yaml
+kubectl apply -f test-deploy.yaml
 ```
 
 # Local Build
@@ -31,10 +41,6 @@ kubectl apply -f threetrees-deploy.yaml
 GIT_TAG=`git describe --tags`
 set -a; source .env; set +a
 docker build  -t ghcr.io/3bases/3trees:$GIT_TAG \
---build-arg GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
---build-arg GCLOUD_PROJECT=$GCLOUD_PROJECT \
---build-arg FIREBASE_COLLECTION_IMAGES=$FIREBASE_COLLECTION_IMAGES \
---build-arg NOTION_API_AUTH_TOKEN=$NOTION_API_AUTH_TOKEN \
 --build-arg GIT_TAG=$GIT_TAG \
 .
 docker push  ghcr.io/3bases/3trees:$GIT_TAG

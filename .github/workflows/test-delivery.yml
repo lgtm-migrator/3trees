@@ -3,7 +3,7 @@ name: Deploy Image from Semantic Version
 on:
   push:
     tags:
-    - '[0-9]+.[0-9]+.[0-9]+'
+    - '[0-9]+.[0-9]+.[0-9]-[a-z]+.[0-9]+'
 
 jobs:
   deploy:
@@ -44,11 +44,11 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: apply -f app/threetrees-svc.yaml
+          args: apply -f app/test-svc.yaml
 
       - name: Apply Deployment
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: apply -f app/threetrees-deploy.yaml
+          args: apply -f app/test-deploy.yaml
