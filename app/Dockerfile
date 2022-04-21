@@ -6,7 +6,7 @@ ARG GIT_TAG
 
 # clone
 RUN apk --no-cache --virtual build-dependencies add git
-RUN apk add --no-cache chromium udev
+RUN apk --no-cache add --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing firefox
 RUN git clone -b $GIT_TAG https://github.com/3bases/3trees .
 RUN rm -r .git
 
