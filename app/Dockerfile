@@ -5,16 +5,8 @@ WORKDIR /app
 ARG GIT_TAG
 
 # chrome
-RUN set -e \
-  && echo " ------ INSTALLING PACKAGES ------" \
-    && apk -U --no-cache add udev chromium bash git \
-  \
-  && echo " ------ SETTING UP CHROMIUM ------" \
-    && ln -s /usr/bin/chromium-browser /usr/bin/google-chrome \
-    && ln -s /usr/bin/chromium-browser /usr/bin/chromium-browser \
-  \
-  && echo " ------ CLEANING UP ------" \
-    && rm -rf /var/cache/apk/*
+RUN apk -U --no-cache add udev chromium bash git
+RUN ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
 
 # clone
 RUN git clone -b $GIT_TAG https://github.com/3bases/3trees .
