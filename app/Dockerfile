@@ -7,13 +7,11 @@ ARG GIT_TAG
 # chrome
 RUN set -e \
   && echo " ------ INSTALLING PACKAGES ------" \
-    && apk -U --no-cache add udev chromium xvfb dbus ttf-freefont bash git \
+    && apk -U --no-cache add udev chromium bash git \
   \
   && echo " ------ SETTING UP CHROMIUM ------" \
-    && rm -f /usr/bin/chromium-browser \
-    && ln -s /usr/bin/xvfb-chromium /usr/bin/google-chrome \
-    && ln -s /usr/bin/xvfb-chromium /usr/bin/chromium-browser \
-    && chmod 755 /usr/bin/xvfb-chromium \
+    && ln -s /usr/bin/chromium-browser /usr/bin/google-chrome \
+    && ln -s /usr/bin/chromium-browser /usr/bin/chromium-browser \
   \
   && echo " ------ CLEANING UP ------" \
     && rm -rf /var/cache/apk/*
