@@ -4,9 +4,21 @@ WORKDIR /app
 # args
 ARG GIT_TAG
 
+# chrome
+RUN set -e \
+  && echo " ------ INSTALLING PACKAGES ------" \
+    && apk -U --no-cache add udev chromium xvfb dbus ttf-freefont bash git \
+  \
+  && echo " ------ SETTING UP CHROMIUM ------" \
+    && rm -f /usr/bin/chromium-browser \
+    && ln -s /usr/bin/xvfb-chromium /usr/bin/google-chrome \
+    && ln -s /usr/bin/xvfb-chromium /usr/bin/chromium-browser \
+    && chmod 755 /usr/bin/xvfb-chromium \
+  \
+  && echo " ------ CLEANING UP ------" \
+    && rm -rf /var/cache/apk/*
+
 # clone
-RUN apk --no-cache --virtual build-dependencies add git
-RUN apk --no-cache add --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing firefox
 RUN git clone -b $GIT_TAG https://github.com/3bases/3trees .
 RUN rm -r .git
 
