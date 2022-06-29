@@ -29,7 +29,7 @@ export default withOGImage<'query', 'id'>({
         throw new Error('Invalid notion page id')
       }
 
-      const site = await getSiteForDomain(config.domain)
+      const site = getSiteForDomain(config.domain)
       const recordMap = await notion.getPage(pageId)
 
       const keys = Object.keys(recordMap?.block || {})

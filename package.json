@@ -60,13 +60,13 @@
     "classnames": "^2.3.1",
     "copy": "^0.3.2",
     "dotenv": "^16.0.1",
-    "esbuild-node-loader": "^0.8.0",
     "esno": "^0.16.3",
     "favicons": "^6.2.2",
     "got": "^11.8.5",
     "isomorphic-unfetch": "^3.1.0",
     "lqip-modern": "^1.2.0",
     "next": "12.1.6",
+    "next-api-og-image": "^4.0.1",
     "next-seo": "^4.29.0",
     "notion-client": "6.12.9",
     "notion-types": "6.12.6",
@@ -92,7 +92,9 @@
     "webpack": "^5.73.0",
     "windicss": "^3.5.4",
     "windicss-webpack-plugin": "^1.7.3",
-    "zustand": "^3.7.2"
+    "zustand": "^3.7.2",
+    "chrome-aws-lambda": "7.0.0",
+    "puppeteer-core": "7.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",
@@ -115,9 +117,5 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^7.0.4",
     "windicss-analysis": "^0.3.5"
-  },
-  "resolutions": {
-    "chrome-aws-lambda": "7.0.0",
-    "puppeteer-core": "7.0.0"
   }
 }

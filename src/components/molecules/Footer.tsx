@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useMemo, useEffect } from 'react'
+import React, { MouseEventHandler, useMemo, useEffect, MouseEvent } from 'react'
 import { FaTwitter, FaGithub, FaLinkedin } from 'react-icons/fa'
 import { IoSunnyOutline, IoMoonSharp, IoPauseOutline, IoPlayOutline } from 'react-icons/io5'
 import useSound from 'use-sound'
@@ -23,7 +23,7 @@ export const Footer: React.FC<{
 
   // Dark Mode
   const [hasMounted, setHasMounted] = React.useState(false)
-  const toggleDarkModeCb = React.useCallback(
+  const toggleDarkModeCb = React.useCallback<MouseEventHandler>(
     e => {
       const index = Math.floor(Math.random() * claps.length)
       claps[index]()
@@ -39,7 +39,8 @@ export const Footer: React.FC<{
     const listener = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.shiftKey && e.key === 'L') {
         e.preventDefault()
-        toggleDarkModeCb(e)
+        // @ts-ignore
+        toggleDarkModeCb(e as MouseEvent)
       }
     }
     document.addEventListener('keydown', listener)
