@@ -13,7 +13,7 @@
     "lint": "eslint ./**/*.{ts,tsx} --ignore-path .gitignore --fix",
     "css": "windicss-analysis",
     "build": "run-s \"build:**\"",
-    "build:scripts": "esmo scripts/build.ts",
+    "build:scripts": "esno scripts/build.ts",
     "build:web": "next build",
     "analyze": "cross-env ANALYZE=true next build",
     "prepare": "husky install",
