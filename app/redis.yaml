@@ -1,14 +1,37 @@
+---
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
+  namespace: hdgen
   name: redis
 spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+      protocol: TCP
+  selector:
+    app: redis-app
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-state
+spec:
+  serviceName: redis
+  selector:
+    matchLabels:
+      app: redis-app
+  template:
+    metadata:
+      labels:
+        app: redis-app
   containers:
-    - name: redis
-      image: redis:5.0.4
+    - name: redis-container
+      image: redis:7.0.0
       command:
         - redis-server
-        - '/redis-master/redis.conf'
+        - '/redis-config/redis.conf'
       env:
         - name: MASTER
           value: 'true'
@@ -16,18 +39,42 @@ spec:
         - containerPort: 6379
       resources:
         limits:
-          cpu: '0.1'
-      volumeMounts:
-        - mountPath: /redis-master-data
-          name: data
-        - mountPath: /redis-master
-          name: config
-  volumes:
-    - name: data
-      emptyDir: {}
-    - name: config
-      configMap:
-        name: example-redis-config
-        items:
-          - key: redis-config
-            path: redis.conf
+          memory: 4Gi
+          cpu: '1'
+        requests:
+          memory: 2Gi
+          cpu: '1'
+        volumeMounts:
+          - name: redis-pv
+            mountPath: /data
+          - name: redis-config
+            mountPath: /redis-config
+        livenessProbe:
+          tcpSocket:
+            port: redis-port
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+              - redis-cli
+              - ping   name: config
+      volumes:
+        - name: redis-pv
+          emptyDir: {}
+        - name: redis-config
+          configMap:
+            name: redis-configmap
+            items:
+              - key: redis-config
+                path: redis.conf
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: hdgen
+  name: redis-configmap
+data:
+  redis-config: |
+    stop-writes-on-bgsave-error no
