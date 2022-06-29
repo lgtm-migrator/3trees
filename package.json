@@ -55,10 +55,8 @@
   "dependencies": {
     "@babel/runtime": "^7.18.3",
     "@giscus/react": "^2.0.6",
-    "@google-cloud/firestore": "^4.15.1",
-    "@react-spring/three": "^9.4.5",
-    "@react-three/drei": "^9.14.1",
-    "@react-three/fiber": "^8.0.27",
+    "@keyvhq/core": "^1.6.9",
+    "@keyvhq/redis": "^1.6.10",
     "classnames": "^2.3.1",
     "copy": "^0.3.2",
     "dotenv": "^16.0.1",
@@ -86,8 +84,7 @@
     "react-markdown": "^5.0.3",
     "react-notion-x": "6.12.10",
     "react-use": "^17.4.0",
-    "sharp": "0.30.4",
-    "three": "^0.141.0",
+    "sharp": "0.28.3",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4",
     "use-dark-mode": "^2.3.1",
@@ -95,7 +92,6 @@
     "webpack": "^5.73.0",
     "windicss": "^3.5.4",
     "windicss-webpack-plugin": "^1.7.3",
-    "worker-loader": "^3.0.8",
     "zustand": "^3.7.2"
   },
   "devDependencies": {
@@ -108,7 +104,6 @@
     "@types/react": "^18.0.14",
     "@types/react-body-classname": "^1.1.7",
     "@types/react-dom": "^17.0.17",
-    "@types/three": "^0.141.0",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
     "eslint": "^7.32.0",
