@@ -42,9 +42,9 @@ specifiers:
   next: 12.1.5
   next-api-og-image: ^2.2.1
   next-seo: ^4.29.0
-  notion-client: 6.11.0
-  notion-types: 6.11.0
-  notion-utils: 6.11.0
+  notion-client: 6.12.9
+  notion-types: 6.12.6
+  notion-utils: 6.12.9
   npm-run-all: ^4.1.5
   nprogress: ^0.2.0
   p-map: ^4.0.0
@@ -56,7 +56,7 @@ specifiers:
   react-dom: ^17.0.2
   react-icons: ^4.3.1
   react-markdown: ^5.0.3
-  react-notion-x: 6.11.0
+  react-notion-x: 6.12.10
   react-use: ^17.3.2
   sharp: 0.28.3
   tslib: ^2.3.1
@@ -86,9 +86,9 @@ dependencies:
   next: 12.1.5_f370f735164a03a12cea0cc89593cbee
   next-api-og-image: 2.2.1_7711af82ee0d60a5c39f3f11da715b4c
   next-seo: 4.29.0_7711af82ee0d60a5c39f3f11da715b4c
-  notion-client: 6.11.0
-  notion-types: 6.11.0
-  notion-utils: 6.11.0
+  notion-client: 6.12.9
+  notion-types: 6.12.6
+  notion-utils: 6.12.9
   npm-run-all: 4.1.5
   nprogress: 0.2.0
   p-map: 4.0.0
@@ -100,7 +100,7 @@ dependencies:
   react-dom: 17.0.2_react@17.0.2
   react-icons: 4.3.1_react@17.0.2
   react-markdown: 5.0.3_c8e45b4eb687790dba17b4e1c4b4273f
-  react-notion-x: 6.11.0_0e9c46310c7de3b02f84309868c0474c
+  react-notion-x: 6.12.10_0e9c46310c7de3b02f84309868c0474c
   react-use: 17.3.2_react-dom@17.0.2+react@17.0.2
   sharp: 0.28.3
   tslib: 2.3.1
@@ -3381,7 +3381,7 @@ packages:
     dev: false
 
   /exenv/1.2.2:
-    resolution: {integrity: sha1-KueOhdmJQVhnCwPUe+wfA72Ru50=}
+    resolution: {integrity: sha512-Z+ktTxTwv9ILfgKCk32OX3n/doe+OcLTRtqK9pcL+JsP3J1/VW8Uvl4ZjLlKqeW4rzK4oesDOGMEMRIZqtP4Iw==}
     dev: false
 
   /exif-parser/0.1.12:
@@ -5167,29 +5167,29 @@ packages:
     engines: {node: '>=12.20'}
     dev: false
 
-  /notion-client/6.11.0:
-    resolution: {integrity: sha512-bgi4ZHxVe4oZhTvoO9MdJPiKZyf6OKXDPNoU5PNvhgPwL9AfKetowBTC3xIEMzGbS9iw5OSa7S5KmLDD3BCnaA==}
+  /notion-client/6.12.9:
+    resolution: {integrity: sha512-bF1YKk76pxyynQ+Nni23K5HH1CTtZYsiEpuBvJfQAd3bEXGaqUri9StmdWLMob7+6rP57D6dgFQpI/SdGZ/jfw==}
     engines: {node: '>=12'}
     dependencies:
       got: 11.8.3
-      notion-types: 6.11.0
-      notion-utils: 6.11.0
+      notion-types: 6.12.6
+      notion-utils: 6.12.9
       p-map: 5.3.0
     dev: false
 
-  /notion-types/6.11.0:
-    resolution: {integrity: sha512-a8Q5Tmgf4lywP57uk4o6UeuxFgswXPul5SYTAWK8spnppMUC3ax5woZcltTHQMvqsP6ZVEqjqDl82lMEL4VD7A==}
+  /notion-types/6.12.6:
+    resolution: {integrity: sha512-UBbhnzKgn48SVTkMP5It3heODrf8gAPb6O5vLna9pi9zdAtfSjmGmn5//C0P1rF/ppX7cCfgX964g+8VLUBOag==}
     engines: {node: '>=12'}
     dev: false
 
-  /notion-utils/6.11.0:
-    resolution: {integrity: sha512-xP58mT0p4mWwrF1TbkV5r/En9XstnQHW75vpsYP+Ghg7TRt80cPzUgRx/lDRaWAkWXN7G+mUZIVU/eQgNonU8w==}
+  /notion-utils/6.12.9:
+    resolution: {integrity: sha512-VSVBfaQ5hDtDwLsOMyp16etp2jNslyXTCmoQ5T8YBCGh4wpRAYsVsuaO+QUG5lrbAK32hE6N6HF2rUr/Qa1dyQ==}
     engines: {node: '>=12'}
     dependencies:
       is-url-superb: 6.1.0
       mem: 9.0.2
       normalize-url: 7.0.3
-      notion-types: 6.11.0
+      notion-types: 6.12.6
       p-queue: 7.2.0
     dev: false
 
@@ -5348,7 +5348,7 @@ packages:
     dev: false
 
   /p-defer/1.0.0:
-    resolution: {integrity: sha1-n26xgvbJqozXQwBKfU+WsZaw+ww=}
+    resolution: {integrity: sha512-wB3wfAxZpk2AzOfUMJNL+d36xothRSyj8EXOa4f6GMqYDN9BJaaSISbsk+wS9abmnebVw95C2Kb5t85UmpCxuw==}
     engines: {node: '>=4'}
     dev: false
 
@@ -5959,8 +5959,8 @@ packages:
       warning: 4.0.3
     dev: false
 
-  /react-notion-x/6.11.0_0e9c46310c7de3b02f84309868c0474c:
-    resolution: {integrity: sha512-puwKPlrqNwOkZJCyEMGkkJ4Sf7FZKM4WWiakNbSNfoXGqUdbS42zxIbovfjeNCHnmSd3JHRfodfLE4qr3DeE8g==}
+  /react-notion-x/6.12.10_0e9c46310c7de3b02f84309868c0474c:
+    resolution: {integrity: sha512-Hrnv37AYkNs0KuNQBOCWxhk6I02HoJwuyM2bihUwQd37F8ZZ/FSOv0q4sgSn2ATat+O5WgFpMGFT1MCK5msp1w==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16'
@@ -5970,8 +5970,8 @@ packages:
       '@matejmazur/react-katex': 3.1.3_katex@0.15.3+react@17.0.2
       '@radix-ui/react-dropdown-menu': 0.1.6_b49bddbe4b905ced4713cb857cca91fa
       katex: 0.15.3
-      notion-types: 6.11.0
-      notion-utils: 6.11.0
+      notion-types: 6.12.6
+      notion-utils: 6.12.9
       prismjs: 1.27.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
