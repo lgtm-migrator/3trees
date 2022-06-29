@@ -5,12 +5,15 @@ metadata:
   labels:
     run: threetrees
 spec:
-  replicas: 9
+  replicas: 8
   selector:
     matchLabels:
       app: threetrees
   strategy:
     type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:

@@ -5,12 +5,15 @@ metadata:
   labels:
     run: threetrees-test
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: threetrees-test
   strategy:
     type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
@@ -18,7 +21,7 @@ spec:
     spec:
       containers:
         - name: threetrees-container
-          image: ghcr.io/3bases/3trees:0.5.0-beta.10
+          image: ghcr.io/3bases/3trees:0.5.0-beta.11
           ports:
             - containerPort: 1234
           resources:
