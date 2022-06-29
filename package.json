@@ -16,7 +16,7 @@
     "build:scripts": "esno scripts/build.ts",
     "build:web": "next build",
     "analyze": "cross-env ANALYZE=true next build",
-    "prepare": "husky install",
+    "devPreinstall": "husky install",
     "format": "run-p \"format:**\"",
     "format:index": "prettier --write \"*.{js,json,md}\"",
     "format:src": "prettier --write \"src/**/*.{css,js,ts,tsx}\"",
