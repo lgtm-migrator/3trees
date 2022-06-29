@@ -1,4 +1,4 @@
-FROM node:lts-alpine as build
+FROM node:16-alpine as build
 WORKDIR /app
 
 # args
@@ -20,7 +20,7 @@ RUN pnpm i --prod
 RUN rm -r cache
 
 # main image
-FROM node:lts-alpine
+FROM node:16-alpine
 COPY --from=build /app /app
 WORKDIR /app
 RUN npm i -g pnpm
