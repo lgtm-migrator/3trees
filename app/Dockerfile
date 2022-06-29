@@ -5,7 +5,7 @@ WORKDIR /app
 ARG GIT_TAG
 
 # chrome
-RUN apk -U --no-cache add udev chromium bash git
+RUN apk -U --no-cache add udev chromium git
 RUN ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
 
 # clone
@@ -24,6 +24,7 @@ FROM node:lts-alpine
 COPY --from=build /app /app
 WORKDIR /app
 RUN npm i -g pnpm
+RUN PUPPETEER_PRODUCT=chrome yarn
 
 # make user
 RUN adduser threetrees -D -H
