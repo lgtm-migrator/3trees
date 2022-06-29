@@ -142,6 +142,7 @@ const propertyCreatedTimeValue = ({ block, pageHeader }, defaultFn: () => React.
 // @ts-ignore
 const propertyTextValue = ({ schema, pageHeader, block }, defaultFn: () => React.ReactNode) => {
   console.debug(schema, pageHeader, block)
+  if (pageHeader && schema?.name?.toLowerCase() === 'author') return <b>{defaultFn()}</b>
   return defaultFn()
 }
 
