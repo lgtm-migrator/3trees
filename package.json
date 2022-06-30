@@ -94,7 +94,8 @@
     "windicss-webpack-plugin": "^1.7.3",
     "zustand": "^3.7.2",
     "chrome-aws-lambda": "7.0.0",
-    "puppeteer-core": "7.0.0"
+    "puppeteer-core": "7.0.0",
+    "puppeteer": "7.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",

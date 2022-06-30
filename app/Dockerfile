@@ -14,7 +14,7 @@ RUN rm -r .git
 
 # install
 RUN npm i -g pnpm
-RUN PUPPETEER_PRODUCT=chrome pnpm i
+RUN pnpm i
 RUN pnpm build
 RUN pnpm i --prod
 RUN rm -r cache
@@ -24,7 +24,7 @@ FROM node:16-alpine
 COPY --from=build /app /app
 WORKDIR /app
 RUN npm i -g pnpm
-RUN npm config set PUPPETEER_PRODUCT chrome npm i puppeteer@7.0.0
+RUN PUPPETEER_PRODUCT=chrome node node_modules/puppeteer/install.js
 
 # make user
 RUN adduser threetrees -D -H
