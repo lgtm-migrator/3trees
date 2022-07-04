@@ -40,7 +40,7 @@ specifiers:
   next-seo: ^4.29.0
   next-transpile-modules: ^8.0.0
   notion-client: 4.19.8
-  notion-types: 4.19.8
+  notion-types: 6.12.6
   notion-utils: 4.19.8
   npm-run-all: ^4.1.5
   nprogress: ^0.2.0
@@ -88,7 +88,7 @@ dependencies:
   next-seo: 4.29.0_c9e78c1ef548b95661158f8b65ef5848
   next-transpile-modules: 8.0.0
   notion-client: 4.19.8
-  notion-types: 4.19.8
+  notion-types: 6.12.6
   notion-utils: 4.19.8
   npm-run-all: 4.1.5
   nprogress: 0.2.0
@@ -5422,6 +5422,11 @@ packages:
 
   /notion-types/4.19.8:
     resolution: {integrity: sha512-KLszLpe2UtejnX0bCoLe8JFZPeQyUS15F29LW4iRPFwnlNZePWz0h303F0IBhxOXQRiWIwy4mEGzRDu45a+dhA==}
+    engines: {node: '>=12'}
+    dev: false
+
+  /notion-types/6.12.6:
+    resolution: {integrity: sha512-UBbhnzKgn48SVTkMP5It3heODrf8gAPb6O5vLna9pi9zdAtfSjmGmn5//C0P1rF/ppX7cCfgX964g+8VLUBOag==}
     engines: {node: '>=12'}
     dev: false
 
