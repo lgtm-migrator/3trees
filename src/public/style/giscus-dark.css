@@ -82,6 +82,9 @@ main .pagination-loader-container {
 }
 
 /*! Custom CSS */
+main {
+  padding: 1px;
+}
 .gsc-timeline {
   flex-direction: column-reverse;
 }

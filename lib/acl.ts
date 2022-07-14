@@ -39,4 +39,14 @@ export function pageAcl({ site, recordMap, pageId }: Partial<PageProps>): PagePr
           message: `Notion page "${pageId}" doesn't belong to the Notion workspace`,
         },
       }
+
+  // @ts-ignore
+  if (rootValue.is_template)
+    if (process.env.NODE_ENV)
+      return {
+        error: {
+          statusCode: 404,
+          message: `Notion page "${pageId}" is Template`,
+        },
+      }
 }

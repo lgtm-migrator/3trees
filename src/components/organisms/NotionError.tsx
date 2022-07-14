@@ -5,11 +5,11 @@ import { PageHead } from './PageHead'
 import { ErrorPage } from '@/components'
 import type { PageProps } from 'lib/types'
 
-export const NotionError: React.FC<PageProps & { darkMode: boolean }> = ({ site, error, darkMode }) => {
+export const NotionError: React.FC<PageProps & { darkMode: boolean }> = ({ pageId, site, error, darkMode }) => {
   const title = error?.message
   return (
     <>
-      <PageHead site={site} darkMode={darkMode} />
+      <PageHead site={site} darkMode={darkMode} pageId={pageId as string} />
       <Head>
         <meta property="og:site_name" content={title} />
         <meta property="og:title" content={title} />
