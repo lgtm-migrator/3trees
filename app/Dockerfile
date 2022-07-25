@@ -5,6 +5,7 @@ WORKDIR /app
 ARG GIT_TAG
 
 # chrome
+USER root
 RUN apk -U --no-cache add git
 
 # clone
