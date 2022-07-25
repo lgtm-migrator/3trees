@@ -23,6 +23,7 @@ RUN rm -r cache
 FROM zenika/alpine-chrome:102-with-node-16
 COPY --from=build /app /app
 WORKDIR /app
+USER root
 RUN npm i -g pnpm
 
 # make user
