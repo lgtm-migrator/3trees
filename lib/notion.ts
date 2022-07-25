@@ -29,7 +29,7 @@ export async function getPage(pageId: string, timeout: number = TIMEOUT): Promis
     .catch(err => console.debug(err.message, pageId))
   if (!recordMap) return recordMap
   const previewImageMap = await getPreviewImageMap(recordMap)
-  const map = recordMap as any
+  const map = recordMap
   map.preview_images = previewImageMap
   await cacher.set(pageId, map)
   return map

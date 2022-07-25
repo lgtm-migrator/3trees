@@ -36,9 +36,7 @@ async function createPreviewImage(url: string, { cacheKey }: { cacheKey: string 
   try {
     try {
       const cachedPreviewImage = await db.get(cacheKey)
-      if (cachedPreviewImage) {
-        return cachedPreviewImage
-      }
+      if (cachedPreviewImage) return cachedPreviewImage
     } catch (err) {
       console.warn(`redis error get "${cacheKey}"`, (err as Error).message)
     }

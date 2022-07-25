@@ -122,20 +122,20 @@ const formatDate = (input: string | number, { month = 'short' }: { month?: 'long
 
 // @ts-ignore
 const propertyLastEditedTimeValue = ({ block, pageHeader }, defaultFn: () => React.ReactNode) => {
-  if (pageHeader && block?.last_edited_time) {
+  if (pageHeader && block?.last_edited_time)
     return `Edited ${formatDate(block?.last_edited_time, {
       month: 'short',
     })}`
-  }
+
   return defaultFn()
 }
 // @ts-ignore
 const propertyCreatedTimeValue = ({ block, pageHeader }, defaultFn: () => React.ReactNode) => {
-  if (pageHeader && block?.created_time) {
+  if (pageHeader && block?.created_time)
     return `Created ${formatDate(block?.created_time, {
       month: 'short',
     })}`
-  }
+
   return defaultFn()
 }
 

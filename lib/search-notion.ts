@@ -16,7 +16,7 @@ async function searchNotionImpl(params: SearchParams): Promise<SearchResults> {
       if (res.ok) return res
 
       // convert non-2xx HTTP responses into errors
-      const error: any = new Error(res.statusText)
+      const error: Error & { response?: Response } = new Error(res.statusText)
       error.response = res
       return Promise.reject(error)
     })

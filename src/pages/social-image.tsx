@@ -5,8 +5,7 @@ import { NextSeo } from 'next-seo'
 import { baseRenderer } from '@/utils/renderers'
 import siteConfig from '~/site-config'
 
-import type { NextPage } from 'next'
-import type { GetServerSideProps } from 'next'
+import type { NextPage, GetServerSideProps } from 'next'
 import type { SocialImageParams } from '@/types'
 
 const SocialImagePage: NextPage<SocialImageParams> = ({

@@ -1,7 +1,7 @@
 import React, { MouseEventHandler, useMemo, useEffect, MouseEvent } from 'react'
 import { FaTwitter, FaGithub, FaLinkedin } from 'react-icons/fa'
 import { IoSunnyOutline, IoMoonSharp, IoPauseOutline, IoPlayOutline } from 'react-icons/io5'
-import useSound from 'use-sound'
+import { useSound } from 'use-sound'
 
 import { usePlayStore } from '@/store/'
 import siteConfig from '~/site-config'

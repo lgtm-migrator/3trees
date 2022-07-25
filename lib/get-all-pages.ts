@@ -19,8 +19,6 @@ export const MAX_PAGE = IS_RC ? 10 : 10000
 export const MAX_PENDING = 100
 export const RETRY = 10
 
-console.log(MAX_PAGE)
-
 export async function getAllPagesImpl(rootNotionPageId: string, rootNotionSpaceId: string): Promise<Partial<SiteMap>> {
   const pageMap = await getAllPagesInSpace(rootNotionPageId, rootNotionSpaceId, getPage.bind(notion), {
     concurrency: OPTIMIZED_CONCURRENCY,
@@ -99,7 +97,7 @@ export async function getAllPagesInSpace(
               }
           count++
           pages[pageId] = page
-        } catch (err: any) {
+        } catch (err: unknown) {
           pages[pageId] = null
         }
         pendingPageIds.delete(pageId)

@@ -25,9 +25,7 @@ export default withOGImage<'query', 'id'>({
     react: async ({ id }) => {
       const pageId = parsePageId(id)
 
-      if (!pageId) {
-        throw new Error('Invalid notion page id')
-      }
+      if (!pageId) throw new Error('Invalid notion page id')
 
       const site = getSiteForDomain(config.domain)
       const recordMap = await notion.getPage(pageId)
@@ -35,9 +33,7 @@ export default withOGImage<'query', 'id'>({
       const keys = Object.keys(recordMap?.block || {})
       const block = recordMap?.block?.[keys[0]]?.value
 
-      if (!block) {
-        throw new Error('Invalid recordMap for page')
-      }
+      if (!block) throw new Error('Invalid recordMap for page')
 
       const isBlogPost = block.type === 'page' && block.parent_table === 'collection'
       const title = getBlockTitle(block, recordMap) || site.name
