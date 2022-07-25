@@ -33,5 +33,7 @@
       "path": "..\\src"
     }
   ],
-  "settings": {}
+  "settings": {
+    "jira-plugin.workingProject": ""
+  }
 }

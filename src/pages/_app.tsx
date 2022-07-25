@@ -24,8 +24,7 @@ Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
 
-function App(props: AppProps) {
-  const { Component, pageProps, router } = props
+function App({ Component, pageProps, router }: AppProps) {
   return (
     <>
       <Head>
@@ -38,6 +37,7 @@ function App(props: AppProps) {
         url={siteConfig.url}
         sameAs={Object.values(siteConfig.socials)}
       />
+      {/* @ts-ignore */}
       <Component {...pageProps} />
       <GA4 id="G-9T961HYDTR" />
     </>
