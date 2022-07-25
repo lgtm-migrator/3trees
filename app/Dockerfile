@@ -1,4 +1,4 @@
-FROM zenika/alpine-chrome:102-with-node-16 as build
+FROM zenika/alpine-chrome:89-with-puppeteer as build
 WORKDIR /app
 
 # args
@@ -20,7 +20,7 @@ RUN pnpm prune --prod
 RUN rm -r cache
 
 # main image
-FROM zenika/alpine-chrome:102-with-node-16
+FROM zenika/alpine-chrome:89-with-puppeteer
 COPY --from=build /app /app
 WORKDIR /app
 USER root
