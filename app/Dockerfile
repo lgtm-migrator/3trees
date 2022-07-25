@@ -14,7 +14,7 @@ RUN rm -r .git
 
 # install
 RUN npm i -g pnpm
-RUN pnpm i
+RUN PUPPETEER_PRODUCT=chrome pnpm i
 RUN pnpm build
 RUN pnpm prune --prod
 RUN rm -r cache
