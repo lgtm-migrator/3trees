@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "next dev --port 1234",
     "start": "next start --port 1234",
-    "lint": "eslint ./**/*.{ts,tsx} --ignore-path .gitignore --fix",
+    "lint": "eslint ./**/*.{ts,tsx} --ignore-path .gitignore --fix --cache",
     "css": "windicss-analysis",
     "build": "run-s \"build:**\"",
     "build:scripts": "esno scripts/build.ts",

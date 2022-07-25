@@ -5,3 +5,4 @@ public
 *.log
 !src/public
 cache
+.eslintcache
