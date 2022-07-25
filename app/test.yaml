@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,7 +22,7 @@ spec:
     spec:
       containers:
         - name: threetrees-container
-          image: ghcr.io/3bases/3trees:0.5.0-beta.18
+          image: ghcr.io/3bases/3trees:0.5.0-rc.0
           ports:
             - containerPort: 1234
           resources:
@@ -31,3 +32,35 @@ spec:
             requests:
               memory: 6Gi
               cpu: '2'
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test
+  annotations:
+    dev.okteto.com/auto-ingress: 'true'
+spec:
+  type: ClusterIP
+  ports:
+    - port: 443
+      targetPort: 1234
+      protocol: TCP
+  selector:
+    app: threetrees-test
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: www
+  annotations:
+    dev.okteto.com/auto-ingress: 'true'
+spec:
+  type: ClusterIP
+  ports:
+    - port: 443
+      targetPort: 1234
+      protocol: TCP
+  selector:
+    app: threetrees

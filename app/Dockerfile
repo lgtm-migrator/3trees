@@ -1,4 +1,4 @@
-FROM node:16-alpine as build
+FROM zenika/alpine-chrome:102-with-node-16 as build
 WORKDIR /app
 
 # args
@@ -6,7 +6,6 @@ ARG GIT_TAG
 
 # chrome
 RUN apk -U --no-cache add git
-RUN ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
 
 # clone
 RUN git clone -b $GIT_TAG https://github.com/3bases/3trees .
@@ -16,15 +15,14 @@ RUN rm -r .git
 RUN npm i -g pnpm
 RUN pnpm i
 RUN pnpm build
-RUN pnpm i --prod
+RUN pnpm prune --prod
 RUN rm -r cache
 
 # main image
-FROM node:16-alpine
+FROM zenika/alpine-chrome:102-with-node-16
 COPY --from=build /app /app
 WORKDIR /app
 RUN npm i -g pnpm
-RUN PUPPETEER_PRODUCT=chrome node node_modules/puppeteer/install.js
 
 # make user
 RUN adduser threetrees -D -H
