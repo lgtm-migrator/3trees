@@ -3,6 +3,7 @@ WORKDIR /app
 
 # args
 ARG GIT_TAG
+ENV PUPPETEER_PRODUCT chrome
 
 # chrome
 USER root
@@ -14,7 +15,7 @@ RUN rm -r .git
 
 # install
 RUN npm i -g pnpm
-RUN PUPPETEER_PRODUCT=chrome pnpm i
+RUN pnpm i
 RUN pnpm build
 RUN pnpm prune --prod
 RUN rm -r cache
