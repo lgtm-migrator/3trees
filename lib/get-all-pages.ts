@@ -12,10 +12,10 @@ import type { ExtendedRecordMap, PageMap } from 'notion-types'
 const uuid = includeNotionIdInUrls
 export const getAllPages = pMemoize(getAllPagesImpl, { maxAge: 60000 * 5 })
 
-const IS_RC = process.env.GIT_TAG && new RegExp(/[0-9]+.[0-9]+.[0-9]-[a-z]+.[0-9]+/).test(process.env.GIT_TAG)
+const IS_TEST = Boolean(process.env.IS_TEST)
 
 export const OPTIMIZED_CONCURRENCY = 10
-export const MAX_PAGE = IS_RC ? 10 : 10000
+export const MAX_PAGE = IS_TEST ? 10 : 10000
 export const MAX_PENDING = 100
 export const RETRY = 10
 
