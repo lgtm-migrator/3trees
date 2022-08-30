@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 overrides:
-  chrome-aws-lambda: 6.0.0
+  chrome-aws-lambda: 1.6.3
   puppeteer-core: 6.0.0
 
 specifiers:
@@ -21,7 +21,7 @@ specifiers:
   '@types/react-dom': ^17.0.17
   '@typescript-eslint/eslint-plugin': ^5.30.0
   '@typescript-eslint/parser': ^5.29.0
-  chrome-aws-lambda: 6.0.0
+  chrome-aws-lambda: 1.6.3
   classnames: ^2.3.1
   copy: ^0.3.2
   dotenv: ^16.0.1
@@ -75,7 +75,7 @@ dependencies:
   '@giscus/react': 2.0.6_sfoxds7t5ydpegc3knd667wn6m
   '@keyvhq/core': 1.6.14
   '@keyvhq/redis': 1.6.17
-  chrome-aws-lambda: 6.0.0_puppeteer-core@6.0.0
+  chrome-aws-lambda: 1.6.3
   classnames: 2.3.1
   copy: 0.3.2
   dotenv: 16.0.1
@@ -85,7 +85,7 @@ dependencies:
   isomorphic-unfetch: 3.1.0
   lqip-modern: 1.2.0
   next: 12.1.6_apvyc6hsquzbx56wwdowrbgkzm
-  next-api-og-image: 4.0.1_yi7ztneidd4fu3tku62vimvbjy
+  next-api-og-image: 4.0.1_6a5nwglzr3n2vnb5j7jbymvvqm
   next-seo: 4.29.0_zhtyyhxvjc4vmyivr6fwl32yja
   notion-client: 6.13.4
   notion-types: 6.13.4
@@ -2317,14 +2317,11 @@ packages:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
     dev: false
 
-  /chrome-aws-lambda/6.0.0_puppeteer-core@6.0.0:
-    resolution: {integrity: sha512-XnFo6AaE5ZYpHYmOmMoj1yCYFeRTx6uFCpJnVuDREWzXevzZvo3gzkyQ6qSKsPW91VGWeQI7wQgnOpW50e+Dzg==}
-    engines: {node: '>= 10.16'}
-    peerDependencies:
-      puppeteer-core: 6.0.x
-    dependencies:
-      lambdafs: 2.1.1
-      puppeteer-core: 6.0.0
+  /chrome-aws-lambda/1.6.3:
+    resolution: {integrity: sha512-K22/X+AqpSFPmBxuIOHhmzH4Id7Od9GpKvEksuaV7fy+WLvS/TYlwpc4I4B36Wz9u/NmvL9wKsQ1TT9cMhdYhg==}
+    engines: {node: '>=8.10'}
+    optionalDependencies:
+      iltorb: 2.4.0
     dev: false
 
   /chrome-trace-event/1.0.3:
@@ -4183,6 +4180,18 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /iltorb/2.4.0:
+    resolution: {integrity: sha512-Px3k32eqlAwpS0OwiQDRUrlPNeY1JKyZvH636cRRxxhkqc5ukmfXZStNHNfRzpa3tb9EK3Nq0pIX9cXUdr+q3w==}
+    deprecated: The zlib module provides APIs for brotli compression/decompression starting with Node.js v10.16.0, please use it over iltorb
+    requiresBuild: true
+    dependencies:
+      detect-libc: 1.0.3
+      npmlog: 4.1.2
+      prebuild-install: 5.3.6
+      which-pm-runs: 1.1.0
+    dev: false
+    optional: true
+
   /image-q/1.1.1:
     resolution: {integrity: sha1-/IQJlmRGC5DKhi2TALa/u7+/gFY=}
     engines: {node: '>=0.9.0'}
@@ -4724,14 +4733,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /lambdafs/2.1.1:
-    resolution: {integrity: sha512-x5k8JcoJWkWLvCVBzrl4pzvkEHSgSBqFjg3Dpsc4AcTMq7oUMym4cL/gRTZ6VM4mUMY+M0dIbQ+V1c1tsqqanQ==}
-    engines: {node: '>= 10.16'}
-    hasBin: true
-    dev: false
-    bundledDependencies:
-      - tar-fs
-
   /language-subtag-registry/0.3.21:
     resolution: {integrity: sha512-L0IqwlIXjilBVVYKFT37X9Ih11Um5NEl9cbJIuU/SwP/zEEAbBPOnEeeuxVMf45ydWQRDQN3Nqc96OgbH1K+Pg==}
     dev: true
@@ -5155,7 +5156,7 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: false
 
-  /next-api-og-image/4.0.1_yi7ztneidd4fu3tku62vimvbjy:
+  /next-api-og-image/4.0.1_6a5nwglzr3n2vnb5j7jbymvvqm:
     resolution: {integrity: sha512-DT66VyOoHlH9pGaIng+tJxEhRd59HAzVmiSe1WNO7cMM9s6L3FNVqX8evFxswQjaZl07gwU2yEjkIlunjGiQrg==}
     peerDependencies:
       chrome-aws-lambda: '>=1.6.3'
@@ -5163,7 +5164,7 @@ packages:
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
     dependencies:
-      chrome-aws-lambda: 6.0.0_puppeteer-core@6.0.0
+      chrome-aws-lambda: 1.6.3
       deepmerge: 4.2.2
       next: 12.1.6_apvyc6hsquzbx56wwdowrbgkzm
       puppeteer-core: 6.0.0
@@ -5254,6 +5255,11 @@ packages:
 
   /node-releases/2.0.5:
     resolution: {integrity: sha512-U9h1NLROZTq9uE1SNffn6WuPDg8icmi3ns4rEl/oTfIle4iLjTliCzgTsbaIFMq/Xn078/lfY/BL0GWZ+psK4Q==}
+
+  /noop-logger/0.1.1:
+    resolution: {integrity: sha512-6kM8CLXvuW5crTxsAtva2YLrRrDaiTIkIePWs9moLHqbFWT94WpNFjwS/5dfLfECg5i/lkmw3aoqVidxt23TEQ==}
+    dev: false
+    optional: true
 
   /normalize-package-data/2.5.0:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
@@ -5753,6 +5759,29 @@ packages:
       nanoid: 3.2.0
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  /prebuild-install/5.3.6:
+    resolution: {integrity: sha512-s8Aai8++QQGi4sSbs/M1Qku62PFK49Jm1CbgXklGz4nmHveDq0wzJkg7Na5QbnO1uNH8K7iqx2EQ/mV0MZEmOg==}
+    engines: {node: '>=6'}
+    hasBin: true
+    dependencies:
+      detect-libc: 1.0.3
+      expand-template: 2.0.3
+      github-from-package: 0.0.0
+      minimist: 1.2.6
+      mkdirp-classic: 0.5.3
+      napi-build-utils: 1.0.2
+      node-abi: 2.30.0
+      noop-logger: 0.1.1
+      npmlog: 4.1.2
+      pump: 3.0.0
+      rc: 1.2.8
+      simple-get: 3.1.0
+      tar-fs: 2.1.1
+      tunnel-agent: 0.6.0
+      which-pm-runs: 1.1.0
+    dev: false
+    optional: true
 
   /prebuild-install/6.1.3:
     resolution: {integrity: sha512-iqqSR84tNYQUQHRXalSKdIaM8Ov1QxOVuBNWI7+BzZWv6Ih9k75wOnH1rGQ9WWTaaLkTpxWKIciOF0KyfM74+Q==}
@@ -7426,6 +7455,12 @@ packages:
       is-number-object: 1.0.5
       is-string: 1.0.7
       is-symbol: 1.0.4
+
+  /which-pm-runs/1.1.0:
+    resolution: {integrity: sha512-n1brCuqClxfFfq/Rb0ICg9giSZqCS+pLtccdag6C2HyufBrh3fBOiy9nb6ggRMvWOVH5GrdJskj5iGTZNxd7SA==}
+    engines: {node: '>=4'}
+    dev: false
+    optional: true
 
   /which/1.3.1:
     resolution: {integrity: sha512-HxJdYWq1MTIQbJ3nw0cqssHoTNU267KlrDuGZ1WYlxDStUtKUhOaJmh112/TZmHxxUfuJqPXSOm7tDyas0OSIQ==}

@@ -121,7 +121,7 @@
     "windicss-analysis": "^0.3.5"
   },
   "resolutions": {
-    "chrome-aws-lambda": "6.0.0",
+    "chrome-aws-lambda": "1.6.3",
     "puppeteer-core": "6.0.0"
   }
 }
