@@ -48,12 +48,9 @@ export const giscusRepo: string | null = getSiteConfig('giscusRepo', null)
 export const imageCDNHost: string | null = getSiteConfig('imageCDNHost', null)
 
 // Optional whether or not to enable support for LQIP preview images
-export const isRedisEnabled: boolean = getSiteConfig('isRedisEnabled', false) || !!getEnv('REDIS_ENABLED', null)
+export const isRedisEnabled: boolean = !!getEnv('REDIS_URL', null)
 export const isPreviewImageSupportEnabled: boolean = getSiteConfig('isPreviewImageSupportEnabled', false)
-export const redisHost: string | null = getEnv('REDIS_HOST', null)
-export const redisPassword: string | null = getEnv('REDIS_PASSWORD', null)
-export const redisUser: string = getEnv('REDIS_USER', 'default')
-export const redisUrl = getEnv('REDIS_URL', `redis://${redisUser}:${redisPassword}@${redisHost}`)
+export const redisUrl = getEnv('REDIS_URL', null)
 export const redisNamespace: string | null = getEnv('REDIS_NAMESPACE', 'preview-images')
 export const isDev = process.env.NODE_ENV === 'development' || !process.env.NODE_ENV
 
