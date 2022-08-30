@@ -7,7 +7,7 @@ import { PageBlock } from 'notion-types'
 import { notion } from 'lib/notion'
 import { getSiteForDomain } from 'lib/get-site-for-domain'
 import { mapImageUrl } from 'lib/map-image-url'
-import * as config from 'lib/config'
+import { domain, defaultPageCover, author as siteAuthor, defaultPageIcon, defaultPageCoverPosition } from 'lib/config'
 import { interRegular } from 'lib/fonts'
 
 /**
@@ -27,7 +27,7 @@ export default withOGImage<'query', 'id'>({
 
       if (!pageId) throw new Error('Invalid notion page id')
 
-      const site = getSiteForDomain(config.domain)
+      const site = getSiteForDomain(domain)
       const recordMap = await notion.getPage(pageId)
 
       const keys = Object.keys(recordMap?.block || {})
@@ -40,17 +40,17 @@ export default withOGImage<'query', 'id'>({
       const image = mapImageUrl(
         getPageProperty<string>('Social Image', block, recordMap) ||
           (block as PageBlock).format?.page_cover ||
-          config.defaultPageCover,
+          defaultPageCover,
         block
       )
 
-      const imageCoverPosition = (block as PageBlock).format?.page_cover_position ?? config.defaultPageCoverPosition
+      const imageCoverPosition = (block as PageBlock).format?.page_cover_position ?? defaultPageCoverPosition
       const imageObjectPosition = imageCoverPosition ? `center ${(1 - imageCoverPosition) * 100}%` : null
 
       const blockIcon = getBlockIcon(block, recordMap)
-      const authorImage = mapImageUrl(blockIcon && isUrl(blockIcon) ? blockIcon : config.defaultPageIcon, block)
+      const authorImage = mapImageUrl(blockIcon && isUrl(blockIcon) ? blockIcon : defaultPageIcon, block)
 
-      const author = getPageProperty<string>('Author', block, recordMap) || config.author
+      const author = getPageProperty<string>('Author', block, recordMap) || siteAuthor
       const lastUpdatedTime = getPageProperty<number>('Last Updated', block, recordMap)
       const publishedTime = getPageProperty<number>('Published', block, recordMap)
       const dateUpdated = lastUpdatedTime ? new Date(lastUpdatedTime) : publishedTime ? new Date(publishedTime) : undefined
