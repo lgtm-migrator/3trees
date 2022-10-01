@@ -22,8 +22,8 @@ export const NotionPageHeader: React.FC<{
     }
   }, [])
   return (
-    <header className="notion-header" w="!full !max-10/12 !<sm:max-12/12" m="x-auto">
-      <div className="notion-nav-header">
+    <header className="notion-header">
+      <div className="notion-nav-header" w="!full !max-10/12 !<sm:max-12/12" m="x-auto">
         <Breadcrumbs block={block} rootOnly={false} />
         <Search block={block} title={'Search'} />
       </div>
