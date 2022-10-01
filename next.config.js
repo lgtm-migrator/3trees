@@ -21,7 +21,6 @@ const nextConfig = {
     config.externals.push('sharp')
     return config
   },
-  pageDataCollectionTimeout: 20000,
   staticPageGenerationTimeout: 20000,
   eslint: {
     ignoreDuringBuilds: true,

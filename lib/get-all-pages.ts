@@ -107,9 +107,11 @@ export async function getAllPagesInSpace(
   await processPage(rootPageId)
   const info = setInterval(() => console.debug('Pending', pendingPageIds.size), 2000)
   const counter = setInterval(() => console.debug('Complete', count), 2000)
+  const max = setInterval(() => console.debug('Max', MAX_PAGE), 2000)
   await queue.onIdle()
   clearInterval(info)
   clearInterval(counter)
+  clearInterval(max)
   return pages
 }
 
