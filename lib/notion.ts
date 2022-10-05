@@ -9,7 +9,7 @@ import { getSiteConfig } from './get-config-value'
 
 export const TIMEOUT = 20000
 
-// Rmove notion-client's vervose warning
+// Remove notion-client's vervose warning
 console.warn = (...args) => console.debug(...args.map(arg => (arg instanceof Error ? arg.message : arg)))
 
 export const activeUser: string = getSiteConfig('notionUserId')

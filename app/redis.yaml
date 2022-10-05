@@ -39,11 +39,11 @@ spec:
         - containerPort: 6379
       resources:
         limits:
-          memory: 6Gi
-          cpu: 2
+          memory: 3Gi
+          cpu: 1
         requests:
-          memory: 6Gi
-          cpu: 2
+          memory: 3Gi
+          cpu: 1
         volumeMounts:
           - name: redis-pv
             mountPath: /data
