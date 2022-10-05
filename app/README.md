@@ -3,6 +3,7 @@
 ```bash
 kubectl config set-context cloud_okteto_com --namespace 3trees-seonglae
 kubectl config use-context cloud_okteto_com
+kubectl delete secret ghcred
 kubectl create secret docker-registry ghcred \
 --docker-server="ghcr.io" \
 --docker-username="$USER" \
