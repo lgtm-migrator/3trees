@@ -57,6 +57,8 @@ module.exports = {
     '/notion-cloudflare': 'aeb0f8e85c3e49c18b4c3320254305a7',
     '/testament': '39788903601a40fab6b2ff3f4bc42518',
     '/present': 'b612831ac69d4787b502237bdb87b66a',
+    '/weekly-music': 'e3c2e365d65a4e638c2f7ccb114641df',
+    '/movie-review': 'ae71b2a51ffc4fc0af4b7aaf566b60ae',
   },
 
   // Color
